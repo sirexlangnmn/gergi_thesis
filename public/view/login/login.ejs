@@ -1,0 +1,83 @@
+<%- include('../includes/head/head.ejs') %>
+
+    <body class="text-base text-black font-nunito dark:text-white dark:bg-slate-900">
+        <!-- Loader Start -->
+        <!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Loader End -->
+
+
+        <section
+            class="md:h-screen py-36 flex items-center bg-[url('../../assets/images/cta.jpg')] bg-no-repeat bg-center bg-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+            <div class="container relative">
+                <div class="flex justify-center">
+                    <div
+                        class="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md">
+                        <a href="/">
+                            <img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/long-logo-50.png"
+                                class="mx-auto" alt="">
+                        </a>
+                        <h5 class="my-6 text-xl font-semibold">Login</h5>
+                        <form action="javascript:void(0);" class="text-start" method="POST" id="loginForm"
+                            name="loginForm" enctype="multipart/form-data" accept-charset="utf-8">
+                            <p class="mb-0" id="error-msg" style="opacity: 1;">
+                                <div id="LoginError" class="alert alert-warning"></div>
+                            </p>
+                            <div class="grid grid-cols-1">
+
+                                <div class="mb-4">
+                                    <label class="font-semibold" for="LoginEmailAddress">Email Address:</label>
+                                    <input id="LoginEmailAddress" type="email"
+                                        class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
+                                        placeholder="">
+                                    <span id="LoginEmailAddressError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="font-semibold" for="LoginPassword">Password:</label>
+                                    <input id="LoginPassword" type="password"
+                                        class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
+                                        placeholder="">
+                                    <span id="LoginPasswordError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <input type="submit"
+                                        class="inline-block w-full px-5 py-2 text-base tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-700 hover:border-indigo-700"
+                                        value="Login">
+                                </div>
+
+                                <div class="text-center">
+                                    <span class="text-slate-400 me-2">Don't have an account yet? </span> <a
+                                        href="/registration"
+                                        class="inline-block font-bold text-black dark:text-white">Register</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section><!--end section -->
+
+        <%- include('../includes/footer/footer.ejs') %>
+
+        <%- include('../includes/start_cookie_popup/start_cookie_popup.ejs') %>
+
+        <%- include('../includes/back_to_top/back_to_top.ejs') %>
+
+        <%- include('../includes/switcher/switcher.ejs') %>
+
+        <%- include('../includes/ltr_and_rtl_mode/ltr_and_rtl_mode.ejs') %>
+
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/displayErrorMessage.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resetErrorMessages.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/login.js"></script>
+
+        <%- include('../includes/script/script.ejs') %>

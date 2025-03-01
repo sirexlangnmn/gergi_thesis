@@ -1,0 +1,49 @@
+<%- include('../includes/head/head.ejs') %>
+
+    <body class="text-base text-black font-nunito dark:text-white dark:bg-slate-900">
+        <!-- Loader Start -->
+        <!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Loader End -->
+
+
+        <%- include('../includes/nav/nav.ejs') %>
+
+         <!-- Start Section-->
+         <section class="relative py-16 md:py-24">
+            <div class="container relative">
+                <div class="pl-10">
+                    <h3 class="pl-10 mb-4 text-2xl font-semibold leading-normal md:text-3xl md:leading-normal">Choose Course</h3>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[30px]" id="courseContainer">
+
+                </div><!--end grid-->
+            </div><!--end container-->
+        </section><!--end section-->
+        <!-- End Section-->
+
+
+
+        <%- include('../includes/start_cookie_popup/start_cookie_popup.ejs') %>
+
+        <%- include('../includes/back_to_top/back_to_top.ejs') %>
+
+        <%- include('../includes/switcher/switcher.ejs') %>
+
+        <%- include('../includes/ltr_and_rtl_mode/ltr_and_rtl_mode.ejs') %>
+
+
+    <script>
+        const departmentValue = `<%= data.departmentValue %>`;
+    </script>
+    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/convertToTitleCase.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/slugilize.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/courses.js"></script>
+
+<%- include('../includes/script/script.ejs') %>

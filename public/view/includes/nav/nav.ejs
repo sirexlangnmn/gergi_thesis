@@ -1,0 +1,51 @@
+<!-- Start Navbar -->
+<nav id="topnav" class="defaultscroll is-sticky">
+    <div class="container relative">
+        <!-- Logo container-->
+        <a class="logo" href="/">
+            <!-- <img src="assets_2/images/logo-dark.png" class="inline-block dark:hidden" alt="">
+            <img src="assets_2/images/logo-light.png" class="hidden dark:inline-block" alt=""> -->
+            <img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/long-logo-50.png" class="inline-block dark:hidden" alt="">
+            <img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/long-logo-50.png" class="hidden dark:inline-block" alt="">
+        </a>
+
+        <!-- End Logo container-->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+
+        <!--Login button Start-->
+        <!-- <ul class="mb-0 list-none buy-button">
+            <li class="inline mb-0">
+                <a href="/" class="inline-flex items-center justify-center text-base tracking-wide text-center text-indigo-600 align-middle duration-500 border rounded-full size-9 bg-indigo-600/5 hover:bg-indigo-600 border-indigo-600/10 hover:border-indigo-600 hover:text-white"><i data-feather="settings" class="size-4"></i></a>
+            </li>
+
+            <li class="inline mb-0 ps-1">
+                <a href="https://1.envato.market/techwind" target="_blank" class="inline-flex items-center justify-center text-base tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-full size-9 hover:bg-indigo-700 hover:border-indigo-700"><i data-feather="shopping-cart" class="size-4"></i></a>
+            </li>
+        </ul> -->
+        <!--Login button End-->
+
+        <div id="navigation">
+            <!-- Navigation Menu-->
+            <ul class="navigation-menu">
+                <li><a href="<%= process.env.GERGI_HOSTNAME %>" class="sub-menu-item">Home</a></li>
+                <!-- <li><a href="<%= process.env.GERGI_HOSTNAME %>library" class="sub-menu-item">Library</a></li> -->
+                <li><a href="<%= process.env.GERGI_HOSTNAME %>library" class="sub-menu-item">Library</a></li>
+                <li><a href="<%= process.env.GERGI_HOSTNAME %>about-us" class="sub-menu-item">About Us</a></li>
+                <li><a href="<%= process.env.GERGI_HOSTNAME %>contact-us" class="sub-menu-item">Contact Us</a></li>
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+</nav><!--end header-->
+<!-- End Navbar -->

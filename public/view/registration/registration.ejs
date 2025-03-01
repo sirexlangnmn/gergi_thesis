@@ -1,0 +1,95 @@
+<%- include('../includes/head/head.ejs') %>
+
+    <body class="text-base text-black font-nunito dark:text-white dark:bg-slate-900">
+        <!-- Loader Start -->
+        <!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Loader End -->
+
+        <!-- <section class="md:h-screen py-36 flex items-center bg-[url('/public/uploads/gergi/registration/registration.webp')] bg-no-repeat bg-center bg-cover"> -->
+            <section class="md:h-screen py-36 flex items-center bg-[url('../../assets/images/cta.jpg')] bg-no-repeat bg-center bg-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+            <div class="container relative">
+                <div class="flex justify-center">
+                    <div class="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md">
+                        <a href="/"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/long-logo-50.png" class="mx-auto" alt=""></a>
+                        <h5 class="my-6 text-xl font-semibold">Registration</h5>
+                        <form action="javascript:void(0);" class="text-start" method="POST" id="registrationForm" name="registrationForm" enctype="multipart/form-data" accept-charset="utf-8">
+                            <div class="grid grid-cols-1">
+                                <div class="mb-4">
+                                    <label class="font-semibold" for="RegistrationFullName">Your Full Name:</label>
+                                    <input id="RegistrationFullName" type="text" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
+                                    <span id="RegistrationFullNameError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="font-semibold" for="RegistrationMobileNumber">Mobile Number:</label>
+                                    <input id="RegistrationMobileNumber" type="text" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" minlength="11" maxlength="11"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" placeholder="">
+                                    <span id="RegistrationMobileNumberError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="font-semibold" for="RegistrationEmailAddress">Email Address:</label>
+                                    <input id="RegistrationEmailAddress" type="email" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
+                                    <span id="RegistrationEmailAddressError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="font-semibold" for="RegistrationPassword">Password:</label>
+                                    <input id="RegistrationPassword" type="password" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
+                                    <span id="RegistrationPasswordError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="font-semibold" for="RegistrationConfirmPassword">
+                                        Confirm Password:
+                                    </label>
+                                    <input id="RegistrationConfirmPassword" type="password" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
+                                    <span id="RegistrationConfirmPasswordError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="flex items-center w-full mb-0">
+                                        <input class="text-indigo-600 border-gray-200 rounded form-checkbox dark:border-gray-800 focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="RegistrationTermsAndCondition">
+                                        <label class="form-check-label text-slate-400" for="RegistrationTermsAndCondition">I Accept <a href="#" class="text-indigo-600">Terms And Condition</a></label>
+                                    </div>
+                                    <span id="RegistrationTermsAndConditionError" class="text-red-600 error-message"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <input type="submit" class="inline-block w-full px-5 py-2 text-base tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-700 hover:border-indigo-700" value="Register">
+                                </div>
+
+                                <div class="text-center">
+                                    <span class="text-slate-400 me-2">Already have an account ? </span> <a href="/login" class="inline-block font-bold text-black dark:text-white">Login</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section><!--end section -->
+
+        <%- include('../includes/footer/footer.ejs') %>
+
+        <%- include('../includes/start_cookie_popup/start_cookie_popup.ejs') %>
+
+        <%- include('../includes/back_to_top/back_to_top.ejs') %>
+
+        <%- include('../includes/switcher/switcher.ejs') %>
+
+        <%- include('../includes/ltr_and_rtl_mode/ltr_and_rtl_mode.ejs') %>
+
+
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/displayErrorMessage.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resetErrorMessages.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/registration.js"></script>
+
+        <%- include('../includes/script/script.ejs') %>
