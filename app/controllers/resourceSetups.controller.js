@@ -35,7 +35,8 @@ exports.getResourcesByCourse = async (req, res) => {
 
 
     try {
-        const courseTitle = req.body.course;
+        // const courseTitle = req.body.course;
+        const courseTitle = "Optometry";
         try {
             let query = QUERY.getResources3
             query += ` WHERE ct.title = '${courseTitle}'`;
