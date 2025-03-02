@@ -222,6 +222,27 @@ app.get(['/'], (req, res) => {
 });
 
 
+app.get(['/library'], (req, res) => {
+    let sessionData = {
+        name: '',
+        email: '',
+        user_type: '',
+        organization_id: '',
+    };
+
+    if (req.session && req.session.user) {
+        sessionData = {
+            name: req.session.user.name || '',
+            email: req.session.user.email || '',
+            user_type: req.session.user.user_type || '',
+            organization_id: req.session.user.organization_id || '',
+        };
+    }
+
+    res.render(path.join(__dirname, '../../', 'public/view/library/library'), {
+        data: sessionData,
+    });
+});
 
 
 
@@ -288,35 +309,35 @@ app.get('/login', (req, res) => {
 });
 
 
-app.get('/library', (req, res) => {
-    let sessionData = {
-        name: '',
-        email: '',
-        user_type: '',
-        organization_id: '',
-    };
+// app.get('/library', (req, res) => {
+//     let sessionData = {
+//         name: '',
+//         email: '',
+//         user_type: '',
+//         organization_id: '',
+//     };
 
-    if (req.session && req.session.user) {
-        sessionData = {
-            name: req.session.user.name || '',
-            email: req.session.user.email || '',
-            user_type: req.session.user.user_type || '',
-            organization_id: req.session.user.organization_id || '',
-        };
-    }
+//     if (req.session && req.session.user) {
+//         sessionData = {
+//             name: req.session.user.name || '',
+//             email: req.session.user.email || '',
+//             user_type: req.session.user.user_type || '',
+//             organization_id: req.session.user.organization_id || '',
+//         };
+//     }
 
-   if (!req.session || !req.session.user) {
-        res.render(path.join(__dirname, '../../', 'public/view/login/login'));
-    } else if (parseInt(req.session.user.user_type) === 1) {
-        res.render(path.join(__dirname, '../../', 'public/view/admin/admin'), {
-            data: sessionData,
-        });
-    }  else if (parseInt(req.session.user.user_type) === 2) {
-        res.render(path.join(__dirname, '../../', 'public/view/departments/departments'), {
-            data: sessionData,
-        });
-    }
-});
+//    if (!req.session || !req.session.user) {
+//         res.render(path.join(__dirname, '../../', 'public/view/login/login'));
+//     } else if (parseInt(req.session.user.user_type) === 1) {
+//         res.render(path.join(__dirname, '../../', 'public/view/admin/admin'), {
+//             data: sessionData,
+//         });
+//     }  else if (parseInt(req.session.user.user_type) === 2) {
+//         res.render(path.join(__dirname, '../../', 'public/view/departments/departments'), {
+//             data: sessionData,
+//         });
+//     }
+// });
 
 
 app.get('/courses/:departmentValue', (req, res) => {
