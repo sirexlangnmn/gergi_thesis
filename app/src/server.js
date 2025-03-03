@@ -245,6 +245,50 @@ app.get(['/library'], (req, res) => {
 });
 
 
+app.get(['/profile'], (req, res) => {
+    let sessionData = {
+        name: '',
+        email: '',
+        user_type: '',
+        organization_id: '',
+    };
+
+    if (req.session && req.session.user) {
+        sessionData = {
+            name: req.session.user.name || '',
+            email: req.session.user.email || '',
+            user_type: req.session.user.user_type || '',
+            organization_id: req.session.user.organization_id || '',
+        };
+    }
+
+    res.render(path.join(__dirname, '../../', 'public/view/admin/profile/profile'), {
+        data: sessionData,
+    });
+});
+
+app.get(['/web-scraping'], (req, res) => {
+    let sessionData = {
+        name: '',
+        email: '',
+        user_type: '',
+        organization_id: '',
+    };
+
+    if (req.session && req.session.user) {
+        sessionData = {
+            name: req.session.user.name || '',
+            email: req.session.user.email || '',
+            user_type: req.session.user.user_type || '',
+            organization_id: req.session.user.organization_id || '',
+        };
+    }
+
+    res.render(path.join(__dirname, '../../', 'public/view/admin/web-scraping/web-scraping'), {
+        data: sessionData,
+    });
+});
+
 
 app.get('/contact-us', (req, res) => {
     res.render(path.join(__dirname, '../../', 'public/view/contact_us/contact_us'), {
