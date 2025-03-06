@@ -49,11 +49,57 @@ async function fetchBiblioboardApiData(searchKeyword) {
     }
 }
 
+async function fetchBiblioboardApiData2(searchKeyword) {
+    const encoded = encodeURIComponent(searchKeyword);
+    const url = `https://api.biblioboard.com/search/v2?facet-list=true&limit=20&org-id=1f7368e7-f10b-49a1-8ced-2d9476279974&platform=WEB&offset=0&g=${encoded}`;
+    const publicUrl = `https://openresearchlibrary.org/search-results/g%3D${encoded}`;
+
+    console.log('searchKeyword => ', searchKeyword)
+    console.log('encoded => ', encoded)
+    console.log('url => ', url)
+    console.log('publicUrl => ', publicUrl)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json, text/javascript, */*; q=0.01",
+                "Accept-Language": "en-US,en;q=0.6",
+                "Connection": "keep-alive",
+                "Origin": "https://openresearchlibrary.org",
+                "Referer": "https://openresearchlibrary.org/",
+                "Sec-Fetch-Dest": "empty",
+                "Sec-Fetch-Mode": "cors",
+                "Sec-Fetch-Site": "cross-site",
+                "Sec-GPC": "1",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
+                "X-Auth-Token": "6d506236-4324-4eb5-aee3-63f87e25aaa0", // it expires, just get new token to the main website
+                "X-Biblio-Audience": "library.biblioboard.com",
+                "sec-ch-ua": "\"Not(A:Brand\";v=\"99\", \"Brave\";v=\"133\", \"Chromium\";v=\"133\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"Windows\""
+            },
+            body: null
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('fetchApiData data => ', data.media)
+        generateSearchedData(data.media, publicUrl)
+        // return data;
+    } catch (error) {
+        console.error("Error fetching API data:", error);
+    }
+}
+
 
 function generateSearchedData(books, publicUrl) {
     console.log('fetchApiData books => ', books)
     const container = document.getElementById("searchedData");
-    container.innerHTML = ""; // Clear previous content
+    // container.innerHTML = ""; // Clear previous content
 
     books.forEach((book, index) => {
         const bookElement = document.createElement("div");
@@ -105,5 +151,10 @@ inputField.addEventListener("keyup", (event) => {
 function getInputValue() {
     const inputValue = inputField.value.trim();
     console.log("Input Value:", inputValue);
+
+    const container = document.getElementById("searchedData");
+    container.innerHTML = ""; // Clear previous content
+
     fetchBiblioboardApiData(inputValue);
+    fetchBiblioboardApiData2(inputValue);
 }
