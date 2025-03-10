@@ -17,6 +17,8 @@ module.exports = (app) => {
     const courseTitlesController = controllers.courseTitles;
     const subjectTitlesController = controllers.subjectTitles;
 
+    const webScrapingController = controllers.webScraping;
+
     app.get(['/api/v1/get/resources/pdf'], resourcesController.pdf);
     app.post(['/api/get/resources-order-by-latest'], resourcesController.resourcesOrderByLatest);
     app.post(['/api/get/resources-by-id'], resourcesController.getResourcesById);
@@ -46,6 +48,9 @@ module.exports = (app) => {
     app.post(['/api/post/add-category'], categoriesController.create);
     app.post(['/api/post/add-subject-title'], subjectTitlesController.create);
 
+
+    app.post(['/api/v1/get/web-scraping/open-research-library'], webScrapingController.openResearchLibrary);
+    app.post(['/api/v1/get/web-scraping/fetch-pdf-room'], webScrapingController.fetchPdfRoomApiData);
 
 
     // app.get(['/api/v1/get/resources/transfering'], joinController.transfering);

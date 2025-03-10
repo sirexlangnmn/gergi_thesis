@@ -14,5 +14,7 @@ controller.classifications = require('./classifications.controller.js');
 controller.courseTitles = require('./courseTitles.controller.js');
 controller.subjectTitles = require('./subjectTitles.controller.js');
 
+controller.webScraping = require('./webScraping.controller.js');
+
 
 module.exports = controller;
