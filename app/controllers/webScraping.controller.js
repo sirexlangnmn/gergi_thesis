@@ -1,4 +1,20 @@
-const axios = require('axios');
+const { v4: uuidV4 } = require('uuid');
+const { check, validationResult } = require('express-validator');
+
+const sql = require('../models/db.js');
+const QUERY = require('../query/join.query.js');
+
+const db = require('../models');
+const sequelizeConfig = require('../config/sequelize.config.js');
+
+const Departments = db.departments;
+const Courses = db.courses;
+const Course_titles = db.course_titles
+const Resource_setups = db.resource_setups
+const Resources = db.resources
+
+const Op = db.Sequelize.Op;
+const Sequelize = db.Sequelize;
 
 module.exports = {
 
@@ -88,19 +104,37 @@ module.exports = {
 
     },
 
+    saveResources: async (req, res) => {
+        try {
+            console.log(`saveResources req.body ==> `, req.body)
+            const { name, downloadLink, imageUrl } = req.body;
 
+            try {
+                // Sequelize insert query here
+                const newResource = await Resources.create({
+                    resource_id: uuidV4(),
+                    title: name,
+                    url_link: downloadLink,
+                    image: imageUrl,
+                    createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                    updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+                });
 
+                if (newResource) {
+                    return res.status(200).json({ message: 'Resource create successfully', resource: newResource });
+                } else {
+                    throw new Error('Failed to create resource');
+                }
+            } catch (error) {
+                console.error('Error executing query:', error);
+                return res.status(500).json({ error: 'Failed to create resource' });
+            }
 
-
-
-    // three: async (req, res) => {
-    //     try {
-    //         // code here
-    //     } catch (error) {
-    //         console.error("Error in 'three':", error);
-    //         res.status(500).json({ error: "Internal Server Error" });
-    //     }
-    // },
+        } catch (error) {
+            console.error("Error in saveResources : ", error);
+            res.status(500).json({ error: "Internal Server Error | saveResources" });
+        }
+    },
 
     // four: async (req, res) => {
     //     try {

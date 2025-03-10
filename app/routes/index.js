@@ -51,6 +51,7 @@ module.exports = (app) => {
 
     app.post(['/api/v1/get/web-scraping/open-research-library'], webScrapingController.openResearchLibrary);
     app.post(['/api/v1/get/web-scraping/fetch-pdf-room'], webScrapingController.fetchPdfRoomApiData);
+    app.post(['/api/v1/post/web-scraping/save-resources'], webScrapingController.saveResources);
 
 
     // app.get(['/api/v1/get/resources/transfering'], joinController.transfering);

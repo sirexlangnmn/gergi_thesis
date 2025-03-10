@@ -288,8 +288,29 @@ function handleSaveButtonClick(button) {
 
         console.log("Extracted Book Data from DOM:", bookData);
 
-        // Now you can process `bookData` (e.g., add it to a cart, send it to an API, etc.)
+        // Send the data to your API
+        sendBookDataToAPI(bookData);
     }
+}
+
+// Function to send `bookData` via POST request
+function sendBookDataToAPI(bookData) {
+    fetch("/api/v1/post/web-scraping/save-resources", {  // Replace with your actual API endpoint
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bookData) // Convert object to JSON format
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from API:", data);
+        alert("Book saved successfully!"); // Show success message
+    })
+    .catch(error => {
+        console.error("Error sending data:", error);
+        alert("Failed to save book.");
+    });
 }
 
 
