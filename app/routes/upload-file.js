@@ -6,6 +6,7 @@ module.exports = (app) => {
     const path = require('path');
     const mysql = require('mysql2');
     const multer = require('multer');
+    const xlsx = require("xlsx");
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -29,6 +30,7 @@ module.exports = (app) => {
 
     const upload = multer({ storage: storage });
     const upload2 = multer({ storage: storage2 });
+    const upload3 = multer({ dest: "./uploads" });
 
     app.use(express.static(path.join(__dirname, 'public')));
 
@@ -103,6 +105,50 @@ module.exports = (app) => {
             console.log('Data updated successfully');
             res.json({ message: 'Resource updated successfully', data: inputData });
         });
+    });
+
+
+
+    app.post('/api/v1/post/upload-resources', upload3.single('excelFile'), (req, res) => {
+        
+        console.log(`req.file ==>`, req.file)
+        if (!req.file) {
+            return res.status(400).json({ message: "No file uploaded!" });
+        }
+
+        const filePath = path.join('/var/www/html/gergi_thesis/', req.file.path);
+        console.log(`req.file.path ==>`, req.file.path)
+        console.log(`__dirname ==>`, __dirname)
+        console.log(`filePath ==>`, filePath)
+        const workbook = xlsx.readFile(filePath);
+        console.log(`workbook ==>`, workbook)
+        const sheetName = workbook.SheetNames[0];
+        console.log(`sheetName ==>`, sheetName)
+        const sheet = workbook.Sheets[sheetName];
+        console.log(`sheet ==>`, sheet)
+
+        // Convert Excel sheet to JSON
+        const extractedData = xlsx.utils.sheet_to_json(sheet);
+        console.log(`extractedData ==>`, extractedData)
+
+        // Delete the file after processing
+        // fs.unlinkSync(filePath);
+
+        // Insert data into the database
+        // if (extractedData.length > 0) {
+        //     const sql = "INSERT INTO uploaded_files (name, download_link, image_link) VALUES ?";
+        //     const values = extractedData.map(row => [row.Name, row.DownloadLink, row.ImageLink]);
+
+        //     db.query(sql, [values], (err, result) => {
+        //         if (err) return res.status(500).json({ message: "Database error", error: err });
+
+        //         res.json({ message: "✅ Data uploaded successfully!", data: extractedData });
+        //     });
+        // } else {
+        //     res.status(400).json({ message: "No valid data found in the file!" });
+        // }
+
+
     });
 
 
