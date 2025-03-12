@@ -131,6 +131,33 @@ module.exports = (app) => {
         const extractedData = xlsx.utils.sheet_to_json(sheet);
         console.log(`extractedData ==>`, extractedData)
 
+
+        const sql = `INSERT INTO resources (resource_id, title, url_link, image, createdAt, updatedAt) VALUES ?`;
+
+            const values = extractedData.map((inputData) => [
+                inputData.resource_id = uuidV4(),
+                inputData.book_title,
+                inputData.download_link,
+                inputData.image_link,
+                inputData.createdAt = new Date().toISOString().slice(0, 19).replace('T', ' '),
+                inputData.updatedAt = new Date().toISOString().slice(0, 19).replace('T', ' ')
+            ]);
+
+            console.log(`[values] ==> `, [values]);
+
+            db.query(sql, [values], (err, result) => {
+                if (err) {
+                    console.error('Error inserting data:', err);
+                    return res.json({ message: 'Error inserting data into database' });
+                }
+                console.log('Data inserted successfully:', result.affectedRows);
+                res.json({
+                    message: 'Form submitted successfully',
+                    insertedRows: result.affectedRows
+                });
+            });
+
+
         // Delete the file after processing
         // fs.unlinkSync(filePath);
 
