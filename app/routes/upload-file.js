@@ -116,7 +116,7 @@ module.exports = (app) => {
             return res.status(400).json({ message: "No file uploaded!" });
         }
 
-        const filePath = path.join(`/var/www/html/${process.env.GERGI_FOLDER}/`, req.file.path);
+        const filePath = path.join(`${process.env.GERGI_FOLDER}/`, req.file.path);
         console.log(`req.file.path ==>`, req.file.path)
         console.log(`__dirname ==>`, __dirname)
         console.log(`filePath ==>`, filePath)
