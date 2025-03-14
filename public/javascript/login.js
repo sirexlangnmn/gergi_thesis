@@ -1,89 +1,44 @@
-
-let loginEmailAddress = getId('LoginEmailAddress');
-let loginPassword = getId('LoginPassword');
-
-let loginEmailAddressError = getId('LoginEmailAddressError');
-let loginPasswordError = getId('LoginPasswordError');
-
-let loginError  = getId('LoginError');
-let loginForm = getId('loginForm');
-
-function validateRegistrationForm() {
-    const emailAddressValue = loginEmailAddress.value;
-    const passwordValue = loginPassword.value;
-
-    resetErrorMessages();
-
-    let isValid = true;
-
-    if (!emailAddressValue) {
-        displayErrorMessage('Please enter an Email Address', loginEmailAddressError);
-        isValid = false;
-    }
-
-    if (!passwordValue) {
-        displayErrorMessage('Please enter a Password', loginPasswordError);
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-
-function submitLoginForm(event) {
-    event.preventDefault();
-
-    if (!validateRegistrationForm()) {
-        return;
-    }
-
-    const formData = {
-        emailAddressInput: loginEmailAddress.value,
-        passwordInput: loginPassword.value
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("login");
+    const fields = {
+        email: form.querySelector("input[type='email']"),
+        password: form.querySelector("input[type='password']")
     };
+    const loginButton = form.querySelector("button");
 
-    fetch(baseUrl + 'api/post/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-        .then(response => {
-            if (response.status === 401) {
-                displayErrorMessage('The email address or password is incorrect', loginError);
-                loginError.classList.add("error_message");
-            }
+    loginButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent form submission
+        clearValidationMessages();
 
-            if (!response.ok) {
-                throw new Error('The email address or password is incorrect');
+        const isValid = validateFields(fields);
+        if (isValid) form.submit();
+    });
+
+    function validateFields(fields) {
+        let isValid = true;
+        Object.entries(fields).forEach(([key, input]) => {
+            if (input.value.trim() === "") {
+                showValidationMessage(input, `${capitalize(key)} is required.`);
+                isValid = false;
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data.message === 'Login successful') {
-                loginError.classList.remove("error_message");
-                displayErrorMessage(null, loginError);
-                window.location.href = '/library';
-            }
-        })
-        .catch(error => {
-            console.log('Login failed error:', error);
         });
-}
+        return isValid;
+    }
 
+    function showValidationMessage(inputElement, message) {
+        console.log('inputElement', inputElement)
+        console.log('message', message)
+        const errorElement = document.createElement("small");
+        errorElement.className = "text-danger validation-message";
+        errorElement.textContent = message;
+        inputElement.parentNode.appendChild(errorElement);
+    }
 
-loginForm.addEventListener('submit', submitLoginForm);
+    function clearValidationMessages() {
+        document.querySelectorAll(".validation-message").forEach(msg => msg.remove());
+    }
 
-
-loginEmailAddress.addEventListener("keyup", function (event) {
-    event.target.value
-        ? displayErrorMessage(null, loginEmailAddressError)
-        : displayErrorMessage('Please enter your Email Address', loginEmailAddressError);
-});
-
-loginPassword.addEventListener("keyup", function (event) {
-    event.target.value
-        ? displayErrorMessage(null, loginPasswordError)
-        : displayErrorMessage('Please enter your Password', loginPasswordError);
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
 });
