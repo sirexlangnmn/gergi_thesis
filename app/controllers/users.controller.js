@@ -87,6 +87,7 @@ exports.login = async (req, res) => {
         }
 
         const { emailAddressInput, passwordInput } = req.body;
+        console.log('req.body', req.body)
 
         const user = await Users.findOne({ where: { email: emailAddressInput } });
 

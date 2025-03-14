@@ -6,12 +6,18 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     const loginButton = form.querySelector("button");
 
-    loginButton.addEventListener("click", function (event) {
+    loginButton.addEventListener("click", async function (event) {
         event.preventDefault(); // Prevent form submission
         clearValidationMessages();
 
-        const isValid = validateFields(fields);
-        if (isValid) form.submit();
+        if (!validateFields(fields)) return;
+
+        const credentials = {
+            emailAddressInput: fields.email.value.trim(),
+            passwordInput: fields.password.value.trim()
+        };
+
+        await loginUser(credentials);
     });
 
     function validateFields(fields) {
@@ -26,8 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showValidationMessage(inputElement, message) {
-        console.log('inputElement', inputElement)
-        console.log('message', message)
         const errorElement = document.createElement("small");
         errorElement.className = "text-danger validation-message";
         errorElement.textContent = message;
@@ -40,5 +44,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    async function loginUser(credentials) {
+        try {
+            const response = await fetch(`${baseUrl}api/post/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(credentials)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Login failed");
+            }
+
+            alert("Login successful!");
+            window.location.href = "/library"; // Redirect to dashboard after successful login
+        } catch (error) {
+            showServerError(error.message);
+        }
     }
 });

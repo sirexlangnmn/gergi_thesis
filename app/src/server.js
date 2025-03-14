@@ -198,6 +198,13 @@ const classificationsJson = readFileSync(path.join(__dirname, '../../', 'public/
 const organizationsJson = readFileSync(path.join(__dirname, '../../', 'public/references/organizations.json'));
 
 
+// Utility function to get session data
+const getSessionData = (session) => ({
+    name: session?.user?.name || '',
+    email: session?.user?.email || '',
+    user_type: session?.user?.user_type || '',
+    organization_id: session?.user?.organization_id || '',
+});
 
 app.get(['/'], (req, res) => {
     let sessionData = {
@@ -222,26 +229,19 @@ app.get(['/'], (req, res) => {
 });
 
 
-app.get(['/library'], (req, res) => {
-    let sessionData = {
-        name: '',
-        email: '',
-        user_type: '',
-        organization_id: '',
+// Utility function to determine the view path
+const getViewPath = (userType) => {
+    const views = {
+        1: 'public/view/admin/web-scraping/web-scraping',
+        2: 'public/view/library/library',
     };
+    return path.join(__dirname, '../../', views[userType] || 'public/view/login/login');
+};
 
-    if (req.session && req.session.user) {
-        sessionData = {
-            name: req.session.user.name || '',
-            email: req.session.user.email || '',
-            user_type: req.session.user.user_type || '',
-            organization_id: req.session.user.organization_id || '',
-        };
-    }
-
-    res.render(path.join(__dirname, '../../', 'public/view/library/library'), {
-        data: sessionData,
-    });
+app.get(['/library'], (req, res) => {
+    const sessionData = getSessionData(req.session);
+    const userType = parseInt(sessionData.user_type);
+    res.render(getViewPath(userType), { data: sessionData });
 });
 
 

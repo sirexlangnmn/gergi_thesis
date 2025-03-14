@@ -46,11 +46,11 @@
 										<p class="font-weight-600">If you have an account with us, please log in.</p>
 										<div class="mb-4">
 											<label class="label-title">E-MAIL ADDRESS *</label>
-											<input name="dzName" required="" class="form-control" placeholder="Email Address" type="email">
+											<input name="dzName" required="" class="form-control" id="emailAddressInput" placeholder="Email Address" type="email">
 										</div>
 										<div class="mb-4">
 											<label class="label-title">PASSWORD *</label>
-											<input name="dzName" required="" class="form-control " placeholder="Password" type="password">
+											<input name="dzName" required="" class="form-control" id="passwordInput" placeholder="Password" type="password">
 										</div>
 										<div class="text-center">
 											<button class="btn btn-primary btnhover me-2" >login</button>
@@ -90,7 +90,7 @@
 						<div class="col-xl-3 col-lg-12">
 							<div class="widget widget_about">
 								<div class="footer-logo logo-white">
-									<a href="index.html"><img src="images/logo.png" alt=""></a> 
+									<a href="#"><img src="<%= process.env.GERGI_HOSTNAME %>assets/images/logo.png" alt=""></a> 
 								</div>
 								<p class="text">Bookland is a Book Store Ecommerce Website Template by DexignZone lorem ipsum dolor sit</p>
 								<div class="dz-social-icon style-1">
@@ -188,6 +188,6 @@
 	
 <!-- JAVASCRIPT FILES ========================================= -->
 
-
+<script src="<%= process.env.GERGI_HOSTNAME %>javascript/global.js"></script>
 <script src="<%= process.env.GERGI_HOSTNAME %>javascript/login.js"></script>
 <%- include('../includes/script/script2.ejs') %>
