@@ -1,40 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-
-});
-
-
-    const loginForm = getId("loginForm");
-    const loginEmailAddress = getId("loginEmailAddress");
-    const loginPassword = getId("loginPassword");
-    const loginButton = getId("loginButton");
+    const form = document.getElementById("login");
+    const fields = {
+        email: form.querySelector("input[type='email']"),
+        password: form.querySelector("input[type='password']")
+    };
+    const loginButton = form.querySelector("button");
 
     loginButton.addEventListener("click", async function (event) {
-        event.preventDefault(); // Prevent the default form submission behavior
+        event.preventDefault(); // Prevent form submission
         clearValidationMessages();
 
-        if (!validateFields(loginEmailAddress, loginPassword)) return;
+        if (!validateFields(fields)) return;
 
         const credentials = {
-            emailAddressInput: loginEmailAddress.value.trim(),
-            passwordInput: loginPassword.value.trim(),
+            emailAddressInput: fields.email.value.trim(),
+            passwordInput: fields.password.value.trim()
         };
 
         await loginUser(credentials);
     });
 
-    function validateFields(email, password) {
+    function validateFields(fields) {
         let isValid = true;
-
-        if (email.value.trim() === "") {
-            showValidationMessage(email, "Email Address is required.");
-            isValid = false;
-        }
-
-        if (password.value.trim() === "") {
-            showValidationMessage(password, "Password is required.");
-            isValid = false;
-        }
-
+        Object.entries(fields).forEach(([key, input]) => {
+            if (input.value.trim() === "") {
+                showValidationMessage(input, `${capitalize(key)} is required.`);
+                isValid = false;
+            }
+        });
         return isValid;
     }
 
@@ -47,6 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function clearValidationMessages() {
         document.querySelectorAll(".validation-message").forEach(msg => msg.remove());
+    }
+
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     async function loginUser(credentials) {
@@ -66,15 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             alert("Login successful!");
-            window.location.href = "/library"; // Redirect after successful login
+            window.location.href = "/library"; // Redirect to dashboard after successful login
         } catch (error) {
             showServerError(error.message);
         }
     }
-
-    function showServerError(message) {
-        const errorContainer = document.createElement("div");
-        errorContainer.className = "text-danger validation-message";
-        errorContainer.textContent = message;
-        form.prepend(errorContainer);
-    }
+});
