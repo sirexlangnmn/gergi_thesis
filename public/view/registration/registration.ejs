@@ -1,95 +1,192 @@
-<%- include('../includes/head/head.ejs') %>
+<%- include('../includes/head/head2.ejs') %>
 
-    <body class="text-base text-black font-nunito dark:text-white dark:bg-slate-900">
-        <!-- Loader Start -->
-        <!-- <div id="preloader">
-            <div id="status">
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
-                </div>
-            </div>
-        </div> -->
-        <!-- Loader End -->
+	<div class="page-wraper">
+		<div id="loading-area" class="preloader-wrapper-1">
+			<div class="preloader-inner">
+				<div class="preloader-shade"></div>
+				<div class="preloader-wrap"></div>
+				<div class="preloader-wrap wrap2"></div>
+				<div class="preloader-wrap wrap3"></div>
+				<div class="preloader-wrap wrap4"></div>
+				<div class="preloader-wrap wrap5"></div>
+			</div>
+		</div>
 
-        <!-- <section class="md:h-screen py-36 flex items-center bg-[url('/public/uploads/gergi/registration/registration.webp')] bg-no-repeat bg-center bg-cover"> -->
-            <section class="md:h-screen py-36 flex items-center bg-[url('../../assets/images/cta.jpg')] bg-no-repeat bg-center bg-cover">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
-            <div class="container relative">
-                <div class="flex justify-center">
-                    <div class="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md">
-                        <a href="/"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/long-logo-50.png" class="mx-auto" alt=""></a>
-                        <h5 class="my-6 text-xl font-semibold">Registration</h5>
-                        <form action="javascript:void(0);" class="text-start" method="POST" id="registrationForm" name="registrationForm" enctype="multipart/form-data" accept-charset="utf-8">
-                            <div class="grid grid-cols-1">
-                                <div class="mb-4">
-                                    <label class="font-semibold" for="RegistrationFullName">Your Full Name:</label>
-                                    <input id="RegistrationFullName" type="text" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
-                                    <span id="RegistrationFullNameError" class="text-red-600 error-message"></span>
-                                </div>
+	<!-- Header -->
+    <%- include('../includes/header/header.ejs') %>
+	<!-- Header End -->
 
-                                <div class="mb-4">
-                                    <label class="font-semibold" for="RegistrationMobileNumber">Mobile Number:</label>
-                                    <input id="RegistrationMobileNumber" type="text" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" minlength="11" maxlength="11"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" placeholder="">
-                                    <span id="RegistrationMobileNumberError" class="text-red-600 error-message"></span>
-                                </div>
+		<div class="page-content">
+			<!-- inner page banner -->
+			<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style="background-image:url(images/background/bg3.jpg);">
+				<div class="container">
+				</div>
+			</div>
+			<!-- inner page banner End-->
+			
+			<!-- contact area -->
+			<section class="content-inner shop-account">
+				<!-- Product -->
+				<div class="container">
+					<div class="row"  style="justify-content: center;">
+						<div class="col-lg-6 col-md-6 mb-4">
+							<div class="login-area">
+								<div class="tab-content nav">
+									<form action="javascript:void(0);" id="registrationForm" class="tab-pane active col-12">
+										<h4 class="text-secondary">REGISTRATION</h4>
+										<p class="font-weight-600">If you have an account with us, please <a href="/login">log in.</a> </p>
+										<div class="mb-4">
+											<label class="label-title">FULLNAME *</label>
+											<input name="dzName" required="" class="form-control" id="registrationFullname" placeholder="Fullname" type="input">
+										</div>
+                                        <div class="mb-4">
+											<label class="label-title">MOBILE NUMBER *</label>
+											<input name="dzName" required="" class="form-control" id="registrationMobileNumber" placeholder="Mobile Number" type="input">
+										</div>
+                                        <div class="mb-4">
+											<label class="label-title">E-MAIL ADDRESS *</label>
+											<input name="dzName" required="" class="form-control" id="registrationEmailAddress" placeholder="Email Address" type="email">
+										</div>
+										<div class="mb-4">
+											<label class="label-title">PASSWORD *</label>
+											<input name="dzName" required="" class="form-control" id="registrationPassword" placeholder="Password" type="password">
+										</div>
+										<div class="text-center">
+											<button class="btn btn-primary btnhover me-2" id="registrationButton" >Submit</button>
+										</div>
+										<div class="text-center" style="margin-top: 20px;">
+											<a data-bs-toggle="tab" href="shop-login.html#forgot-password" class="m-l5"><i class="fas fa-unlock-alt"></i> Forgot Password ?</a> 
+										</div>
+									</form>
+									<form id="forgot-password" class="tab-pane fade  col-12">
+										<h4 class="text-secondary">FORGET PASSWORD ?</h4>
+										<p class="font-weight-600">We will send you an email to reset your password. </p>
+										<div class="mb-3">
+											<label class="label-title">E-MAIL ADDRESS *</label>
+											<input name="dzName" required="" class="form-control" placeholder="Email Address" type="email">
+										</div>
+										<div class="text-left"> 
+											<a class="btn btn-outline-secondary btnhover m-r10" data-bs-toggle="tab" href="shop-login.html#login">Back</a>
+											<button class="btn btn-primary btnhover">Submit</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Product END -->
+			</section>
+			<!-- contact area End--> 
+	</div>
 
-                                <div class="mb-4">
-                                    <label class="font-semibold" for="RegistrationEmailAddress">Email Address:</label>
-                                    <input id="RegistrationEmailAddress" type="email" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
-                                    <span id="RegistrationEmailAddressError" class="text-red-600 error-message"></span>
-                                </div>
+		<!-- Footer -->
+		<footer class="site-footer style-1">
+			<!-- Footer Top -->
+			<div class="footer-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-3 col-lg-12">
+							<div class="widget widget_about">
+								<div class="footer-logo logo-white">
+									<a href="#"><img src="<%= process.env.GERGI_HOSTNAME %>assets/images/logo.png" alt=""></a> 
+								</div>
+								<p class="text">Bookland is a Book Store Ecommerce Website Template by DexignZone lorem ipsum dolor sit</p>
+								<div class="dz-social-icon style-1">
+									<ul>
+										<li><a href="https://www.facebook.com/dexignzone" target="_blank" ><i class="fa-brands fa-facebook-f"></i></a></li>
+										<li><a href="https://www.youtube.com/channel/UCGL8V6uxNNMRrk3oZfVct1g" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>
+										<li><a href="https://www.linkedin.com/showcase/3686700/admin/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+										<li><a href="https://www.instagram.com/website_templates__/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4">
+							<div class="widget widget_services">
+								<h5 class="footer-title">Our Links</h5>
+								<ul>
+									<li><a href="about-us.html">About us</a></li>
+									<li><a href="contact-us.html">Contact us</a></li>
+									<li><a href="privacy-policy.html">Privacy Policy</a></li>
+									<li><a href="pricing.html">Pricing Table</a></li>
+									<li><a href="faq.html">FAQ</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-xl-2 col-lg-3 col-sm-4 col-4">
+							<div class="widget widget_services">
+								<h5 class="footer-title">Bookland ?</h5>
+								<ul>
+									<li><a href="index.html">Bookland</a></li>
+									<li><a href="services.html">Services</a></li>
+									<li><a href="books-detail.html">Book Details</a></li>
+									<li><a href="blog-detail.html">Blog Details</a></li>
+									<li><a href="books-grid-view.html">Shop</a></li>
+								</ul>   
+							</div>
+						</div>
+						<div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4">
+							<div class="widget widget_services">
+								<h5 class="footer-title">Resources</h5>
+								<ul>
+									<li><a href="services.html">Download</a></li>
+									<li><a href="help-desk.html">Help Center</a></li>
+									<li><a href="shop-cart.html">Shop Cart</a></li>
+									<li><a href="shop-login.html">Login</a></li>
+									<li><a href="about-us.html">Partner</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+							<div class="widget widget_getintuch">
+								<h5 class="footer-title">Get in Touch With Us</h5>
+								<ul>
+									<li>
+										<i class="flaticon-placeholder"></i>
+										<span>832  Thompson Drive, San Fransisco CA 94107,US</span>
+									</li>
+									<li>
+										<i class="flaticon-phone"></i>
+										<span>+123 345123 556<br>
+										+123 345123 556</span>
+									</li>
+									<li>
+										<i class="flaticon-email"></i> 
+										<span>support@bookland.id<br>
+										info@bookland.id</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer Top End -->
+			
+			<!-- Footer Bottom -->
+			<div class="footer-bottom">
+				<div class="container">
+					<div class="row fb-inner">
+						<div class="col-lg-6 col-md-12 text-start"> 
+							<p class="copyright-text">Bookland Book Store Ecommerce Website - © <span class="current-year">2024</span> All Rights Reserved</p>
+						</div>
+						<div class="col-lg-6 col-md-12 text-end"> 
+							<p>Made with <span class="heart"></span> by <a href="https://dexignzone.com/">DexignZone</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer Bottom End -->
+			
+		</footer>
+		<!-- Footer End -->
+		
+		<button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
+	</div>
+	
+<!-- JAVASCRIPT FILES ========================================= -->
 
-                                <div class="mb-4">
-                                    <label class="font-semibold" for="RegistrationPassword">Password:</label>
-                                    <input id="RegistrationPassword" type="password" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
-                                    <span id="RegistrationPasswordError" class="text-red-600 error-message"></span>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="font-semibold" for="RegistrationConfirmPassword">
-                                        Confirm Password:
-                                    </label>
-                                    <input id="RegistrationConfirmPassword" type="password" class="w-full h-10 px-3 py-2 mt-3 bg-transparent border border-gray-200 rounded outline-none form-input dark:bg-slate-900 dark:text-slate-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0" placeholder="">
-                                    <span id="RegistrationConfirmPasswordError" class="text-red-600 error-message"></span>
-                                </div>
-
-                                <div class="mb-4">
-                                    <div class="flex items-center w-full mb-0">
-                                        <input class="text-indigo-600 border-gray-200 rounded form-checkbox dark:border-gray-800 focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="RegistrationTermsAndCondition">
-                                        <label class="form-check-label text-slate-400" for="RegistrationTermsAndCondition">I Accept <a href="#" class="text-indigo-600">Terms And Condition</a></label>
-                                    </div>
-                                    <span id="RegistrationTermsAndConditionError" class="text-red-600 error-message"></span>
-                                </div>
-
-                                <div class="mb-4">
-                                    <input type="submit" class="inline-block w-full px-5 py-2 text-base tracking-wide text-center text-white align-middle duration-500 bg-indigo-600 border border-indigo-600 rounded-md hover:bg-indigo-700 hover:border-indigo-700" value="Register">
-                                </div>
-
-                                <div class="text-center">
-                                    <span class="text-slate-400 me-2">Already have an account ? </span> <a href="/login" class="inline-block font-bold text-black dark:text-white">Login</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section><!--end section -->
-
-        <%- include('../includes/footer/footer.ejs') %>
-
-        <%- include('../includes/start_cookie_popup/start_cookie_popup.ejs') %>
-
-        <%- include('../includes/back_to_top/back_to_top.ejs') %>
-
-        <%- include('../includes/switcher/switcher.ejs') %>
-
-        <%- include('../includes/ltr_and_rtl_mode/ltr_and_rtl_mode.ejs') %>
-
-
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/displayErrorMessage.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resetErrorMessages.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/registration.js"></script>
-
-        <%- include('../includes/script/script.ejs') %>
+<script src="<%= process.env.GERGI_HOSTNAME %>javascript/global.js"></script>
+<script src="<%= process.env.GERGI_HOSTNAME %>javascript/registration.js"></script>
+<%- include('../includes/script/script2.ejs') %>
