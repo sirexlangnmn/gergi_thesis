@@ -128,3 +128,13 @@ exports.login = async (req, res) => {
         });
     }
 };
+
+exports.getUsers = async (req, res) => {
+    const getRows = await Users.findAll()
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            return 'Some error occurred while retrieving users.';
+        });
+};

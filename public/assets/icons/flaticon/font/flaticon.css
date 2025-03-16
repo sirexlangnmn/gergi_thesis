@@ -129,3 +129,6 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
 .flaticon-leaf:before {
     content: "\f125";
 }
+.flaticon-pencil:before { 
+    content: "\f115"; 
+}

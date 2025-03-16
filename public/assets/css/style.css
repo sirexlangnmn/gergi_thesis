@@ -12995,11 +12995,20 @@ button:focus {
       border-radius: 6px; }
   .check-tbl .product-item-close {
     text-align: right; }
-    .check-tbl .product-item-close a {
+    /* .check-tbl .product-item-close a {
       width: 40px;
       height: 40px;
       border-radius: 6px;
       background: var(--bs-danger);
+      display: inline-block;
+      color: #fff;
+      text-align: center;
+      line-height: 40px; } */
+  .check-tbl .product-item-close a {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      /* background: var(--bs-danger); */
       display: inline-block;
       color: #fff;
       text-align: center;
@@ -23465,8 +23474,18 @@ body.woo-variation-swatches .variable-items-wrapper .variable-item:not(.radio-va
 .site-header {
   position: relative;
   z-index: 9999; }
-  .site-header .main-bar {
+  /* .site-header .main-bar {
     background: #ffffff;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05); } */
+  .site-header{
+    background: #ffffff;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05); }
+  .main-bar {
+    /* background: #ffffff; */
     width: 100%;
     position: relative;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05); }

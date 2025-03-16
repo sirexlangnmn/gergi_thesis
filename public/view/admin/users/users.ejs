@@ -1,0 +1,135 @@
+<%- include('../../includes/head/head.ejs') %>
+    <body id="bg">
+        <div class="page-wraper">
+            <div id="loading-area" class="preloader-wrapper-1">
+                <div class="preloader-inner">
+                    <div class="preloader-shade"></div>
+                    <div class="preloader-wrap"></div>
+                    <div class="preloader-wrap wrap2"></div>
+                    <div class="preloader-wrap wrap3"></div>
+                    <div class="preloader-wrap wrap4"></div>
+                    <div class="preloader-wrap wrap5"></div>
+                </div> 
+            </div>
+            <!-- Header -->
+            <%- include('../../includes/header/header.ejs') %>
+            <!-- Header End -->
+            <!-- Content -->
+            <div class="page-content bg-white">
+                <!-- contact area -->
+                <div class="content-block">
+                    <!-- Browse Jobs -->
+                    <section class="content-inner bg-white">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-4 m-b30">
+                                    <div class="sticky-top">
+                                        <div class="shop-account">
+                                            <ul class="account-list">
+                                                <li>
+                                                    <a href="my-profile.html"><i class="far fa-user" aria-hidden="true"></i> 
+                                                    <span>Profile</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="flaticon-shopping-cart-1"></i>
+                                                    <span>Web Scrape</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="far fa-heart" aria-hidden="true"></i> 
+                                                    <span>Upload Resources</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="/users" class="active"><i class="fa fa-briefcase" aria-hidden="true"></i> 
+                                                    <span>Users</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="services.html"><i class="far fa-bell" aria-hidden="true"></i> 
+                                                    <span>Services</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="help-desk.html"><i class="far fa-id-card" aria-hidden="true"></i> 
+                                                    <span>Help Desk</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="privacy-policy.html"><i class="fa fa-key" aria-hidden="true"></i> 
+                                                    <span>Privacy Policy</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop-login.html"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> 
+                                                    <span>Log Out</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-9 col-lg-8 m-b30">
+                                    <div class="shop-bx shop-profile">
+                                        <div class="shop-bx-title clearfix">
+                                            <h5 class="text-uppercase">Users</h5>
+                                        </div>
+                                        <div class="row m-b30">
+                                            <div class="row" style="--bs-gutter-x: 9px;">
+                                                <div class="col-lg-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table check-tbl">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Mobile</th>
+                                                                    <th>Email</th>
+                                                                    <th>User Type</th>
+                                                                    <th>Organization</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="usersTable">
+                                                                <!-- <tr>
+                                                                    <td class="product-item-img">Name</td>
+                                                                    <td class="product-item-name">Mobile</td>
+                                                                    <td class="product-item-price">Email</td>
+                                                                    <td class="product-item-quantity">User Type<</td>
+                                                                    <td class="product-item-totle">Organization</td>
+                                                                    <td class="product-item-close">
+                                                                        <a href="javascript:void(0);" >  <img src="https://cdn-icons-png.flaticon.com/128/9283/9283120.png" loading="lazy" alt="Edit " title="Edit " width="32" height="32"></a>
+                                                                    </td>
+                                                                </tr> -->
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row page mt-0">
+                                                <div class="col-md-6">
+                                                    <p class="page-text">Showing 12 from 50 data</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <nav aria-label="Blog Pagination">
+                                                    <ul class="pagination style-1 p-t20">
+                                                        <li class="page-item"><a class="page-link prev" href="javascript:void(0);">Prev</a></li>
+                                                        <li class="page-item"><a class="page-link active" href="javascript:void(0);">1</a></li>
+                                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                                        <li class="page-item"><a class="page-link next" href="javascript:void(0);">Next</a></li>
+                                                    </ul>
+                                                </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Browse Jobs END -->
+                </div>
+            </div>
+            <!-- Content END-->
+        
+            <%- include('users-modal.ejs') %>
+                
+            <button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
+        </div>
+
+
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/users.js"></script>
+    <%- include('../../includes/script/script.ejs') %>
