@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function fetchAndPopulateUsers() {
     try {
         const users = await fetchUsers();
+        console.log(`users ==> `, users)
         populateTable(users);
     } catch (error) {
         console.error('Error fetching or displaying users:', error);
@@ -32,7 +33,7 @@ async function fetchUsers() {
 }
 
 function populateTable(users) {
-    const tableBody = document.getElementById("usersTable");
+    const tableBody = getId("usersTable");
 
     users.forEach(user => {
         const row = document.createElement("tr");
@@ -41,8 +42,8 @@ function populateTable(users) {
             <td>${user.name}</td>
             <td>${user.mobile_number}</td>
             <td>${user.email}</td>
-            <td>${user.user_type ?? "N/A"}</td>
-            <td>${user.organization_id ? user.organization_id : "N/A"}</td>
+            <td>${user.user_type === '1' ? 'Admin' : user.user_type === '2' ? 'Client' : user.user_type === '3' ? 'Student' : ''}</td>
+            <td>${user.organization_id ? user.organization_title : "N/A"}</td>
             <td class="product-item-close">
                 <a href="javascript:void(0);" class="edit-btn" data-user='${JSON.stringify(user)}'>
                     <img src="https://cdn-icons-png.flaticon.com/128/9283/9283120.png"
@@ -71,6 +72,14 @@ function handleEditClick(event) {
     const button = event.currentTarget;
     const userData = JSON.parse(button.getAttribute("data-user"));
     console.log("Selected User Data:", userData);
+
+    getId("modalName").value = userData.name || "";
+    getId("modalMobile").value = userData.mobile_number || "";
+    getId("modalEmail").value = userData.email || "";
+    getId("modalType").value = userData.user_type === '1' ? 'Admin' : userData.user_type === '2' ? 'Client' : userData.user_type === '3' ? 'Student' : '';
+    getId("modalOrganization").value = userData.organization_id || "";
+    getId("modalCreatedAt").value = userData.createdAt || "";
+    getId("modalUpdatedAt").value = userData.updatedAt || "";
 
     modal.style.display = "block";
 }

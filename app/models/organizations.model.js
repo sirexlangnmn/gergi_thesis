@@ -10,3 +10,5 @@ module.exports = (sequelize, Sequelize) => {
 
     return Organizations;
 };
+
+

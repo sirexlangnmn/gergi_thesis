@@ -5,6 +5,7 @@ const db = require('../models');
 const sequelizeConfig = require('../config/sequelize.config.js');
 
 const Users = db.users;
+const Organizations = db.organizations;
 
 const Op = db.Sequelize.Op;
 
@@ -138,3 +139,5 @@ exports.getUsers = async (req, res) => {
             return 'Some error occurred while retrieving users.';
         });
 };
+
+

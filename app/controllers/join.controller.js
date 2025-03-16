@@ -122,6 +122,26 @@ exports.search = async (req, res) => {
 
 
 
+exports.getUsers = async (req, res) => {
+    try {
+        let query = QUERY.getUsers
+
+        const values = [];
+
+        sql.query(query, values, (err, result) => {
+            if (err) {
+                console.log('Error executing query:', err);
+                return;
+            }
+
+            res.json(result);
+        });
+
+    } catch (error) {
+        console.error('Error executing query:', error);
+    }
+};
+
 
 
 

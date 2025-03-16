@@ -25,4 +25,5 @@ db.subjects = require('./subjects.model.js')(sequelize, Sequelize);
 db.users = require('./users.model.js')(sequelize, Sequelize);
 db.academic_levels = require('./academic_levels.model.js')(sequelize, Sequelize);
 
+
 module.exports = db;

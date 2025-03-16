@@ -81,6 +81,22 @@ const QUERY = {
         LEFT JOIN
             subject_titles st ON su.subject_title_id = st.id
     `,
+
+
+    getUsers: `
+        SELECT
+            users.id,
+            users.name,
+            users.mobile_number,
+            users.email,
+            users.user_type,
+            users.organization_id,
+            users.createdAt,
+            users.updatedAt,
+            organizations.title AS organization_title
+        FROM users
+        LEFT JOIN organizations ON users.organization_id = organizations.id
+    `,
 }
 
 // export default QUERY;
