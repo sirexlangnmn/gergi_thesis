@@ -3,7 +3,7 @@
         font-family: Arial, sans-serif;
     }
     .modal {
-        display: none;
+        /* display: none; */
         position: fixed;
         z-index: 1;
         left: 0;
@@ -33,6 +33,27 @@
     .close:hover {
         color: black;
     }
+
+
+
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: white;
+    }
+
+    .form-group select {
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="black" d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 18px;
+        cursor: pointer;
+    }
+
 </style>
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -59,14 +80,16 @@
 										<div class="form-group col-lg-12 col-md-12">
 											<input type="text" class="form-control" id="modalType" placeholder="User Type" readonly>
 										</div>
+                                        <div class="form-group col-lg-12 col-md-12 dropdown">
+                                            <select class="" id="modalOrganization">
+                                                <option>Nothing Selected</option>
+                                            </select>
+                                        </div>
 										<div class="form-group col-lg-12 col-md-12">
-											<input type="text" class="form-control" id="modalOrganization" placeholder="Organization">
+											<input type="text" class="form-control" id="modalCreatedAt" placeholder="Created At" readonly>
 										</div>
 										<div class="form-group col-lg-12 col-md-12">
-											<input type="text" class="form-control" id="modalCreatedAt" placeholder="Created At">
-										</div>
-										<div class="form-group col-lg-12 col-md-12">
-											<input type="text" class="form-control" id="modalUpdatedAt" placeholder="Updated At">
+											<input type="text" class="form-control" id="modalUpdatedAt" placeholder="Updated At" readonly>
 										</div>
 									</div>
 									<button class="btn btn-primary btnhover mb-3" type="button" > Save <i class="fa fa-arrow-circle-o-down"></i></button>

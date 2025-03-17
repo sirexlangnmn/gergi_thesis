@@ -20,6 +20,7 @@ exports.getAll = async (req, res) => {
         });
 };
 
+
 exports.create = async (req, res) => {
     const errors = validationResult(req);
 
