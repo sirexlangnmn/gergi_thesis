@@ -55,7 +55,7 @@ module.exports = (app) => {
     // app.post(['/api/v1/get/users'], usersController.getUsers);
     app.post(['/api/v1/get/users'], joinController.getUsers);
     app.get(['/api/v1/get/organizations'], organizationsController.getAll);
-
+    app.post(['/api/v1/post/user'], usersController.update);
 
     // app.get(['/api/v1/get/resources/transfering'], joinController.transfering);
     // app.get(['/api/v1/get/resources/updateResourceSetup'], joinController.updateResourceSetup);

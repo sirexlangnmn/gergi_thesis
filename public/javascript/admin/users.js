@@ -87,6 +87,7 @@ async function handleEditClick(event) {
 
     modal.style.display = "block";
 
+    getId("modalId").value = userData.id || "";
     getId("modalName").value = userData.name || "";
     getId("modalMobile").value = userData.mobile_number || "";
     getId("modalEmail").value = userData.email || "";
@@ -124,3 +125,40 @@ function populateOrganizationDropdown(selectedOrganizationId) {
         }
     });
 }
+
+
+
+getId("modalUserSave").addEventListener("click", function () {
+    // Get input field values
+    const userData = {
+        id: document.getElementById("modalId").value,
+        name: document.getElementById("modalName").value,
+        mobile_number: document.getElementById("modalMobile").value,
+        email: document.getElementById("modalEmail").value,
+        userType: document.getElementById("modalType").value,
+        organization_id: document.getElementById("modalOrganization").value,
+        createdAt: document.getElementById("modalCreatedAt").value,
+        updatedAt: document.getElementById("modalUpdatedAt").value,
+    };
+
+    console.log("Submitting user data:", userData); // Debugging log
+
+
+    fetch(`${baseUrl}api/v1/post/user`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Success:", data);
+        alert("User details updated successfully!");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Failed to update user details.");
+    });
+});
+

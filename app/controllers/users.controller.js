@@ -141,3 +141,43 @@ exports.getUsers = async (req, res) => {
 };
 
 
+exports.update = async (req, res) => {
+    const errors = validationResult(req);
+
+    try {
+        if (!errors.isEmpty()) {
+            return res.status(400).send({
+                message: errors.array(),
+            });
+        }
+
+        const { id, organization_id } = req.body;
+        console.log(`req.body ===> `, req.body)
+
+        // Check if the user exists
+        const user = await Users.findByPk(id);
+        if (!user) {
+            return res.status(404).json({
+                message: 'User not found',
+            });
+        }
+
+        // Update user details
+        await user.update({
+            organization_id,
+            updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+        });
+
+        return res.status(200).json({
+            message: 'User updated successfully',
+            user,
+        });
+    } catch (error) {
+        console.error('Error during user update:', error);
+        return res.status(500).json({
+            error: {
+                message: 'Internal server error',
+            },
+        });
+    }
+};
