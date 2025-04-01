@@ -1,4 +1,62 @@
 <%- include('../../includes/head/head.ejs') %>
+<style>
+    .widget-post-bx {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Two columns, responsive */
+        gap: 20px; /* Spacing between items */
+    }
+
+    .widget-post {
+        display: flex;
+        align-items: center;
+        background: #f1f5f9;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .dz-media {
+        flex: 0 0 100px; /* Fixed width for images */
+        margin-right: 15px;
+    }
+
+    .dz-media img {
+        width: 100px; /* Make sure images fit */
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .dz-info {
+        flex: 1;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .dz-meta {
+        font-size: 14px;
+        color: gray;
+    }
+
+    /* Responsive: Stack items in one column on smaller screens */
+    @media (max-width: 600px) {
+        .widget-post-bx {
+            grid-template-columns: 1fr; /* Single column on small screens */
+        }
+
+        .widget-post {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .dz-media {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
     <body id="bg">
         <div class="page-wraper">
             <div id="loading-area" class="preloader-wrapper-1">
@@ -33,46 +91,8 @@
                                         <div class="row m-b30">
                                             <div class="row" id="">
                                                 <div class="widget recent-posts-entry">
-                                                    <div class="widget-post-bx">
-                                                        <div class="widget-post clearfix">
-                                                            <div class="dz-media"> 
-                                                                <a href="blog-detail.html"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/client-logo/blog1.jpg" alt=""></a>
-                                                            </div>
-                                                            <div class="dz-info">
-                                                                <h6 class="title"><a href="blog-detail.html">Omg! The Best Library Ever!</a></h6>
-                                                                <div class="dz-meta">
-                                                                    <ul>
-                                                                        <li class="post-date"> 7 March, 2024 </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-post clearfix">
-                                                            <div class="dz-media"> 
-                                                                <a href="blog-detail.html"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/client-logo/blog2.jpg" alt=""></a>
-                                                            </div>
-                                                            <div class="dz-info">
-                                                                <h6 class="title"><a href="blog-detail.html">The Miracle Of Library In Mind.</a></h6>
-                                                                <div class="dz-meta">
-                                                                    <ul>
-                                                                        <li class="post-date"> 7 March, 2024 </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-post clearfix">
-                                                            <div class="dz-media"> 
-                                                                <a href="blog-detail.html"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/client-logo/blog3.jpg" alt=""></a> 
-                                                            </div>
-                                                            <div class="dz-info">
-                                                                <h6 class="title"><a href="blog-detail.html">So many books, so little time.</a></h6>
-                                                                <div class="dz-meta">
-                                                                    <ul>
-                                                                        <li class="post-date"> 7 March, 2024 </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div class="widget-post-bx" id="organizationsContainer">
+                                                        <!-- organizationsContainer here -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,5 +275,5 @@
         </div>
 
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/admin-navigation.js"></script>
-        <!-- <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/upload-resources.js"></script> -->
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup.js"></script>
     <%- include('../../includes/script/script.ejs') %>
