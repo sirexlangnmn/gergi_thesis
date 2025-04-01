@@ -22,45 +22,8 @@
                     <section class="content-inner bg-white">
                         <div class="container">
                             <div class="row">
-                                <div class="col-xl-3 col-lg-4 m-b30">
-                                    <div class="sticky-top">
-                                        <div class="shop-account">
-                                            <ul class="account-list">
-                                                <li>
-                                                    <a href="my-profile.html"><i class="far fa-user" aria-hidden="true"></i> 
-                                                    <span>Profile</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="flaticon-shopping-cart-1"></i>
-                                                    <span>Web Scrape</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="far fa-heart" aria-hidden="true"></i> 
-                                                    <span>Upload Resources</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="/users" class="active"><i class="fa fa-briefcase" aria-hidden="true"></i> 
-                                                    <span>Users</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="services.html"><i class="far fa-bell" aria-hidden="true"></i> 
-                                                    <span>Services</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="help-desk.html"><i class="far fa-id-card" aria-hidden="true"></i> 
-                                                    <span>Help Desk</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="privacy-policy.html"><i class="fa fa-key" aria-hidden="true"></i> 
-                                                    <span>Privacy Policy</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-login.html"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> 
-                                                    <span>Log Out</span></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div class="col-xl-3 col-lg-4 m-b30" id="admin-navigation">
+                                    <!-- admin navigation here -->
                                 </div>
                                 <div class="col-xl-9 col-lg-8 m-b30">
                                     <div class="shop-bx shop-profile">
@@ -130,5 +93,6 @@
             <button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
         </div>
 
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/admin-navigation.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/users.js"></script>
     <%- include('../../includes/script/script.ejs') %>

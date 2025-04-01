@@ -25,6 +25,7 @@ exports.registration = async (req, res) => {
         let mobile_number = mobileNumberInput;
         let email = emailAddressInput;
         let password = passwordInput;
+        let user_type = 2; // client
 
         // Inserting data into the users table
         const newUser = await Users.create({
@@ -32,6 +33,7 @@ exports.registration = async (req, res) => {
             mobile_number,
             email,
             password,
+            user_type,
         });
 
         return res.status(201).json({
