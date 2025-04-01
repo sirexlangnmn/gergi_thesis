@@ -69,6 +69,7 @@ const adminNav = document.getElementById("admin-navigation");
         const menuItems = [
             { href: "/web-scraping", icon: "flaticon-shopping-cart-1", text: "Web Scraping" },
             { href: "/upload-resources", icon: "far fa-heart", text: "Upload Resources" },
+            { href: "/resources-setup", icon: "far fa-heart", text: "Resources Setup" },
             { href: "/users", icon: "fa fa-briefcase", text: "Users" }
         ];
 

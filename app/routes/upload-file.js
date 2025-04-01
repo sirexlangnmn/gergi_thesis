@@ -23,14 +23,27 @@ module.exports = (app) => {
             cb(null, './uploads');
         },
         filename: function (req, file, cb) {
-            const title = req.body.update_title.replace(/\s+/g, '-').toLowerCase();;
+            const title = req.body.update_title.replace(/\s+/g, '-').toLowerCase();
             cb(null, `${title}-${Date.now()}-${file.originalname}`);
         }
     });
 
+    const storage3 = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/uploads/gergi/uploaded-resources');
+        },
+        filename: function (req, file, cb) {
+            // const title = req.file.replace(/\s+/g, '-').toLowerCase();
+            const title = 'uploaded-resources'
+            cb(null, `${title}-${Date.now()}`);
+        }
+    });
+
+
     const upload = multer({ storage: storage });
     const upload2 = multer({ storage: storage2 });
-    const upload3 = multer({ dest: "./uploads" });
+    // const upload3 = multer({ dest: "./uploads" });
+    const upload3 = multer({ storage: storage3 });
 
     app.use(express.static(path.join(__dirname, 'public')));
 
