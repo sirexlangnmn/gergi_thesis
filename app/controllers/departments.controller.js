@@ -28,6 +28,7 @@ exports.getDepartmentsByOrganization = async (req, res) => {
 
     try {
         const { organizationId } = req.body;
+        console.log(`backend organizationId ==>> `, organizationId)
 
         const departmentsData = await Departments.findAll({ where: { organization_id: organizationId } });
 
