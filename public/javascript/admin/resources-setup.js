@@ -212,5 +212,32 @@ function handleDepartmentClick(departmentId, departmentTitle) {
     departmentContainer.style.display = "none";
 
     handleBreadcrumbs('department', departmentId, departmentTitle);
-    // getCoursesByDepartment(orgId, imageUrl, orgTitle);
+    getCoursesByDepartment(departmentId, departmentTitle);
+}
+
+function getCoursesByDepartment(departmentId, departmentTitle) {
+    console.log("getCoursesByDepartment departmentId  ==>> ", departmentId);
+    console.log("getCoursesByDepartment departmentTitle  ==>> ", departmentTitle);
+
+    fetch(`${baseUrl}api/get/departments-by-organization`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ organizationId: departmentId })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("getCoursesByDepartment data received:", data);
+        // renderCourses(data, imageUrl, orgTitle);
+    })
+    .catch(error => {
+        // Catch any errors (e.g., network errors, API errors)
+        console.error('There was a problem with the fetch operation:', error);
+    });
 }
