@@ -29,6 +29,7 @@ function populateOrganizations(organizations) {
     organizationsContainer.innerHTML = "";
 
     organizations.forEach(org => {
+        const classificationName = getClassificationName(org.classification_id);
         const organizationHTML = `
             <div class="widget-post clearfix" onclick="handleOrganizationClick(${org.id}, '${org.imageUrl}', '${org.title}');">
                 <div class="dz-media">
@@ -41,7 +42,7 @@ function populateOrganizations(organizations) {
                     <h6 class="title"><a href="javascript:void(0)">${org.title}</a></h6>
                     <div class="dz-meta">
                         <ul>
-                            <li class="post-date">${org.classification_id}</li>
+                            <li class="post-date">${classificationName}</li>
                         </ul>
                     </div>
                 </div>
@@ -50,6 +51,18 @@ function populateOrganizations(organizations) {
 
         organizationsContainer.insertAdjacentHTML("beforeend", organizationHTML);
     });
+}
+
+function getClassificationName(id) {
+    const classifications = [
+        { "id": 1, "name": "Government Agencies" },
+        { "id": 2, "name": "Academic Institutions" },
+        { "id": 3, "name": "Private Sectors" },
+        { "id": 4, "name": "Public Sectors" }
+    ];
+
+    const classification = classifications.find(item => item.id == id);
+    return classification ? classification.name : "Unknown Classification";
 }
 
 function handleOrganizationClick(orgId, imageUrl, orgTitle) {

@@ -123,7 +123,7 @@ module.exports = (app) => {
 
 
     app.post('/api/v1/post/upload-resources', upload3.single('excelFile'), (req, res) => {
-        
+
         console.log(`req.file ==>`, req.file)
         if (!req.file) {
             return res.status(400).json({ message: "No file uploaded!" });
