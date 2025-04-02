@@ -25,6 +25,8 @@ async function fetchOrganizations() {
 
 function populateOrganizations(organizations) {
     const organizationsContainer = getId("organizationsContainer");
+    // organizationsContainer.style.display = "display";
+
 
     organizationsContainer.innerHTML = "";
 
@@ -287,4 +289,44 @@ function renderCourses(courses, departmentTitle) {
 function handleCourseClick(courseId, coursTitle) {
     console.log(`handleCourseClick courseId ==> `, courseId)
     console.log(`handleCourseClick coursTitle ==> `, coursTitle)
+
+    const organizationsContainer = getId("organizationsContainer");
+    const departmentContainer = getId("departmentContainer");
+    const coursesContainer = getId("coursesContainer");
+    const resourcesContainer = getId("resourcesContainer");
+
+    organizationsContainer.style.display = "none";
+    departmentContainer.style.display = "none";
+    coursesContainer.style.display = "none";
+    resourcesContainer.style.display = "display";
+
+    handleBreadcrumbs('course', courseId, coursTitle);
+    renderSearchContainer()
+    renderResourcesContainer()
+}
+
+
+function renderSearchContainer() {
+    const searchContainer = getId("searchContainer");
+
+    const searchContainerHtml = `<div class="col-lg-12 col-md-12">
+        <div class="mb-3">
+            <form action="javascript:void(0);" accept-charset="utf-8">
+            <label for="exampleFormControlTextarea" class="form-label">Search:</label>
+            <input type="text" class="form-control" id="searchKeyword" placeholder="Keyword">
+            </form>
+        </div>
+    </div>`
+
+    searchContainer.insertAdjacentHTML("beforeend", searchContainerHtml);
+}
+
+
+function renderResourcesContainer() {
+    const resourcesContainer = getId("resourcesContainer");
+    const resourcesContainerHtml = `<div class="row" id="searchedData"  style="--bs-gutter-x: 9px;">
+    dadas
+    </div>`
+
+    resourcesContainer.insertAdjacentHTML("beforeend", resourcesContainerHtml);
 }
