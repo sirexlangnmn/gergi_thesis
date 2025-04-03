@@ -380,10 +380,9 @@ function renderResources(data) {
 
 
     data.forEach(book => {
-        // const imageExists = book.image ? isValidUrl(book.image) : false;
-        // const linkExists = book.url_link ? isValidUrl(book.url_link) : false;
-        // const imageSrc = isValidUrl(book.image) ? book.image : `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
-        console.log(`isValidUrl ==>>`, isValidUrl(book.image))
+        const imageSrc = getImageSrc(book.image);
+        console.log(`imageSrc rex =>> `, imageSrc)
+
 
 
         const bookCard = document.createElement("div");
@@ -392,7 +391,7 @@ function renderResources(data) {
         bookCard.innerHTML = `
             <div class="dz-shop-card style-2">
                 <div class="dz-media">
-                    <img src="" alt="${book.title}">
+                    <img src="${imageSrc}" alt="">
                 </div>
                 <div class="dz-content">
                     <div>
@@ -423,30 +422,33 @@ function renderResources(data) {
 }
 
 
-// async function isValidUrl(url) {
-//     console.log(`isValidUrl url ==>> `, url)
-//     try {
-//         const response = await fetch(url, { method: 'HEAD' });
-//         return response.ok;
-//     } catch (error) {
-//         return false;
-//     }
-// }
+function getImageSrc(image) {
+    const filePath = `${baseUrl}uploads/gergi/resources_image/`;
+    const fallbackImage = 'CoverNotAvailable.jpg';
 
+    // Function to check if image exists using XMLHttpRequest
+    function checkImageExists(url) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, false);  // false makes it synchronous
+        xhr.send();
 
-async function isValidUrl(url) {
-    console.log(`isValidUrl url ==>> `, url);
-
-    // Check if the URL is an external link or a local file
-    const isExternal = /^(https?:)?\/\//.test(url);
-    if (isExternal) {
-        try {
-            const response = await fetch(url, { method: 'HEAD' });
-            return response.ok ? true : false;
-        } catch (error) {
-            return false;
+        if (xhr.status >= 200 && xhr.status < 300) {
+            return true;  // Image exists
+        } else {
+            return false;  // Image does not exist
         }
+    }
+
+    // Check if the image exists and return the appropriate image URL
+    const exists = checkImageExists(`${filePath}${image}`);
+    if (!exists) {
+        console.log('Image not found, using fallback');
+        return `${filePath}${fallbackImage}`;  // Return fallback image path
     } else {
-        return 'uploaded'
+        console.log('Image exists:', `${filePath}${image}`);
+        return `${filePath}${image}`;  // Return the original image path
     }
 }
+
+
+
