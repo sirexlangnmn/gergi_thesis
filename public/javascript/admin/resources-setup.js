@@ -102,7 +102,7 @@ function handleBreadcrumbs(type, id, title) {
             // console.log("index ==>> :", index);
             breadcrumbHTML += `
             <a href="javascript:void(0);">${item.title}</a> >
-            <input type="text" name="${item.type}_input" class="breadcrumb-input" value="${item.id}" data-index="${index}" hidden >
+            <input type="text" name="${item.type}_input" id="${item.type}_input" class="breadcrumb-input" value="${item.id}" data-index="${index}" hidden >
             `;
         });
 
@@ -301,8 +301,9 @@ function handleCourseClick(courseId, coursTitle) {
     resourcesContainer.style.display = "display";
 
     handleBreadcrumbs('course', courseId, coursTitle);
-    renderSearchContainer()
-    renderResourcesContainer()
+    renderSearchContainer();
+    renderResourcesContainer();
+    getResourcesOrderByLatest();
 }
 
 
@@ -328,5 +329,104 @@ function renderResourcesContainer() {
     dadas
     </div>`
 
-    resourcesContainer.insertAdjacentHTML("beforeend", resourcesContainerHtml);
+    // resourcesContainer.insertAdjacentHTML("beforeend", resourcesContainerHtml);
+
+
+    const organizationInput = getId('organization_input').value;
+    console.log(`renderResourcesContainer organizationInput ==>> `, organizationInput)
+    const departmentInput = getId('department_input').value;
+    console.log(`renderResourcesContainer departmentInput ==>> `, departmentInput)
+    const courseInput = getId('course_input').value;
+    console.log(`renderResourcesContainer courseInput ==>> `, courseInput)
 }
+
+
+function getResourcesOrderByLatest() {
+    // console.log("getDepartmentsByOrganization orgId  ==>> ", orgId);
+    // console.log("getDepartmentsByOrganization imageUrl  ==>> ", imageUrl);
+    // console.log("getDepartmentsByOrganization orgTitle  ==>> ", orgTitle);
+
+    fetch(`${baseUrl}api/get/resources-orde-by-random-with-limit`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("getResourcesOrderByLatest data received:", data);
+        renderResources(data);
+    })
+    .catch(error => {
+        // Catch any errors (e.g., network errors, API errors)
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+
+function renderResources(data) {
+    console.log('renderResources data ==> ', data)
+    const resourcesContainer = getId("resourcesContainer");
+
+    const imageSrc = `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
+    const publicationYear = 'Publication Year : 2021';
+    const author = "Author : WebMaster";
+
+    
+
+    data.forEach(book => {
+        const imageExists = book.image ? isValidUrl(book.image) : false;
+        const linkExists = book.url_link ? isValidUrl(book.url_link) : false;
+
+
+        const bookCard = document.createElement("div");
+        bookCard.className = "col-md-12 col-sm-12";
+
+        bookCard.innerHTML = `
+            <div class="dz-shop-card style-2">
+                <div class="dz-media">
+                    <img src="${imageSrc}" alt="${book.title}">
+                </div>
+                <div class="dz-content">
+                    <div>
+                        <li><a href="${book.url_link}" target="_blank" class="download-link">${book.url_link}</a></li>
+                    </div>
+                    <div class="dz-header">
+                        <div>
+                            <h4 class="title mb-0">
+                                <a href="${book.url_link}" target="_blank" class="book-name">${book.title}</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="dz-body">
+                        <div class="rate" style="justify-content: none">
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-secondary btnhover btnhover2 save-btn">
+                                    <i class="flaticon-send m-r10"></i> Save
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        resourcesContainer.appendChild(bookCard);
+    });
+}
+
+
+async function isValidUrl(url) {
+    try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+}
+

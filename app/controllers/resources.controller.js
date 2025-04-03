@@ -5,6 +5,7 @@ const Resources = db.resources;
 
 
 const Op = db.Sequelize.Op;
+const random = db.Sequelize.literal('RAND()');
 
 exports.pdf = async (req, res) => {
     const getRows = await Resources.findAll()
@@ -27,6 +28,35 @@ exports.resourcesOrderByLatest = async (req, res) => {
         res.status(500).send('Some error occurred while retrieving resources.');
     }
 };
+
+
+exports.resourcesOrderByLatestWithLimit = async (req, res) => {
+    try {
+        const data = await Resources.findAll({
+            order: [['id', 'DESC']],
+            limit: 50 // Limit results to 50
+        });
+        res.send(data);
+    } catch (err) {
+        console.error('Error occurred while retrieving resources:', err);
+        res.status(500).send('Some error occurred while retrieving resources.');
+    }
+};
+
+
+exports.resourcesOrderByRandomWithLimit = async (req, res) => {
+    try {
+        const data = await Resources.findAll({
+            order: random,
+            limit: 50
+        });
+        res.send(data);
+    } catch (err) {
+        console.error('Error occurred while retrieving resources:', err);
+        res.status(500).send('Some error occurred while retrieving resources.');
+    }
+};
+
 
 
 
