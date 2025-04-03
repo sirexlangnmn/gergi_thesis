@@ -56,8 +56,8 @@ module.exports = (app) => {
     app.post(['/api/v1/get/users'], joinController.getUsers);
     app.get(['/api/v1/get/organizations'], organizationsController.getAll);
     app.post(['/api/v1/post/user'], usersController.update);
-    app.post(['/api/get/resources-order-by-latest-with-limit'], resourcesController.resourcesOrderByLatestWithLimit);
-    app.post(['/api/get/resources-orde-by-random-with-limit'], resourcesController.resourcesOrderByRandomWithLimit);
+    app.post(['/api/v1/get/resources-order-by-latest-with-limit'], resourcesController.resourcesOrderByLatestWithLimit);
+    app.post(['/api/v1/get/resources-orde-by-random-with-limit'], resourcesController.resourcesOrderByRandomWithLimit);
 
 
     // app.get(['/api/v1/get/resources/transfering'], joinController.transfering);

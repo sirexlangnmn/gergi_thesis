@@ -1,6 +1,14 @@
 const { v4: uuidV4 } = require('uuid');
 const { check, validationResult } = require('express-validator');
 
+// const fs = require('fs');
+// const https = require('https');
+// const path = require('path');
+
+
+const { extractImage } = require('../service/imageDownloader');
+const { sanitizeFileName, getFileExtensionFromUrl }  = require('../service/imageUtils');
+
 const sql = require('../models/db.js');
 const QUERY = require('../query/join.query.js');
 
@@ -109,13 +117,24 @@ module.exports = {
             console.log(`saveResources req.body ==> `, req.body)
             const { name, downloadLink, imageUrl } = req.body;
 
+            const fileName = imageUrl
+                ? `${sanitizeFileName(name)}-${uuidV4()}.${getFileExtensionFromUrl(imageUrl)}`
+                : 'CoverNotAvailable.jpg';
+
+            console.log(`fileName ==>> `, fileName)
+
+            if (imageUrl) {
+                extractImage(fileName, imageUrl)
+            }
+
+
             try {
                 // Sequelize insert query here
                 const newResource = await Resources.create({
                     resource_id: uuidV4(),
                     title: name,
                     url_link: downloadLink,
-                    image: imageUrl,
+                    image: fileName,
                     createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
                     updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
                 });
@@ -145,3 +164,44 @@ module.exports = {
     //     }
     // },
 };
+
+
+// function extractImage(resourceName, imageUrl) {
+//     // const imageUrl = "https://imgproxy2.pdfroom.com/eLfQEfHzRpd6f7Ze8eGDabZ5L9bzk0kL1_cDcG95B9M/rs:auto:96:132:0/g:no/elc1bjFhdmwyTnEucG5n.jpg";
+//     const folderPath = path.join(__dirname, '../../', 'public/uploads/gergi/resources_image/');
+
+//     const filePath = path.join(folderPath, resourceName);
+
+//     // Ensure the images folder exists
+//     if (!fs.existsSync(folderPath)) {
+//         fs.mkdirSync(folderPath, { recursive: true });
+//     }
+
+//     // Download and save the image
+//     https.get(imageUrl, (response) => {
+//         if (response.statusCode === 200) {
+//             const fileStream = fs.createWriteStream(filePath);
+//             response.pipe(fileStream);
+//             fileStream.on('finish', () => {
+//                 fileStream.close();
+//                 console.log(`Image downloaded successfully: ${filePath}`);
+//             });
+//         } else {
+//             console.error(`Failed to download image. Status Code: ${response.statusCode}`);
+//         }
+//     }).on('error', (err) => {
+//         console.error('Error downloading image:', err.message);
+//     });
+// }
+
+
+
+// function getFileExtensionFromUrl(url) {
+//     const parts = url.split('.');
+//     return parts.length > 1 ? parts.pop().split(/[\?\#]/)[0] : ''; // Removes query params and fragments
+// }
+
+// function sanitizeFileName(name) {
+//     // return name.replace(/[^a-zA-Z0-9]/g, '-');
+//     return name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+// }

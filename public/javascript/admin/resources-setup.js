@@ -346,7 +346,7 @@ function getResourcesOrderByLatest() {
     // console.log("getDepartmentsByOrganization imageUrl  ==>> ", imageUrl);
     // console.log("getDepartmentsByOrganization orgTitle  ==>> ", orgTitle);
 
-    fetch(`${baseUrl}api/get/resources-orde-by-random-with-limit`, {
+    fetch(`${baseUrl}api/v1/get/resources-orde-by-random-with-limit`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -373,15 +373,17 @@ function renderResources(data) {
     console.log('renderResources data ==> ', data)
     const resourcesContainer = getId("resourcesContainer");
 
-    const imageSrc = `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
+    // const imageSrc = `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
     const publicationYear = 'Publication Year : 2021';
     const author = "Author : WebMaster";
 
-    
+
 
     data.forEach(book => {
-        const imageExists = book.image ? isValidUrl(book.image) : false;
-        const linkExists = book.url_link ? isValidUrl(book.url_link) : false;
+        // const imageExists = book.image ? isValidUrl(book.image) : false;
+        // const linkExists = book.url_link ? isValidUrl(book.url_link) : false;
+        // const imageSrc = isValidUrl(book.image) ? book.image : `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
+        console.log(`isValidUrl ==>>`, isValidUrl(book.image))
 
 
         const bookCard = document.createElement("div");
@@ -390,7 +392,7 @@ function renderResources(data) {
         bookCard.innerHTML = `
             <div class="dz-shop-card style-2">
                 <div class="dz-media">
-                    <img src="${imageSrc}" alt="${book.title}">
+                    <img src="" alt="${book.title}">
                 </div>
                 <div class="dz-content">
                     <div>
@@ -421,12 +423,30 @@ function renderResources(data) {
 }
 
 
+// async function isValidUrl(url) {
+//     console.log(`isValidUrl url ==>> `, url)
+//     try {
+//         const response = await fetch(url, { method: 'HEAD' });
+//         return response.ok;
+//     } catch (error) {
+//         return false;
+//     }
+// }
+
+
 async function isValidUrl(url) {
-    try {
-        const response = await fetch(url, { method: 'HEAD' });
-        return response.ok;
-    } catch (error) {
-        return false;
+    console.log(`isValidUrl url ==>> `, url);
+
+    // Check if the URL is an external link or a local file
+    const isExternal = /^(https?:)?\/\//.test(url);
+    if (isExternal) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok ? true : false;
+        } catch (error) {
+            return false;
+        }
+    } else {
+        return 'uploaded'
     }
 }
-
