@@ -16,7 +16,6 @@ function getSubjectsByCategory(categoryId, categoryTitle) {
         return response.json();
     })
     .then(data => {
-        console.log("getSubjectsByCategory data received:", data);
         renderSubjectsContainer(data, categoryTitle);
     })
     .catch(error => {
@@ -36,11 +35,17 @@ function renderSubjectsContainer(subjects, categoryTitle) {
     const categoriesContainer = getId("categoriesContainer");
     const subjectsContainer = getId("subjectsContainer");
 
-    organizationsContainer.style.display = "none";
-    departmentContainer.style.display = "none";
-    coursesContainer.style.display = "none";
-    categoriesContainer.style.display = "none";
-    subjectsContainer.style.display = "display";
+    // organizationsContainer.style.display = "none";
+    // departmentContainer.style.display = "none";
+    // coursesContainer.style.display = "none";
+    // categoriesContainer.style.display = "none";
+    // subjectsContainer.style.display = "display";
+
+    organizationsContainer.classList.add('hidden');
+    departmentContainer.classList.add('hidden');
+    coursesContainer.classList.add('hidden');
+    categoriesContainer.classList.add('hidden');
+    subjectsContainer.classList.remove('hidden');
 
     subjectsContainer.innerHTML = "";
 
@@ -84,11 +89,17 @@ function handleSubjectClick(subjectId, subjectTitle) {
     const categoriesContainer = getId("categoriesContainer");
     const subjectsContainer = getId("subjectsContainer");
 
-    organizationsContainer.style.display = "none";
-    departmentContainer.style.display = "none";
-    coursesContainer.style.display = "none";
-    categoriesContainer.style.display = "none";
-    subjectsContainer.style.display = "none";
+    // organizationsContainer.style.display = "none";
+    // departmentContainer.style.display = "none";
+    // coursesContainer.style.display = "none";
+    // categoriesContainer.style.display = "none";
+    // subjectsContainer.style.display = "none";
+
+    organizationsContainer.classList.add('hidden');
+    departmentContainer.classList.add('hidden');
+    coursesContainer.classList.add('hidden');
+    categoriesContainer.classList.add('hidden');
+    subjectsContainer.classList.add('hidden');
 
     handleBreadcrumbs('subject', subjectId, subjectTitle);
     renderSearchContainer();

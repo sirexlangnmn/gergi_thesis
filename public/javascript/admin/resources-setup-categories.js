@@ -16,7 +16,6 @@ function getCategoriesByCourse(courseId, coursTitle) {
         return response.json();
     })
     .then(data => {
-        console.log("getCategoriesByCourse data received:", data);
         renderCategoriesContainer(data, coursTitle);
     })
     .catch(error => {
@@ -35,10 +34,15 @@ function renderCategoriesContainer(categories, courseTitle) {
     const coursesContainer = getId("coursesContainer");
     const categoriesContainer = getId("categoriesContainer");
 
-    organizationsContainer.style.display = "none";
-    departmentContainer.style.display = "none";
-    coursesContainer.style.display = "none";
-    categoriesContainer.style.display = "display";
+    // organizationsContainer.style.display = "none";
+    // departmentContainer.style.display = "none";
+    // coursesContainer.style.display = "none";
+    // categoriesContainer.style.display = "display";
+
+    organizationsContainer.classList.add('hidden');
+    departmentContainer.classList.add('hidden');
+    coursesContainer.classList.add('hidden');
+    categoriesContainer.classList.remove('hidden');
 
     categoriesContainer.innerHTML = "";
 
@@ -81,10 +85,18 @@ function handleCategoryClick(categoryId, categoryTitle) {
     const coursesContainer = getId("coursesContainer");
     const categoriesContainer = getId("categoriesContainer");
 
-    organizationsContainer.style.display = "none";
-    departmentContainer.style.display = "none";
-    coursesContainer.style.display = "none";
-    categoriesContainer.style.display = "none";
+    // organizationsContainer.style.display = "none";
+    // departmentContainer.style.display = "none";
+    // coursesContainer.style.display = "none";
+    // categoriesContainer.style.display = "none";
+
+    organizationsContainer.classList.add('hidden');
+    departmentContainer.classList.add('hidden');
+    coursesContainer.classList.add('hidden');
+    categoriesContainer.classList.add('hidden');
+
+    getId("hiddenCategoryId").value = categoryId;
+    getId("hiddenCategoryTitle").value = categoryTitle;
 
     handleBreadcrumbs('category', categoryId, categoryTitle);
     getSubjectsByCategory(categoryId, categoryTitle);

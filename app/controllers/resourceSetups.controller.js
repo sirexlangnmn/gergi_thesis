@@ -65,6 +65,47 @@ exports.getResourcesByCourse = async (req, res) => {
 
 
 
+// exports.resourceSetup = async (req, res) => {
+//     const errors = validationResult(req);
+
+//     try {
+//         if (!errors.isEmpty()) {
+//             return res.status(200).send({
+//                 message: errors.array(),
+//             });
+//         }
+
+//         const { resourceId, classification, organization, department, course, category, subject } = req.body;
+
+//         try {
+//             // Sequelize insert query here
+//             const newResource = await Resource_setups.create({
+//                 resource_id: resourceId,
+//                 department_id: department,
+//                 course_id: course,
+//                 category_id: category,
+//                 subject_id: subject,
+//                 createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+//                 updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+//             });
+
+//             if (newResource) {
+//                 return res.status(200).json({ message: 'Resource setup successful', resource: newResource });
+//             } else {
+//                 throw new Error('Failed to create resource');
+//             }
+//         } catch (error) {
+//             console.error('Error executing query:', error);
+//             return res.status(500).json({ error: 'Failed to create resource' });
+//         }
+
+//     } catch (error) {
+//         console.error('Error in resourceSetup:', error);
+//         return res.status(500).json({ error: 'Internal server error' });
+//     }
+// };
+
+
 exports.resourceSetup = async (req, res) => {
     const errors = validationResult(req);
 
@@ -75,16 +116,17 @@ exports.resourceSetup = async (req, res) => {
             });
         }
 
-        const { resourceId, classification, organization, department, course, category, subject } = req.body;
+        const { bookId, subjectInput, categoryInput, courseInput, departmentInput } = req.body;
 
         try {
             // Sequelize insert query here
             const newResource = await Resource_setups.create({
-                resource_id: resourceId,
-                department_id: department,
-                course_id: course,
-                category_id: category,
-                subject_id: subject,
+                resource_id: bookId,
+                subject_id: subjectInput,
+                category_id: categoryInput,
+                course_id: courseInput,
+                department_id: departmentInput,
+                resource_type: 1, // ebooks or pdf
                 createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
             });

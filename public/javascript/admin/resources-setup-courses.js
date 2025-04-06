@@ -16,7 +16,6 @@ function getCoursesByDepartment(departmentId, departmentTitle) {
         return response.json();
     })
     .then(data => {
-        console.log("getCoursesByDepartment data received:", data);
         renderCourses(data, departmentTitle);
     })
     .catch(error => {
@@ -33,9 +32,13 @@ function renderCourses(courses, departmentTitle) {
     const departmentContainer = getId("departmentContainer");
     const coursesContainer = getId("coursesContainer");
 
-    organizationsContainer.style.display = "none";
-    departmentContainer.style.display = "none";
-    coursesContainer.style.display = "display";
+    // organizationsContainer.style.display = "none";
+    // departmentContainer.style.display = "none";
+    // coursesContainer.style.display = "display";
+
+    organizationsContainer.classList.add('hidden');
+    departmentContainer.classList.add('hidden');
+    coursesContainer.classList.remove('hidden');
 
     coursesContainer.innerHTML = "";
 
@@ -76,9 +79,16 @@ function handleCourseClick(courseId, coursTitle) {
     const departmentContainer = getId("departmentContainer");
     const coursesContainer = getId("coursesContainer");
 
-    organizationsContainer.style.display = "none";
-    departmentContainer.style.display = "none";
-    coursesContainer.style.display = "none";
+    // organizationsContainer.style.display = "none";
+    // departmentContainer.style.display = "none";
+    // coursesContainer.style.display = "none";
+
+    organizationsContainer.classList.add('hidden');
+    departmentContainer.classList.add('hidden');
+    coursesContainer.classList.add('hidden');
+
+    getId("hiddenCourseId").value = courseId;
+    getId("hiddenCoursTitle").value = coursTitle;
 
     handleBreadcrumbs('course', courseId, coursTitle);
     getCategoriesByCourse(courseId, coursTitle)

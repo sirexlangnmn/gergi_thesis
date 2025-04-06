@@ -41,6 +41,11 @@
             text-align: center;
         }
     }
+
+
+    .hidden {
+        display: none;
+    }
 </style>
 
     <body id="bg">
@@ -77,25 +82,40 @@
                                         <div class="widget widget_tag_cloud" id="resourceSetupBreadcrumbs">
                                             <!-- resourceSetupBreadcrumbs here -->
                                         </div>
+                                        <div>
+                                            <!-- <input type="hidden" id="" name="" value="" /> -->
+                                            <input type="hidden" id="hiddenOrgId" name="hiddenOrgId" value="" />
+                                            <input type="hidden" id="hiddenImageUrl" name="hiddenImageUrl" value="" />
+                                            <input type="hidden" id="hiddenOrgTitle" name="hiddenOrgTitle" value="" />
+
+                                            <input type="hidden" id="hiddenDepartmentId" name="hiddenDepartmentId" value="" />
+                                            <input type="hidden" id="hiddenDepartmentTitle" name="hiddenDepartmentTitle" value="" />
+
+                                            <input type="hidden" id="hiddenCourseId" name="hiddenCourseId" value="" />
+                                            <input type="hidden" id="hiddenCoursTitle" name="hiddenCoursTitle" value="" />
+
+                                            <input type="hidden" id="hiddenCategoryId" name="hiddenCategoryId" value="" />
+                                            <input type="hidden" id="hiddenCategoryTitle" name="hiddenCategoryTitle" value="" />
+                                        </div>
                                         <div class="row m-b30">
                                             <div class="row" id="">
                                                 <div class="widget recent-posts-entry">
-                                                    <div class="widget-post-bx" id="organizationsContainer">
+                                                    <div class="widget-post-bx hidden" id="organizationsContainer">
                                                         <!-- organizationsContainer here -->
                                                     </div>
-                                                    <div class="widget-post-bx" id="departmentContainer" >
+                                                    <div class="widget-post-bx hidden" id="departmentContainer" >
                                                         <!-- departmentContainer here -->
                                                     </div>
-                                                    <div class="widget-post-bx" id="coursesContainer" >
+                                                    <div class="widget-post-bx hidden" id="coursesContainer" >
                                                         <!-- coursesContainer here -->
                                                     </div>
-                                                    <div class="widget-post-bx" id="searchContainer" >
+                                                    <div class="widget-post-bx hidden" id="searchContainer" >
                                                         <!-- searchContainer here -->
                                                     </div>
-                                                    <div class="widget-post-bx" id="categoriesContainer" >
+                                                    <div class="widget-post-bx hidden" id="categoriesContainer" >
                                                         <!-- categoriesContainer here -->
                                                     </div>
-                                                    <div class="widget-post-bx" id="subjectsContainer" >
+                                                    <div class="widget-post-bx hidden" id="subjectsContainer" >
                                                         <!-- subjectsContainer here -->
                                                     </div>
 
@@ -206,6 +226,9 @@
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-courses.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-categories.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-subjects.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-breadcrumbs.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-breadcrumbs1.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-search.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup.js"></script>
+        
 
     <%- include('../../includes/script/script.ejs') %>

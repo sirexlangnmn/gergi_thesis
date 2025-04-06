@@ -25,7 +25,7 @@ async function fetchOrganizations() {
 
 function populateOrganizations(organizations) {
     const organizationsContainer = getId("organizationsContainer");
-    // organizationsContainer.style.display = "display";
+    organizationsContainer.classList.remove('hidden');
 
 
     organizationsContainer.innerHTML = "";
@@ -73,10 +73,13 @@ function handleOrganizationClick(orgId, imageUrl, orgTitle) {
     // console.log("orgTitle ==>> :", orgTitle);
 
     const organizationsContainer = getId("organizationsContainer");
+    // organizationsContainer.style.display = "none";
+    organizationsContainer.innerHTML = "";
+    organizationsContainer.classList.add('hidden');
 
-    if (organizationsContainer) {
-        organizationsContainer.style.display = "none";
-    }
+    getId("hiddenOrgId").value = orgId;
+    getId("hiddenImageUrl").value = imageUrl;
+    getId("hiddenOrgTitle").value = orgTitle;
 
     handleBreadcrumbs('organization', orgId, orgTitle);
     getDepartmentsByOrganization(orgId, imageUrl, orgTitle);
