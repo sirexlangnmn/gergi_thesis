@@ -13,10 +13,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
         },
         url_link: {
-            type: Sequelize.TINYINT,
+            type: Sequelize.STRING,
         },
         image: {
-            type: Sequelize.TINYINT,
+            type: Sequelize.STRING,
         },
         format_id: {
             type: Sequelize.TINYINT,

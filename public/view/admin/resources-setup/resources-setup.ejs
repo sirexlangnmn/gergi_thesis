@@ -92,6 +92,13 @@
                                                     <div class="widget-post-bx" id="searchContainer" >
                                                         <!-- searchContainer here -->
                                                     </div>
+                                                    <div class="widget-post-bx" id="categoriesContainer" >
+                                                        <!-- categoriesContainer here -->
+                                                    </div>
+                                                    <div class="widget-post-bx" id="subjectsContainer" >
+                                                        <!-- subjectsContainer here -->
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="row" id="resourcesContainer"  style="--bs-gutter-x: 9px;">
@@ -194,5 +201,11 @@
         </div>
 
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/admin-navigation.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-organizations.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-departments.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-courses.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-categories.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-subjects.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-breadcrumbs.js"></script>
+
     <%- include('../../includes/script/script.ejs') %>

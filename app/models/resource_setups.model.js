@@ -3,10 +3,10 @@ module.exports = (sequelize, Sequelize) => {
         resource_id: {
             type: Sequelize.STRING,
         },
-        category_id: {
+        subject_id: {
             type: Sequelize.STRING,
         },
-        subject_id: {
+        category_id: {
             type: Sequelize.STRING,
         },
         course_id: {
@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         department_id: {
             type: Sequelize.STRING,
+        },
+        resource_type: {
+            type: Sequelize.TINYINT,
         },
     });
 
