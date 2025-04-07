@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    displayResources();
+    // displayResources();
     fetchResources();
+    showingXfromYdata();
 });
 
 
@@ -80,7 +81,7 @@ function renderData(data) {
                         <div class="price">
                         </div>
                         <a href="${book.url_link}" target="_blank" class="btn btn-secondary box-btn btnhover btnhover2">
-                            <i class="flaticon-shopping-cart-1 m-r10"></i> Download
+                            <i class="flaticon-send m-r10"></i> Download
                         </a>
                     </div>
                 </div>

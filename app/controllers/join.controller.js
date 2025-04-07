@@ -195,3 +195,28 @@ exports.getResourcesByOrganizationWithPagination = async (req, res) => {
 };
 
 
+exports.showingXfromYdata = async (req, res) => {
+    const { sessionOrganizationId} = req.body;
+
+    try {
+        let query = QUERY.showingXfromYdata;
+        query += ` WHERE d.organization_id = ?`;
+
+        const values = [sessionOrganizationId];
+
+        sql.query(query, values, (err, result) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                return res.status(500).json({ error: 'Database query error' });
+            }
+
+            // console.log(`result rex ==>> `, result)
+            res.status(200).json(result);
+        });
+    } catch (error) {
+        console.error('Unexpected error in getResourcesByOrganization:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+

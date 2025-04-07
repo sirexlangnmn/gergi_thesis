@@ -111,6 +111,15 @@ const QUERY = {
         LEFT JOIN
             resources r ON rs.resource_id = r.resource_id
     `,
+
+    showingXfromYdata: `
+        SELECT
+            COUNT(*) as total
+        FROM
+            resource_setups rs
+        LEFT JOIN
+            departments d ON d.id = rs.department_id
+    `,
 }
 
 // export default QUERY;

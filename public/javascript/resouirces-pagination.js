@@ -4,7 +4,7 @@ let currentPage = 1;
 
 function fetchResources(page = 1) {
     const data = {
-        sessionOrganizationId: '1', // Or get it dynamically
+        sessionOrganizationId,
         page: page,
         limit: limit
     };
@@ -48,5 +48,18 @@ document.querySelectorAll('.pagination .page-link').forEach(link => {
     });
 });
 
-// Initial load
 
+function showingXfromYdata() {
+
+    fetch(`${baseUrl}api/v1/get/resources-showing-x-from-y-data`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionOrganizationId })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log('showingXfromYdata data ==>> ', data[0].total);
+        getId("showingXfromYdata").innerText = `Showing 12 from ${data[0].total} data`;
+    })
+    .catch(err => console.error('Fetch error:', err));
+}

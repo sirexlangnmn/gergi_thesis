@@ -61,6 +61,7 @@ module.exports = (app) => {
     // app.post(['/api/v1/get/resources-by-organization'], resourceSetupsController.getResourcesByOrganization);
     app.post(['/api/v1/get/resources-by-organization'], joinController.getResourcesByOrganization);
     app.post(['/api/v1/get/resources-by-organization-with-pagination'], joinController.getResourcesByOrganizationWithPagination);
+    app.post(['/api/v1/get/resources-showing-x-from-y-data'], joinController.showingXfromYdata);
     
 
     // app.get(['/api/v1/get/resources/transfering'], joinController.transfering);
