@@ -60,7 +60,8 @@ module.exports = (app) => {
     app.post(['/api/v1/get/resources-order-by-random-with-limit'], resourcesController.resourcesOrderByRandomWithLimit);
     // app.post(['/api/v1/get/resources-by-organization'], resourceSetupsController.getResourcesByOrganization);
     app.post(['/api/v1/get/resources-by-organization'], joinController.getResourcesByOrganization);
-
+    app.post(['/api/v1/get/resources-by-organization-with-pagination'], joinController.getResourcesByOrganizationWithPagination);
+    
 
     // app.get(['/api/v1/get/resources/transfering'], joinController.transfering);
     // app.get(['/api/v1/get/resources/updateResourceSetup'], joinController.updateResourceSetup);

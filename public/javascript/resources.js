@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     displayResources();
-
+    fetchResources();
 });
 
 
@@ -32,8 +32,17 @@ async function displayResources() {
 }
 
 displayResources().then((data) => {
+    renderData(data);
+})
+.catch((error) => {
+    console.error('Error rendering resource : ', error);
+});
+
+
+function renderData(data) {
     console.log('data2 ==> ', data)
     const resourcesContainer = getId("resourcesContainer");
+    resourcesContainer.innerHTML = '';
 
     // const imageSrc = `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
     const publicationYear = 'Publication Year : 2021';
@@ -80,11 +89,7 @@ displayResources().then((data) => {
         index ++;
         resourcesContainer.appendChild(bookCard);
     });
-})
-.catch((error) => {
-    console.error('Error rendering resource : ', error);
-});
-
+}
 
 function getImageSrc(image) {
     const filePath = `${baseUrl}uploads/gergi/resources_image/`;
