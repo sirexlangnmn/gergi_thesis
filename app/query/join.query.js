@@ -97,6 +97,20 @@ const QUERY = {
         FROM users
         LEFT JOIN organizations ON users.organization_id = organizations.id
     `,
+
+
+    getResourcesByOrganizationId: `
+        SELECT
+            d.id as department_id,
+            rs.resource_id as resource_id,
+            r.*
+        FROM
+            departments d
+        LEFT JOIN
+            resource_setups rs ON d.id = rs.department_id
+        LEFT JOIN
+            resources r ON rs.resource_id = r.resource_id
+    `,
 }
 
 // export default QUERY;

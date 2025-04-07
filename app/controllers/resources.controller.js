@@ -77,3 +77,5 @@ exports.getResourcesById = async (req, res) => {
         res.status(500).send('Some error occurred while retrieving resource.');
     }
 };
+
+

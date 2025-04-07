@@ -146,3 +146,33 @@ exports.resourceSetup = async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+
+exports.getResourcesByOrganization = async (req, res) => {
+    try {
+        const { sessionOrganizationId } = req.body;
+        console.log(`getResourceByOrganization sessionOrganizationId ==>> `, sessionOrganizationId);
+
+        const department = await Departments.findOne({
+            where: { organization_id: sessionOrganizationId  }
+        });
+
+        console.log(`getResourceByOrganization department ==>> `, department);
+
+        const resources = await Resource_setups.findAll({
+            where: { department_id: department.id }
+        });
+
+        console.log(`getResourceByOrganization resources ==>> `, resources);
+
+        if (resources && resources.length > 0) {
+            return res.status(200).json({ message: 'Resources fetched successfully', resources });
+        } else {
+            return res.status(404).json({ message: 'No resources found for this organization' });
+        }
+    } catch (error) {
+        console.error('Error fetching resources by organization:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};

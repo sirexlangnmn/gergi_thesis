@@ -3,7 +3,7 @@ function getResourcesOrderByLatest() {
     // console.log("getDepartmentsByOrganization imageUrl  ==>> ", imageUrl);
     // console.log("getDepartmentsByOrganization orgTitle  ==>> ", orgTitle);
 
-    fetch(`${baseUrl}api/v1/get/resources-orde-by-random-with-limit`, {
+    fetch(`${baseUrl}api/v1/get/resources-order-by-random-with-limit`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

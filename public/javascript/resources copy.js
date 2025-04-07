@@ -5,19 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 async function displayResources() {
-    // console.log(`be sessionName ==>> `, sessionName);
-    // console.log(`be sessionEmail ==>> `, sessionEmail);
-    // console.log(`be sessionUserType ==>> `, sessionUserType);
-    // console.log(`be sessionOrganizationId ==>> `, sessionOrganizationId);
-
-
+    // const course = convertToTitleCase(courseValue);
+    const course = "Optometry";
     try {
-        const response = await fetch(`${baseUrl}api/v1/get/resources-by-organization`, {
+        const response = await fetch(`${baseUrl}api/get/resources-by-course`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ sessionOrganizationId })
+            body: JSON.stringify({ course })
         });
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -35,16 +31,12 @@ displayResources().then((data) => {
     console.log('data2 ==> ', data)
     const resourcesContainer = getId("resourcesContainer");
 
-    // const imageSrc = `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
+    const imageSrc = `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
     const publicationYear = 'Publication Year : 2021';
     const author = "Author : WebMaster";
 
     let index = 0;
-
     data.forEach(book => {
-        const imageSrc = getImageSrc(book.image);
-        console.log(`imageSrc rex =>> `, imageSrc)
-
         const bookCard = document.createElement("div");
         bookCard.className = "col-book style-2";
 
@@ -60,7 +52,7 @@ displayResources().then((data) => {
                     </label>
                 </div>
                 <div class="dz-content">
-                    <h5 class="title"><a href="${book.url_link}">${book.title}</a></h5>
+                    <h5 class="title"><a href="${book.link}">${book.title}</a></h5>
                     <ul class="dz-tags">
                       link
                     </ul>
@@ -84,32 +76,3 @@ displayResources().then((data) => {
 .catch((error) => {
     console.error('Error rendering resource : ', error);
 });
-
-
-function getImageSrc(image) {
-    const filePath = `${baseUrl}uploads/gergi/resources_image/`;
-    const fallbackImage = 'CoverNotAvailable.jpg';
-
-    // Function to check if image exists using XMLHttpRequest
-    function checkImageExists(url) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('HEAD', url, false);  // false makes it synchronous
-        xhr.send();
-
-        if (xhr.status >= 200 && xhr.status < 300) {
-            return true;  // Image exists
-        } else {
-            return false;  // Image does not exist
-        }
-    }
-
-    // Check if the image exists and return the appropriate image URL
-    const exists = checkImageExists(`${filePath}${image}`);
-    if (!exists) {
-        console.log('Image not found, using fallback');
-        return `${filePath}${fallbackImage}`;  // Return fallback image path
-    } else {
-        console.log('Image exists:', `${filePath}${image}`);
-        return `${filePath}${image}`;  // Return the original image path
-    }
-}

@@ -143,6 +143,29 @@ exports.getUsers = async (req, res) => {
 };
 
 
+exports.getResourcesByOrganization = async (req, res) => {
+    const { sessionOrganizationId } = req.body;
+
+    try {
+        let query = QUERY.getResourcesByOrganizationId;
+        query += ` WHERE organization_id = ? LIMIT 50`;
+
+        const values = [sessionOrganizationId];
+
+        sql.query(query, values, (err, result) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                return res.status(500).json({ error: 'Database query error' });
+            }
+
+            res.status(200).json(result);
+        });
+
+    } catch (error) {
+        console.error('Unexpected error in getResourcesByOrganization:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 
 

@@ -18,6 +18,7 @@ const QUERY = {
             subject_titles st ON s.subject_title_id = st.id
     `,
 
+
 }
 
 // export default QUERY;
