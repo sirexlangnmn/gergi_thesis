@@ -16,12 +16,11 @@ function fetchResources(page = 1) {
     })
     .then(res => res.json())
     .then(data => {
-        console.log('Fetched data:', data);
         currentPage = page;
         updatePaginationUI(); // optional: highlight current page
         renderData(data);     // display data in the DOM
     })
-    .catch(err => console.error('Fetch error:', err));
+    .catch(err => console.error('fetchResources Fetch error:', err));
 }
 
 function updatePaginationUI() {
@@ -58,8 +57,7 @@ function showingXfromYdata() {
     })
     .then(res => res.json())
     .then(data => {
-        console.log('showingXfromYdata data ==>> ', data[0].total);
         getId("showingXfromYdata").innerText = `Showing 12 from ${data[0].total} data`;
     })
-    .catch(err => console.error('Fetch error:', err));
+    .catch(err => console.error('showingXfromYdata Fetch error:', err));
 }

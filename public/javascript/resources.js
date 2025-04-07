@@ -1,17 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     // displayResources();
     fetchResources();
+    // fetchSearchResults("", 1);
     showingXfromYdata();
 });
 
 
 async function displayResources() {
-    // console.log(`be sessionName ==>> `, sessionName);
-    // console.log(`be sessionEmail ==>> `, sessionEmail);
-    // console.log(`be sessionUserType ==>> `, sessionUserType);
-    // console.log(`be sessionOrganizationId ==>> `, sessionOrganizationId);
-
-
     try {
         const response = await fetch(`${baseUrl}api/v1/get/resources-by-organization`, {
             method: 'POST',
@@ -24,10 +19,9 @@ async function displayResources() {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log('data1 ==> ', data)
         return data;
     } catch (error) {
-        console.error('Error fetching resources : ', error);
+        console.error('displayResources Error fetching resources : ', error);
         throw error;
     }
 }
@@ -36,16 +30,14 @@ displayResources().then((data) => {
     renderData(data);
 })
 .catch((error) => {
-    console.error('Error rendering resource : ', error);
+    console.error('displayResources Error rendering resource : ', error);
 });
 
 
 function renderData(data) {
-    console.log('data2 ==> ', data)
     const resourcesContainer = getId("resourcesContainer");
     resourcesContainer.innerHTML = '';
 
-    // const imageSrc = `${baseUrl}/uploads/gergi/optometry/OPTOMETRY.webp`
     const publicationYear = 'Publication Year : 2021';
     const author = "Author : WebMaster";
 
@@ -53,7 +45,6 @@ function renderData(data) {
 
     data.forEach(book => {
         const imageSrc = getImageSrc(book.image);
-        console.log(`imageSrc rex =>> `, imageSrc)
 
         const bookCard = document.createElement("div");
         bookCard.className = "col-book style-2";
@@ -112,10 +103,8 @@ function getImageSrc(image) {
     // Check if the image exists and return the appropriate image URL
     const exists = checkImageExists(`${filePath}${image}`);
     if (!exists) {
-        console.log('Image not found, using fallback');
         return `${filePath}${fallbackImage}`;  // Return fallback image path
     } else {
-        console.log('Image exists:', `${filePath}${image}`);
         return `${filePath}${image}`;  // Return the original image path
     }
 }

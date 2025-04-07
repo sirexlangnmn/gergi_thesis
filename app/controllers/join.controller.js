@@ -220,3 +220,67 @@ exports.showingXfromYdata = async (req, res) => {
 };
 
 
+
+
+exports.getResourcesByOrganizationWithPaginationAndSearchKeyword = async (req, res) => {
+    const {
+        sessionOrganizationId,
+        searchKeyword = '',
+        page = 1,
+        limit = 12
+    } = req.body;
+
+    const keyword = `%${searchKeyword}%`;
+    const offset = (page - 1) * limit;
+
+    const searchQuery = `
+        SELECT
+            d.id AS department_id,
+            rs.resource_id AS resource_id,
+            r.*
+        FROM
+            departments d
+        LEFT JOIN
+            resource_setups rs ON d.id = rs.department_id
+        LEFT JOIN
+            resources r ON rs.resource_id = r.resource_id
+        WHERE
+            d.organization_id = ?
+            AND r.title LIKE ?
+        LIMIT ? OFFSET ?
+    `;
+
+    const countQuery = `
+        SELECT COUNT(*) AS total
+        FROM departments d
+        LEFT JOIN resource_setups rs ON d.id = rs.department_id
+        LEFT JOIN resources r ON rs.resource_id = r.resource_id
+        WHERE d.organization_id = ?
+        AND r.title LIKE ?
+    `;
+
+    try {
+        const values = [sessionOrganizationId, keyword, Number(limit), Number(offset)];
+
+        sql.query(searchQuery, values, (err, result) => {
+            if (err) {
+                console.error("Error executing query:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+
+            // Get total count
+            sql.query(countQuery, [sessionOrganizationId, keyword], (countErr, countResult) => {
+                if (countErr) {
+                    console.error("Error executing count query:", countErr);
+                    return res.status(500).json({ error: "Count error" });
+                }
+
+                const total = countResult[0].total;
+                res.status(200).json({ data: result, total });
+            });
+        });
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
