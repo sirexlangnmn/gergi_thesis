@@ -240,6 +240,12 @@ const getViewPath = (userType) => {
 
 app.get(['/library'], (req, res) => {
     const sessionData = getSessionData(req.session);
+
+    // Check if session or user_type is missing
+    if (!sessionData || !sessionData.user_type) {
+        return res.redirect('/login'); // or res.render if login is a view
+    }
+
     const userType = parseInt(sessionData.user_type);
     res.render(getViewPath(userType), { data: sessionData });
 });
