@@ -1,3 +1,9 @@
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
 <!-- Header -->
 <header class="site-header mo-left header style-1">
     <!-- Main Header -->
@@ -5,7 +11,7 @@
         <div class="container clearfix">
             <!-- Website Logo -->
             <div class="logo-header logo-dark">
-                <a href="index.html"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
+                <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
             </div>
 
             <!-- EXTRA NAV -->
@@ -187,7 +193,7 @@
             <div class="container clearfix">
                 <!-- Website Logo -->
                 <div class="logo-header logo-dark">
-                    <a href="index.html"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
+                    <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
                 </div>
 
                 <!-- Nav Toggle Button -->
@@ -202,14 +208,14 @@
                 <!-- EXTRA NAV -->
                 <div class="extra-nav">
                     <div class="extra-cell">
-                        <a href="/login" class="btn btn-primary btnhover">Login</a>
+                        <a href="/login" class="btn btn-primary btnhover" id="headerButtonLogin">Login</a>
                     </div>
                 </div>
 
                 <!-- Main Nav -->
                 <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
                     <div class="logo-header logo-dark">
-                        <a href="index.html"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt=""></a>
+                        <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt=""></a>
                     </div>
                     <form class="search-input">
                         <div class="input-group">
@@ -386,5 +392,10 @@
     </div>
     <!-- Main Header End -->
 
+    <script>
+        const sessionOrganizationIdHeader = `<%= data.organization_id %>`;
+        const headerButtonLogin = getId('headerButtonLogin');
+        sessionOrganizationIdHeader ? headerButtonLogin.classList.add('hidden') : headerButtonLogin.classList.remove('hidden')
+    </script>
 </header>
 <!-- Header End -->
