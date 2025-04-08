@@ -290,6 +290,11 @@ app.get(['/web-scraping'], (req, res) => {
         };
     }
 
+    // Check if session or user_type is missing
+    if (!sessionData || !sessionData.user_type) {
+        return res.redirect('/login'); // or res.render if login is a view
+    }
+
     res.render(path.join(__dirname, '../../', 'public/view/admin/web-scraping/web-scraping'), {
         data: sessionData,
     });
@@ -310,6 +315,11 @@ app.get(['/upload-resources'], (req, res) => {
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
         };
+    }
+
+    // Check if session or user_type is missing
+    if (!sessionData || !sessionData.user_type) {
+        return res.redirect('/login'); // or res.render if login is a view
     }
 
     res.render(path.join(__dirname, '../../', 'public/view/admin/upload-resources/upload-resources'), {
@@ -334,6 +344,11 @@ app.get(['/resources-setup'], (req, res) => {
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
         };
+    }
+
+    // Check if session or user_type is missing
+    if (!sessionData || !sessionData.user_type) {
+        return res.redirect('/login'); // or res.render if login is a view
     }
 
     res.render(path.join(__dirname, '../../', 'public/view/admin/resources-setup/resources-setup'), {
@@ -420,6 +435,11 @@ app.get(['/users'], (req, res) => {
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
         };
+    }
+
+    // Check if session or user_type is missing
+    if (!sessionData || !sessionData.user_type) {
+        return res.redirect('/login'); // or res.render if login is a view
     }
 
     res.render(path.join(__dirname, '../../', 'public/view/admin/users/users'), {
