@@ -580,7 +580,8 @@ var Bookland = function(){
 	
 	/* handleSupport */
 	var handleSupport = function(){
-		var support = '<script id="DZScript" src="https://dzassets.s3.amazonaws.com/w3-global.js"></script>';
+		// var support = '<script id="DZScript" src="https://dzassets.s3.amazonaws.com/w3-global.js"></script>';
+		var support = '';
 		jQuery('body').append(support);
 	}
 	
