@@ -93,6 +93,7 @@ exports.login = async (req, res) => {
         console.log('req.body', req.body)
 
         const user = await Users.findOne({ where: { email: emailAddressInput } });
+        const organization = await Organizations.findOne({ where: { id: user.organization_id } });
 
 
         if (!user) {
@@ -109,9 +110,10 @@ exports.login = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 user_type: user.user_type,
-                organization_id:  user.organization_id
+                organization_id:  user.organization_id,
+                image_url:  organization.imageUrl
             };
-
+            console.log(` sessionUser ==>> `, sessionUser)
             req.session.user = sessionUser
             return res.status(200).json({ message: 'Login successful', user });
         } else {

@@ -204,6 +204,7 @@ const getSessionData = (session) => ({
     email: session?.user?.email || '',
     user_type: session?.user?.user_type || '',
     organization_id: session?.user?.organization_id || '',
+    image_url: session?.user?.image_url || '',
 });
 
 app.get(['/'], (req, res) => {
@@ -212,6 +213,7 @@ app.get(['/'], (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -220,6 +222,7 @@ app.get(['/'], (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -257,6 +260,7 @@ app.get(['/profile'], (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -265,6 +269,7 @@ app.get(['/profile'], (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -279,6 +284,7 @@ app.get(['/web-scraping'], (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -287,6 +293,7 @@ app.get(['/web-scraping'], (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -306,6 +313,7 @@ app.get(['/upload-resources'], (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -314,6 +322,7 @@ app.get(['/upload-resources'], (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -335,6 +344,7 @@ app.get(['/resources-setup'], (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -343,6 +353,7 @@ app.get(['/resources-setup'], (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -380,6 +391,7 @@ app.get('/registration', (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -388,6 +400,7 @@ app.get('/registration', (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -403,6 +416,7 @@ app.get(['/modal'], (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -411,6 +425,7 @@ app.get(['/modal'], (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -426,6 +441,7 @@ app.get(['/users'], (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -434,6 +450,7 @@ app.get(['/users'], (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 
@@ -454,6 +471,7 @@ app.get('/login', (req, res) => {
         email: '',
         user_type: '',
         organization_id: '',
+        image_url: '',
     };
 
     if (req.session && req.session.user) {
@@ -462,6 +480,7 @@ app.get('/login', (req, res) => {
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
             organization_id: req.session.user.organization_id || '',
+            image_url: req.session.user.image_url || '',
         };
     }
 

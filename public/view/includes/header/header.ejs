@@ -19,20 +19,22 @@
                 <div class="extra-cell">
                     <ul class="navbar-nav header-right">
                         <li class="nav-item dropdown profile-dropdown  ms-4">
-                            <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <img src="<%= process.env.GERGI_HOSTNAME %>assets/images/profile5.png" alt="/">
-                                <div class="profile-info">
-                                    <h6 class="title">Rex</h6>
-                                    <span>rex@gmail.com</span>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu py-0 dropdown-menu-end">
+                            <div id="headerCurrentUser1">
+                                <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <img src="" id="headerCurrentImage1" alt="" >
+                                    <div class="profile-info">
+                                        <h6 class="title" id="headerCurrentName1"></h6>
+                                        <span  id="headerCurrentEmail1"></span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-menu py-0 dropdown-menu-end" id="headerCurrentUser2">
                                 <div class="dropdown-header">
-                                    <h6 class="m-0">Rex</h6>
-                                    <span>rex@gmail.com</span>
+                                    <h6 class="m-0" id="headerCurrentName2"></h6>
+                                    <span id="headerCurrentEmail2"></span>
                                 </div>
-                                <div class="dropdown-body">
+                                <!-- <div class="dropdown-body">
                                     <a href="my-profile.html"
                                         class="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                         <div>
@@ -69,7 +71,7 @@
                                             <span class="ms-2">Wishlist</span>
                                         </div>
                                     </a>
-                                </div>
+                                </div> -->
                                 <div class="dropdown-footer">
                                     <a class="btn btn-primary w-100 btnhover btn-sm" href="shop-login.html">Log Out</a>
                                 </div>
@@ -315,9 +317,31 @@
     <!-- Main Header End -->
 
     <script>
+        const sessionNameHeader = `<%= data.name %>`;
+        const sessionEmailHeader = `<%= data.email %>`;
+        const sessionUserTypeHeader = `<%= data.user_type %>`;
         const sessionOrganizationIdHeader = `<%= data.organization_id %>`;
+        const sessionimageUrldHeader = `<%= data.image_url %>`;
+
         const headerButtonLogin = getId('headerButtonLogin');
-        sessionOrganizationIdHeader ? headerButtonLogin.classList.add('hidden') : headerButtonLogin.classList.remove('hidden')
+        const headerCurrentUser1 = getId('headerCurrentUser1');
+        const headerCurrentUser2 = getId('headerCurrentUser2');
+
+        if (sessionOrganizationIdHeader) {
+            getId('headerCurrentName1').innerHTML = sessionNameHeader;
+            getId('headerCurrentEmail1').innerHTML = sessionEmailHeader;
+            getId('headerCurrentName2').innerHTML = sessionNameHeader;
+            getId('headerCurrentEmail2').innerHTML = sessionEmailHeader;
+            getId("headerCurrentImage1").src = `<%= process.env.GERGI_HOSTNAME %>uploads/gergi/client-logo/${sessionimageUrldHeader}`;
+
+            headerButtonLogin.classList.add('hidden')
+            headerCurrentUser1.classList.remove('hidden')
+            headerCurrentUser2.classList.remove('hidden')
+        } else {
+            headerButtonLogin.classList.remove('hidden')
+            headerCurrentUser1.classList.add('hidden')
+            headerCurrentUser2.classList.add('hidden')
+        }
     </script>
 </header>
 <!-- Header End -->

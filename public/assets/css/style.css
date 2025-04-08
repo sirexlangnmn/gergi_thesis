@@ -24246,7 +24246,7 @@ body.woo-variation-swatches .variable-items-wrapper .variable-item:not(.radio-va
   background: none !important; }
   .profile-dropdown .nav-link img {
     width: 48px;
-    height: 48px;
+    /* height: 48px; */
     border-radius: var(--border-radius-base); }
   .profile-dropdown .nav-link .profile-info {
     margin-left: 15px; }

@@ -39,7 +39,7 @@ function goToPage(page) {
 function fetchSearchResults(keyword, page = 1) {
 
     const bodyData = {
-        sessionOrganizationId: '1',
+        sessionOrganizationId: sessionOrganizationId,
         searchKeyword: keyword,
         page: page,
         limit: searchedLimit
