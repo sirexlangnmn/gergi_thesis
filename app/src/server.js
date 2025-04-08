@@ -241,8 +241,8 @@ const getViewPath = (userType) => {
 app.get(['/library'], (req, res) => {
     const sessionData = getSessionData(req.session);
 
-    // Check if session or user_type is missing
-    if (!sessionData || !sessionData.user_type) {
+    // Check if session or organization_id is missing
+    if (!sessionData || !sessionData.organization_id) {
         return res.redirect('/login'); // or res.render if login is a view
     }
 
@@ -290,8 +290,8 @@ app.get(['/web-scraping'], (req, res) => {
         };
     }
 
-    // Check if session or user_type is missing
-    if (!sessionData || !sessionData.user_type) {
+    // Check if session or organization_id is missing
+    if (!sessionData || !sessionData.organization_id) {
         return res.redirect('/login'); // or res.render if login is a view
     }
 
@@ -317,8 +317,8 @@ app.get(['/upload-resources'], (req, res) => {
         };
     }
 
-    // Check if session or user_type is missing
-    if (!sessionData || !sessionData.user_type) {
+    // Check if session or organization_id is missing
+    if (!sessionData || !sessionData.organization_id) {
         return res.redirect('/login'); // or res.render if login is a view
     }
 
@@ -346,8 +346,8 @@ app.get(['/resources-setup'], (req, res) => {
         };
     }
 
-    // Check if session or user_type is missing
-    if (!sessionData || !sessionData.user_type) {
+    // Check if session or organization_id is missing
+    if (!sessionData || !sessionData.organization_id) {
         return res.redirect('/login'); // or res.render if login is a view
     }
 
@@ -437,8 +437,8 @@ app.get(['/users'], (req, res) => {
         };
     }
 
-    // Check if session or user_type is missing
-    if (!sessionData || !sessionData.user_type) {
+    // Check if session or organization_id is missing
+    if (!sessionData || !sessionData.organization_id) {
         return res.redirect('/login'); // or res.render if login is a view
     }
 
