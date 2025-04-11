@@ -15,11 +15,11 @@
                                     
                                     <div class="accordion-item">
                                         <button class="accordion-button collapsed" id="headingTwo" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseSubject"
-                                            aria-expanded="false" aria-controls="collapseSubject">
-                                            Subject
+                                            data-bs-toggle="collapse" data-bs-target="#collapseSubjects"
+                                            aria-expanded="false" aria-controls="collapseSubjects">
+                                            Subjects
                                         </button>
-                                        <div id="collapseSubject" class="accordion-collapse collapse accordion-body"
+                                        <div id="collapseSubjects" class="accordion-collapse collapse accordion-body"
                                             aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                             <div class="widget dz-widget_services">
                                                 <div class="form-check search-content">
@@ -93,27 +93,14 @@
                                     </div>
                                     <div class="accordion-item">
                                         <button class="accordion-button collapsed" id="headingTwo" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseDepartment"
-                                            aria-expanded="false" aria-controls="collapseDepartment">
-                                            Department
+                                            data-bs-toggle="collapse" data-bs-target="#collapseDepartments"
+                                            aria-expanded="false" aria-controls="collapseDepartments">
+                                            Departments
                                         </button>
-                                        <div id="collapseDepartment" class="accordion-collapse collapse accordion-body"
+                                        <div id="collapseDepartments" class="accordion-collapse collapse accordion-body"
                                             aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                            <div class="widget dz-widget_services">
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox15">
-                                                    <label class="form-check-label" for="productCheckBox15">
-                                                        Action
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox16">
-                                                    <label class="form-check-label" for="productCheckBox16">
-                                                        Advanture
-                                                    </label>
-                                                </div>
+                                            <div class="widget dz-widget_services" id="collapseDepartmentsContainer" >
+                                                <!-- departments here -->
                                             </div>
                                         </div>
                                     </div>
@@ -473,5 +460,6 @@
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-pagination.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-department.js"></script>
         r
         <%- include('../includes/script/script1.ejs') %>

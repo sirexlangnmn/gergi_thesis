@@ -176,3 +176,68 @@ exports.getResourcesByOrganization = async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+
+exports.getResourcesByDepartment = async (req, res) => {
+    const {
+        departmentId,
+        page = 1,
+        limit = 10
+    } = req.body;
+
+    if (!departmentId) {
+        return res.status(400).json({ message: 'departmentId is required' });
+    }
+
+    const offset = (page - 1) * limit;
+
+    const dataQuery = `
+        SELECT r.*
+        FROM resource_setups rs
+        JOIN resources r ON r.resource_id = rs.resource_id
+        WHERE rs.department_id = ?
+        ORDER BY r.createdAt DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    const countQuery = `
+        SELECT COUNT(*) as total
+        FROM resource_setups rs
+        JOIN resources r ON r.resource_id = rs.resource_id
+        WHERE rs.department_id = ?
+    `;
+
+    try {
+        sql.query(dataQuery, [departmentId, Number(limit), Number(offset)], (err, resources) => {
+            if (err) {
+                console.error("Error fetching resources:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+
+            if (resources.length === 0) {
+                return res.status(404).json({ message: 'No resources found for this department' });
+            }
+
+            sql.query(countQuery, [departmentId], (countErr, countResult) => {
+                if (countErr) {
+                    console.error("Error fetching count:", countErr);
+                    return res.status(500).json({ error: "Count query error" });
+                }
+
+                const total = countResult[0].total;
+                const totalPages = Math.ceil(total / limit);
+
+                return res.status(200).json({
+                    message: 'Resources fetched successfully',
+                    resources,
+                    totalPages,
+                    currentPage: Number(page)
+                });
+            });
+        });
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
