@@ -79,3 +79,34 @@ exports.getResourcesById = async (req, res) => {
 };
 
 
+exports.getResourcesBySearchKeyword = async (req, res) => {
+    const searchInput = req.body.searchInput || '';
+    console.log(`getResourcesBySearchKeyword searchInput ==>> `, searchInput)
+    try {
+        const resources = await Resources.findAll({
+            where: {
+                title: {
+                    [Op.like]: `%${searchInput}%`
+                }
+            }
+            // order: [['createdAt', 'DESC']]
+        });
+
+        if (resources.length > 0) {
+            res.status(200).json({
+                message: 'Resources fetched successfully',
+                resources
+            });
+        } else {
+            res.status(200).json({
+                message: 'No resources matched your search.',
+                resources: []
+            });
+        }
+    } catch (err) {
+        console.error('Error occurred while retrieving resource:', err);
+        res.status(500).json({
+            error: 'An error occurred while retrieving resources.'
+        });
+    }
+};

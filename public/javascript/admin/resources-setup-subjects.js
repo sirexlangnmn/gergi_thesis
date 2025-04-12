@@ -107,7 +107,6 @@ function handleSubjectClick(subjectId, subjectTitle) {
     searchKeywordDiv.classList.remove('hidden');
 
     handleBreadcrumbs('subject', subjectId, subjectTitle);
-    renderSearchContainer();
     getResourcesOrderByLatest();
     checkHiddenInputs();
 }
