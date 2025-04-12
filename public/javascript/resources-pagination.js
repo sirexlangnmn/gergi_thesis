@@ -5,9 +5,12 @@ let currentPage = 1;
 function fetchResources(page = 1) {
     const data = {
         sessionOrganizationId,
+        currentDepartmentId,
         page: page,
         limit: limit
     };
+
+    console.log(`fetchResources data ==>>  `, data)
 
     fetch(`${baseUrl}api/v1/get/resources-by-organization-with-pagination`, {
         method: 'POST',
