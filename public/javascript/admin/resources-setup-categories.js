@@ -73,6 +73,8 @@ function renderCategoriesContainer(categories, courseTitle) {
         categoriesContainer.insertAdjacentHTML("beforeend", noCategoriesMessage);
     }
 
+    chooseLabel('Choose Category');
+
 }
 
 

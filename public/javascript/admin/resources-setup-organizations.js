@@ -53,6 +53,8 @@ function populateOrganizations(organizations) {
 
         organizationsContainer.insertAdjacentHTML("beforeend", organizationHTML);
     });
+
+    chooseLabel('Choose Organization');
 }
 
 function getClassificationName(id) {

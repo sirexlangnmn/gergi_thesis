@@ -70,6 +70,8 @@ function renderDepartments(departments, imageUrl, orgTitle) {
         `;
         departmentContainer.insertAdjacentHTML("beforeend", noDepartmentsMessage);
     }
+
+    chooseLabel('Choose Department');
 }
 
 function handleDepartmentClick(departmentId, departmentTitle) {

@@ -76,6 +76,8 @@ function renderSubjectsContainer(subjects, categoryTitle) {
         subjectsContainer.insertAdjacentHTML("beforeend", noSubjectsMessage);
     }
 
+    chooseLabel('Choose Subject');
+
 }
 
 
@@ -88,6 +90,8 @@ function handleSubjectClick(subjectId, subjectTitle) {
     const coursesContainer = getId("coursesContainer");
     const categoriesContainer = getId("categoriesContainer");
     const subjectsContainer = getId("subjectsContainer");
+    const searchKeywordDiv = getId("searchKeywordDiv");
+    
 
     // organizationsContainer.style.display = "none";
     // departmentContainer.style.display = "none";
@@ -100,6 +104,7 @@ function handleSubjectClick(subjectId, subjectTitle) {
     coursesContainer.classList.add('hidden');
     categoriesContainer.classList.add('hidden');
     subjectsContainer.classList.add('hidden');
+    searchKeywordDiv.classList.remove('hidden');
 
     handleBreadcrumbs('subject', subjectId, subjectTitle);
     renderSearchContainer();

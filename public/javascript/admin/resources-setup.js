@@ -160,3 +160,8 @@ function sendBookDataToAPI(bookData) {
         alert("Failed to save book.");
     });
 }
+
+
+function chooseLabel(label) {
+    getId('chooseLabel').innerHTML= label;
+}

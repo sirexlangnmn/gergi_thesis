@@ -68,6 +68,8 @@ function renderCourses(courses, departmentTitle) {
         `;
         coursesContainer.insertAdjacentHTML("beforeend", noCoursesMessage);
     }
+
+    chooseLabel('Choose Course');
 }
 
 
