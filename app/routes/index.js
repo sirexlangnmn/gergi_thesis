@@ -65,10 +65,15 @@ module.exports = (app) => {
     app.post(['/api/v1/get/resources-by-organization-with-pagination-and-search-keyword'], joinController.getResourcesByOrganizationWithPaginationAndSearchKeyword);
     app.post(['/api/get/resources-by-department'], resourceSetupsController.getResourcesByDepartment);
     app.post(['/api/get/resources-by-search-keyword'], resourcesController.getResourcesBySearchKeyword);
+    app.post(['/api/get/courses-by-organization'], joinController.getCoursesByOrganization);
+    app.post(['/api/get/fetch-resources-by-course'], resourceSetupsController.fetchResourcesByCourse);
+    app.post(['/api/get/categories-by-organization'], joinController.getCategoriesByOrganization);
+    app.post(['/api/get/resources-by-category'], resourceSetupsController.fetchResourcesByCategory);
+    app.post(['/api/v1/get/fetch-filtered-resources'], joinController.getResourcesByFilters);
+   
 
-    // app.get(['/api/v1/get/resources/transfering'], joinController.transfering);
-    // app.get(['/api/v1/get/resources/updateResourceSetup'], joinController.updateResourceSetup);
 
 
-    // app.get('/api/get/course/:id', languages.getLanguageNameByCode);
+
+
 };

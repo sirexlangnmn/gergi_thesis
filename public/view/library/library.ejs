@@ -12,7 +12,45 @@
                                             class="flaticon-close"></i></a>
                                 </div>
                                 <div class="accordion accordion-filter" id="accordionExample">
-                                    
+                                    <div class="accordion-item">
+                                        <button class="accordion-button collapsed" id="headingTwo" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseDepartments"
+                                            aria-expanded="false" aria-controls="collapseDepartments">
+                                            Departments
+                                        </button>
+                                        <div id="collapseDepartments" class="accordion-collapse collapse accordion-body"
+                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="widget dz-widget_services" id="collapseDepartmentsContainer" >
+                                                <!-- departments here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <button class="accordion-button collapsed" id="headingTwo" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseCourse"
+                                            aria-expanded="false" aria-controls="collapseCourse">
+                                            Courses
+                                        </button>
+                                        <div id="collapseCourse" class="accordion-collapse collapse accordion-body"
+                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="widget dz-widget_services" id="collapseCoursesContainer">
+                                                 <!-- Courses here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <button class="accordion-button collapsed" id="headingTwo" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseCategory"
+                                            aria-expanded="false" aria-controls="collapseCategory">
+                                            Categories
+                                        </button>
+                                        <div id="collapseCategory" class="accordion-collapse collapse accordion-body"
+                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="widget dz-widget_services" id="collapseCategoriesContainer">
+                                                <!-- Categories here -->
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="accordion-item">
                                         <button class="accordion-button collapsed" id="headingTwo" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseSubjects"
@@ -39,72 +77,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingTwo" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseCategory"
-                                            aria-expanded="false" aria-controls="collapseCategory">
-                                            Categories
-                                        </button>
-                                        <div id="collapseCategory" class="accordion-collapse collapse accordion-body"
-                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                            <div class="widget dz-widget_services">
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox15">
-                                                    <label class="form-check-label" for="productCheckBox15">
-                                                        Action
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox16">
-                                                    <label class="form-check-label" for="productCheckBox16">
-                                                        Advanture
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingTwo" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseCourse"
-                                            aria-expanded="false" aria-controls="collapseCourse">
-                                            Courses
-                                        </button>
-                                        <div id="collapseCourse" class="accordion-collapse collapse accordion-body"
-                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                            <div class="widget dz-widget_services">
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox15">
-                                                    <label class="form-check-label" for="productCheckBox15">
-                                                        Action
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox16">
-                                                    <label class="form-check-label" for="productCheckBox16">
-                                                        Advanture
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingTwo" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseDepartments"
-                                            aria-expanded="false" aria-controls="collapseDepartments">
-                                            Departments
-                                        </button>
-                                        <div id="collapseDepartments" class="accordion-collapse collapse accordion-body"
-                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                            <div class="widget dz-widget_services" id="collapseDepartmentsContainer" >
-                                                <!-- departments here -->
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="row filter-buttons">
                                     <div>
@@ -461,5 +433,7 @@
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-pagination.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-department.js"></script>
-        r
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-courses.js"></script>
+        <!-- <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-categories.js"></script> -->
+        
         <%- include('../includes/script/script1.ejs') %>

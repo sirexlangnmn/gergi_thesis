@@ -12,6 +12,7 @@ input.addEventListener("input", function () {
         if (keyword) {
             searchedCurrentPage = 1;
             fetchSearchResults(keyword, searchedCurrentPage);
+            fetchFilteredResources(1);
         }
     }, 3000);
 });
@@ -36,7 +37,7 @@ function goToPage(page) {
     fetchSearchResults(keyword, page);
 }
 
-function fetchSearchResults(keyword, page = 1) {
+async function fetchSearchResults(keyword, page = 1) {
 
     const bodyData = {
         sessionOrganizationId: sessionOrganizationId,
@@ -45,19 +46,26 @@ function fetchSearchResults(keyword, page = 1) {
         limit: searchedLimit
     };
 
-    console.log(`fetchSearchResults bodyData ==>> `, bodyData);
+    // try {
+    //     const response = await fetch(`${baseUrl}api/v1/get/resources-by-organization-with-pagination-and-search-keyword`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(bodyData)
+    //     });
 
-    fetch(`${baseUrl}api/v1/get/resources-by-organization-with-pagination-and-search-keyword`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(bodyData)
-    })
-    .then(res => res.json())
-    .then(({ data, total }) => {
-        renderData(data); // your UI logic
-        updatePaginationUI(total, page);
-    })
-    .catch(err => console.error("Search error:", err));
+    //     if (!response.ok) throw new Error('Failed to fetch resources');
+
+    //     const result = await response.json();
+    //     // console.log('Fetched resources:', result);
+
+    //     renderData(result);
+    //     updatePaginationUI(result.total, page);
+
+    // } catch (error) {
+    //     console.error('Error fetching resources:', error);
+    // }
 }
 
 function updatePaginationUI(total, page) {
@@ -70,3 +78,60 @@ function updatePaginationUI(total, page) {
 }
 
 fetchSearchResults("", 1);
+
+
+
+
+
+async function fetchFilteredResources(page = 1) {
+    const searchKeyword = document.getElementById("searchKeyword").value.trim();
+
+    const departmentId = getCheckedValue("departmentRadioGroup");
+    const courseId = getCheckedValue("courseRadioGroup");
+    const categoryId = ''
+    const subjectId = ''
+    const limit = 10;
+
+    const filters = {
+        searchKeyword,
+        departmentId,
+        courseId,
+        categoryId,
+        subjectId,
+        page,
+        limit
+    };
+
+    console.log(`fetchFilteredResources filters ==>> `, filters)
+
+    try {
+        const response = await fetch(`${baseUrl}api/v1/get/fetch-filtered-resources`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(filters)
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch resources');
+
+        const result = await response.json();
+        console.log('fetchFilteredResources result ==>> ', result);
+
+        renderData(result);
+        // updatePaginationUI(result.total, page);
+
+    } catch (error) {
+        console.error('Error fetching resources:', error);
+    }
+}
+
+
+
+function getCheckedValue(groupName) {
+    const radios = document.getElementsByName(groupName);
+    for (let radio of radios) {
+        if (radio.checked) return radio.value;
+    }
+    return '';
+}

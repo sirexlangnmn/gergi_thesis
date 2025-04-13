@@ -89,7 +89,7 @@ exports.getResourcesBySearchKeyword = async (req, res) => {
                     [Op.like]: `%${searchInput}%`
                 }
             }
-            // order: [['createdAt', 'DESC']]
+            // order: [['createdAt', 'DESC']]  // uncomment this if createdAt and updatedAt has value
         });
 
         if (resources.length > 0) {

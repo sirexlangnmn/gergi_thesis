@@ -10,7 +10,7 @@ function fetchResources(page = 1) {
         limit: limit
     };
 
-    console.log(`fetchResources data ==>>  `, data)
+    // console.log(`fetchResources data ==>>  `, data)
 
     fetch(`${baseUrl}api/v1/get/resources-by-organization-with-pagination`, {
         method: 'POST',

@@ -1,34 +1,33 @@
-let currentDepartmentId = null;
-// let currentPage = 1; this is declared alread in resources-pagination.js
-
-fetchDepartments(sessionOrganizationId);
+let currentCourseId = null;
+// fetchCourses(sessionOrganizationId, currentDepartmentId);
 
 
-async function fetchDepartments(organizationId) {
+async function fetchCourses(organizationId, departmentId) {
     try {
-        const response = await fetch(`${baseUrl}api/get/departments-by-organization`, {
+        const response = await fetch(`${baseUrl}api/get/courses-by-organization`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ organizationId })
+            body: JSON.stringify({ organizationId, departmentId })
         });
 
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
-        renderDepartments(data);
+        renderCourses(data.resources);
     } catch (error) {
-        console.error('Error fetching departments:', error);
+        console.error('Error fetching courses:', error);
     }
 }
 
 
-function renderDepartments(departments) {
-    const container = document.getElementById('collapseDepartmentsContainer');
+function renderCourses(courses) {
+    // console.log(`renderCourses courses ==>> `, courses)
+    const container = document.getElementById('collapseCoursesContainer');
     container.innerHTML = '';
 
-    departments.forEach((dept, index) => {
-        const radioId = `departmentRadio${index}`;
+    courses.forEach((course, index) => {
+        const radioId = `courseRadio${index}`;
 
         const formCheckDiv = document.createElement('div');
         formCheckDiv.className = 'form-check search-content';
@@ -36,13 +35,13 @@ function renderDepartments(departments) {
         const input = document.createElement('input');
         input.className = 'form-check-input';
         input.type = 'radio';
-        input.name = 'departmentRadioGroup';
-        input.value = dept.id;
+        input.name = 'courseRadioGroup';
+        input.value = course.course_id;
         input.id = radioId;
 
         input.addEventListener('change', function () {
             if (this.checked) {
-                fetchResourcesByDepartment(dept.id, page = 1);
+                fetchResourcesByCourse(course.course_id, page = 1);
                 fetchFilteredResources(1);
             }
         });
@@ -50,7 +49,7 @@ function renderDepartments(departments) {
         const label = document.createElement('label');
         label.className = 'form-check-label';
         label.setAttribute('for', radioId);
-        label.textContent = dept.title;
+        label.textContent = course.course_title;
 
         formCheckDiv.appendChild(input);
         formCheckDiv.appendChild(label);
@@ -59,38 +58,30 @@ function renderDepartments(departments) {
 }
 
 
-
-// Fetch resources by department and page
-async function fetchResourcesByDepartment(departmentId, page = 1) {
-    currentDepartmentId = departmentId;
+async function fetchResourcesByCourse(courseId, page = 1) {
+    // console.log('fetchResourcesByCourse courseId ==>> ', courseId);
+    currentCourseId = courseId;
     currentPage = page;
 
-    console.log(`Fetching resources for Department: ${departmentId}, Page: ${page}`);
+    console.log(`Fetching resources for Course : ${courseId}, Page: ${page}`);
 
     // try {
-    //     const response = await fetch(`${baseUrl}api/get/resources-by-department`, {
+    //     const response = await fetch(`${baseUrl}api/get/fetch-resources-by-course`, {
     //         method: 'POST',
     //         headers: {
     //             'Content-Type': 'application/json'
     //         },
-    //         body: JSON.stringify({ departmentId, page })
+    //         body: JSON.stringify({ courseId, page })
     //     });
 
     //     if (!response.ok) throw new Error('Failed to fetch resources');
 
     //     const result = await response.json();
-    //     // console.log('Fetched resources:', result);
+    //     console.log('fetchResourcesByCourse resources:', result);
 
-    //     renderData(result);
+    //     renderData(result); // Display the resources
 
     // } catch (error) {
     //     console.error('Error fetching resources:', error);
     // }
-
-    fetchCourses(sessionOrganizationId, departmentId);
 }
-
-
-
-
-

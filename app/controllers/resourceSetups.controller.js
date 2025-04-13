@@ -65,47 +65,6 @@ exports.getResourcesByCourse = async (req, res) => {
 
 
 
-// exports.resourceSetup = async (req, res) => {
-//     const errors = validationResult(req);
-
-//     try {
-//         if (!errors.isEmpty()) {
-//             return res.status(200).send({
-//                 message: errors.array(),
-//             });
-//         }
-
-//         const { resourceId, classification, organization, department, course, category, subject } = req.body;
-
-//         try {
-//             // Sequelize insert query here
-//             const newResource = await Resource_setups.create({
-//                 resource_id: resourceId,
-//                 department_id: department,
-//                 course_id: course,
-//                 category_id: category,
-//                 subject_id: subject,
-//                 createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
-//                 updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
-//             });
-
-//             if (newResource) {
-//                 return res.status(200).json({ message: 'Resource setup successful', resource: newResource });
-//             } else {
-//                 throw new Error('Failed to create resource');
-//             }
-//         } catch (error) {
-//             console.error('Error executing query:', error);
-//             return res.status(500).json({ error: 'Failed to create resource' });
-//         }
-
-//     } catch (error) {
-//         console.error('Error in resourceSetup:', error);
-//         return res.status(500).json({ error: 'Internal server error' });
-//     }
-// };
-
-
 exports.resourceSetup = async (req, res) => {
     const errors = validationResult(req);
 
@@ -293,6 +252,132 @@ exports.getResourcesByDepartment = async (req, res) => {
                     message: resources.length > 0 
                         ? 'Resources fetched successfully' 
                         : 'No resources available for this department',
+                    resources,
+                    totalPages,
+                    currentPage: Number(page)
+                });
+            });
+        });
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+
+
+
+exports.fetchResourcesByCourse = async (req, res) => {
+    const {
+        courseId,
+        page = 1,
+        limit = 10
+    } = req.body;
+
+    if (!courseId) {
+        return res.status(400).json({ message: 'courseId is required' });
+    }
+
+    const offset = (page - 1) * limit;
+
+    const dataQuery = `
+        SELECT r.*
+        FROM resource_setups rs
+        JOIN resources r ON r.resource_id = rs.resource_id
+        WHERE rs.course_id = ?
+        ORDER BY r.createdAt DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    const countQuery = `
+        SELECT COUNT(*) as total
+        FROM resource_setups rs
+        JOIN resources r ON r.resource_id = rs.resource_id
+        WHERE rs.course_id = ?
+    `;
+
+    try {
+        sql.query(dataQuery, [courseId, Number(limit), Number(offset)], (err, resources) => {
+            if (err) {
+                console.error("Error fetching resources:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+
+            sql.query(countQuery, [courseId], (countErr, countResult) => {
+                if (countErr) {
+                    console.error("Error fetching count:", countErr);
+                    return res.status(500).json({ error: "Count query error" });
+                }
+
+                const total = countResult[0].total;
+                const totalPages = Math.ceil(total / limit);
+
+                return res.status(200).json({
+                    message: resources.length > 0
+                        ? 'Resources fetched successfully'
+                        : 'No resources available for this course',
+                    resources,
+                    totalPages,
+                    currentPage: Number(page)
+                });
+            });
+        });
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+
+exports.fetchResourcesByCategory = async (req, res) => {
+    const {
+        courseId,
+        page = 1,
+        limit = 10
+    } = req.body;
+
+    if (!courseId) {
+        return res.status(400).json({ message: 'courseId is required' });
+    }
+
+    const offset = (page - 1) * limit;
+
+    const dataQuery = `
+        SELECT r.*
+        FROM resource_setups rs
+        JOIN resources r ON r.resource_id = rs.resource_id
+        WHERE rs.course_id = ?
+        ORDER BY r.createdAt DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    const countQuery = `
+        SELECT COUNT(*) as total
+        FROM resource_setups rs
+        JOIN resources r ON r.resource_id = rs.resource_id
+        WHERE rs.course_id = ?
+    `;
+
+    try {
+        sql.query(dataQuery, [courseId, Number(limit), Number(offset)], (err, resources) => {
+            if (err) {
+                console.error("Error fetching resources:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+
+            sql.query(countQuery, [courseId], (countErr, countResult) => {
+                if (countErr) {
+                    console.error("Error fetching count:", countErr);
+                    return res.status(500).json({ error: "Count query error" });
+                }
+
+                const total = countResult[0].total;
+                const totalPages = Math.ceil(total / limit);
+
+                return res.status(200).json({
+                    message: resources.length > 0
+                        ? 'Resources fetched successfully'
+                        : 'No resources available for this course',
                     resources,
                     totalPages,
                     currentPage: Number(page)
