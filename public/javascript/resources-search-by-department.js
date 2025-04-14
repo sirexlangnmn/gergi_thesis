@@ -42,8 +42,16 @@ function renderDepartments(departments) {
 
                 // to remove course radio button value
                 removeValue('courseRadioGroup')
+                removeValue('categoryRadio')
+                removeValue('subjectRadio')
+
                 getId('collapseCoursesContainer').innerHTML = '';
+                getId('collapseCategoriesContainer').innerHTML = '';
+                getId('collapseSubjectsContainer').innerHTML = '';
+
                 currentCourseId = null;
+                currentCategoryId = null;
+                currentSubjectId = null;
 
                 fetchFilteredResources(1);
                 fetchCourses(sessionOrganizationId, dept.id);

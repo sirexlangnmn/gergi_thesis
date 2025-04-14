@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let currentDepartmentId = null;
 let currentCourseId = null;
+let currentCategoryId = null;
+let currentSubjectId = null;
 
 
 function renderData(data) {

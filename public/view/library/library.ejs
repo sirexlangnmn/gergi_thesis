@@ -59,21 +59,8 @@
                                         </button>
                                         <div id="collapseSubjects" class="accordion-collapse collapse accordion-body"
                                             aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                            <div class="widget dz-widget_services">
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox15">
-                                                    <label class="form-check-label" for="productCheckBox15">
-                                                        Action
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="productCheckBox16">
-                                                    <label class="form-check-label" for="productCheckBox16">
-                                                        Advanture
-                                                    </label>
-                                                </div>
+                                            <div class="widget dz-widget_services" id="collapseSubjectsContainer">
+                                                <!-- Subjects here -->
                                             </div>
                                         </div>
                                     </div>
@@ -81,9 +68,7 @@
                                 <div class="row filter-buttons">
                                     <div>
                                         <a href="javascript:void(0);"
-                                            class="btn btn-secondary btnhover mt-4 d-block">Refine Search</a>
-                                        <a href="javascript:void(0);"
-                                            class="btn btn-outline-secondary btnhover mt-3 d-block">Reset Filter</a>
+                                            class="btn btn-outline-secondary btnhover mt-3 d-block" id="resetFilterBtn">Reset Filter</a>
                                     </div>
                                 </div>
                             </div>
@@ -434,6 +419,8 @@
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-department.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-courses.js"></script>
-        <!-- <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-categories.js"></script> -->
-        
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-categories.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-subjects.js"></script>
+
+
         <%- include('../includes/script/script1.ejs') %>

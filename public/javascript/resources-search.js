@@ -49,8 +49,8 @@ async function fetchFilteredResources(page = 1) {
 
     const departmentId = getCheckedValue("departmentRadioGroup");
     const courseId = getCheckedValue("courseRadioGroup");
-    const categoryId = ''
-    const subjectId = ''
+    const categoryId = getCheckedValue("categoryRadioGroup");
+    const subjectId = getCheckedValue("subjectRadioGroup");
     const limit = 10;
 
     const filters = {
@@ -105,3 +105,23 @@ function removeValue(groupName) {
         if (radio.checked) return '';
     }
 }
+
+
+
+getId("resetFilterBtn").addEventListener("click", function () {
+    getId("searchKeyword").value = "";
+
+    removeValue('courseRadioGroup')
+    removeValue('categoryRadio')
+    removeValue('subjectRadio')
+
+    getId('collapseCoursesContainer').innerHTML = '';
+    getId('collapseCategoriesContainer').innerHTML = '';
+    getId('collapseSubjectsContainer').innerHTML = '';
+
+    currentCourseId = null;
+    currentCategoryId = null;
+    currentSubjectId = null;
+
+    fetchFilteredResources(searchedCurrentPage)
+});
