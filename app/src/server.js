@@ -466,22 +466,28 @@ app.get(['/users'], (req, res) => {
 
 
 app.get('/login', (req, res) => {
-    let sessionData = {
-        name: '',
-        email: '',
-        user_type: '',
-        organization_id: '',
-        image_url: '',
-    };
+    // let sessionData = {
+    //     name: '',
+    //     email: '',
+    //     user_type: '',
+    //     organization_id: '',
+    //     image_url: '',
+    // };
 
-    if (req.session && req.session.user) {
-        sessionData = {
-            name: req.session.user.name || '',
-            email: req.session.user.email || '',
-            user_type: req.session.user.user_type || '',
-            organization_id: req.session.user.organization_id || '',
-            image_url: req.session.user.image_url || '',
-        };
+    // if (req.session && req.session.user) {
+    //     sessionData = {
+    //         name: req.session.user.name || '',
+    //         email: req.session.user.email || '',
+    //         user_type: req.session.user.user_type || '',
+    //         organization_id: req.session.user.organization_id || '',
+    //         image_url: req.session.user.image_url || '',
+    //     };
+    // }
+
+
+    const sessionData = getSessionData(req.session);
+    if (sessionData.organization_id !== '') {
+        return res.redirect('/');
     }
 
     res.render(path.join(__dirname, '../../', 'public/view/login/login'), {
