@@ -2,7 +2,7 @@ let debounceTimeout;
 let searchedCurrentPage = 1;
 const searchedLimit = 12;
 
-const input = document.getElementById("searchKeyword");
+const input = getId("searchKeyword");
 
 input.addEventListener("input", function () {
     console.log('debounceTimeout input')
@@ -12,6 +12,8 @@ input.addEventListener("input", function () {
         if (keyword) {
             searchedCurrentPage = 1;
             fetchFilteredResources(searchedCurrentPage);
+        } else {
+            getId("searchKeyword").value = "";
         }
     }, 3000);
 });
@@ -25,14 +27,25 @@ input.addEventListener("keypress", function (e) {
         if (keyword) {
             searchedCurrentPage = 1;
             fetchFilteredResources(searchedCurrentPage)
+        } else {
+            getId("searchKeyword").value = "";
         }
+    }
+});
+
+
+input.addEventListener("keyup", function (e) {
+    const keyword = input.value.trim();
+    if (!keyword) {
+        getId("searchKeyword").value = "";
+        fetchFilteredResources(searchedCurrentPage)
     }
 });
 
 
 
 async function fetchFilteredResources(page = 1) {
-    const searchKeyword = document.getElementById("searchKeyword").value.trim();
+    const searchKeyword = getId("searchKeyword").value.trim();
 
     const departmentId = getCheckedValue("departmentRadioGroup");
     const courseId = getCheckedValue("courseRadioGroup");
