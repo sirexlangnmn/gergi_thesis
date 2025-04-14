@@ -1,6 +1,3 @@
-let currentDepartmentId = null;
-// let currentPage = 1; this is declared alread in resources-pagination.js
-
 fetchDepartments(sessionOrganizationId);
 
 
@@ -42,8 +39,15 @@ function renderDepartments(departments) {
 
         input.addEventListener('change', function () {
             if (this.checked) {
-                fetchResourcesByDepartment(dept.id, page = 1);
+
+                // to remove course radio button value
+                removeValue('courseRadioGroup')
+                getId('collapseCoursesContainer').innerHTML = '';
+                currentCourseId = null;
+
                 fetchFilteredResources(1);
+                fetchCourses(sessionOrganizationId, dept.id);
+
             }
         });
 
@@ -56,38 +60,6 @@ function renderDepartments(departments) {
         formCheckDiv.appendChild(label);
         container.appendChild(formCheckDiv);
     });
-}
-
-
-
-// Fetch resources by department and page
-async function fetchResourcesByDepartment(departmentId, page = 1) {
-    currentDepartmentId = departmentId;
-    currentPage = page;
-
-    console.log(`Fetching resources for Department: ${departmentId}, Page: ${page}`);
-
-    // try {
-    //     const response = await fetch(`${baseUrl}api/get/resources-by-department`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ departmentId, page })
-    //     });
-
-    //     if (!response.ok) throw new Error('Failed to fetch resources');
-
-    //     const result = await response.json();
-    //     // console.log('Fetched resources:', result);
-
-    //     renderData(result);
-
-    // } catch (error) {
-    //     console.error('Error fetching resources:', error);
-    // }
-
-    fetchCourses(sessionOrganizationId, departmentId);
 }
 
 

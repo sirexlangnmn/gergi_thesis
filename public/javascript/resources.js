@@ -1,87 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // displayResources();
-    fetchResources();
-    // fetchSearchResults("", 1);
-    showingXfromYdata();
+    fetchFilteredResources();
 });
 
 
-async function displayResources() {
-    try {
-        const response = await fetch(`${baseUrl}api/v1/get/resources-by-organization`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ sessionOrganizationId })
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('displayResources Error fetching resources : ', error);
-        throw error;
-    }
-}
-
-displayResources().then((data) => {
-    renderData(data);
-})
-.catch((error) => {
-    console.error('displayResources Error rendering resource : ', error);
-});
-
-
-// function renderData(data) {
-//     const resourcesContainer = getId("resourcesContainer");
-//     resourcesContainer.innerHTML = '';
-
-//     const publicationYear = 'Publication Year : 2021';
-//     const author = "Author : WebMaster";
-
-//     let index = 0;
-
-//     data.forEach(book => {
-//         const imageSrc = getImageSrc(book.image);
-
-//         const bookCard = document.createElement("div");
-//         bookCard.className = "col-book style-2";
-
-//         bookCard.innerHTML = `
-//             <div class="dz-shop-card style-1">
-//                 <div class="dz-media">
-//                     <img src="${imageSrc}" alt="${book.title}">
-//                 </div>
-//                 <div class="bookmark-btn style-2">
-//                     <input class="form-check-input" type="checkbox" id="flexCheckDefault${index}">
-//                     <label class="form-check-label" for="flexCheckDefault${index}">
-//                         <i class="flaticon-heart"></i>
-//                     </label>
-//                 </div>
-//                 <div class="dz-content">
-//                     <h5 class="title"><a href="${book.url_link}">${book.title}</a></h5>
-//                     <ul class="dz-tags">
-//                       link
-//                     </ul>
-//                     <ul class="dz-rating">
-//                       ratings
-//                     </ul>
-//                     <div class="book-footer">
-//                         <div class="price">
-//                         </div>
-//                         <a href="${book.url_link}" target="_blank" class="btn btn-secondary box-btn btnhover btnhover2">
-//                             <i class="flaticon-send m-r10"></i> Download
-//                         </a>
-//                     </div>
-//                 </div>
-//             </div>
-//         `;
-//         index ++;
-//         resourcesContainer.appendChild(bookCard);
-//     });
-// }
+let currentDepartmentId = null;
+let currentCourseId = null;
 
 
 function renderData(data) {

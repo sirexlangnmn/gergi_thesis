@@ -11,8 +11,7 @@ input.addEventListener("input", function () {
         const keyword = input.value.trim();
         if (keyword) {
             searchedCurrentPage = 1;
-            fetchSearchResults(keyword, searchedCurrentPage);
-            fetchFilteredResources(1);
+            fetchFilteredResources(searchedCurrentPage);
         }
     }, 3000);
 });
@@ -25,61 +24,10 @@ input.addEventListener("keypress", function (e) {
         const keyword = input.value.trim();
         if (keyword) {
             searchedCurrentPage = 1;
-            fetchSearchResults(keyword, searchedCurrentPage);
+            fetchFilteredResources(searchedCurrentPage)
         }
     }
 });
-
-// Add pagination button listeners
-function goToPage(page) {
-    const keyword = input.value.trim();
-    searchedCurrentPage = page;
-    fetchSearchResults(keyword, page);
-}
-
-async function fetchSearchResults(keyword, page = 1) {
-
-    const bodyData = {
-        sessionOrganizationId: sessionOrganizationId,
-        searchKeyword: keyword,
-        page: page,
-        limit: searchedLimit
-    };
-
-    // try {
-    //     const response = await fetch(`${baseUrl}api/v1/get/resources-by-organization-with-pagination-and-search-keyword`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(bodyData)
-    //     });
-
-    //     if (!response.ok) throw new Error('Failed to fetch resources');
-
-    //     const result = await response.json();
-    //     // console.log('Fetched resources:', result);
-
-    //     renderData(result);
-    //     updatePaginationUI(result.total, page);
-
-    // } catch (error) {
-    //     console.error('Error fetching resources:', error);
-    // }
-}
-
-function updatePaginationUI(total, page) {
-    if (total && page) {
-        const totalPages = Math.ceil(total / searchedLimit);
-        // render buttons: Prev, 1, 2, 3, Next based on `totalPages` and `page`
-        // for example:
-        console.log(`Page ${page} of ${totalPages}`);
-    }
-}
-
-fetchSearchResults("", 1);
-
-
 
 
 
@@ -118,8 +66,9 @@ async function fetchFilteredResources(page = 1) {
         const result = await response.json();
         console.log('fetchFilteredResources result ==>> ', result);
 
+        currentPage = page;
         renderData(result);
-        // updatePaginationUI(result.total, page);
+        showingXfromYdata(result);
 
     } catch (error) {
         console.error('Error fetching resources:', error);
@@ -134,4 +83,12 @@ function getCheckedValue(groupName) {
         if (radio.checked) return radio.value;
     }
     return '';
+}
+
+
+function removeValue(groupName) {
+    const radios = document.getElementsByName(groupName);
+    for (let radio of radios) {
+        if (radio.checked) return '';
+    }
 }
