@@ -19,6 +19,7 @@ db.faculties = require('./faculties.model.js')(sequelize, Sequelize);
 db.formats = require('./formats.model.js')(sequelize, Sequelize);
 db.organizations = require('./organizations.model.js')(sequelize, Sequelize);
 db.resource_setups = require('./resource_setups.model.js')(sequelize, Sequelize);
+db.resource_saves = require('./resource_saves.model.js')(sequelize, Sequelize);
 db.resources = require('./resources.model.js')(sequelize, Sequelize);
 db.subject_titles = require('./subject_titles.model.js')(sequelize, Sequelize);
 db.subjects = require('./subjects.model.js')(sequelize, Sequelize);

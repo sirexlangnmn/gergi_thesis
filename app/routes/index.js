@@ -10,6 +10,7 @@ module.exports = (app) => {
     const usersController = controllers.users;
     const coursesController = controllers.courses;
     const resourceSetupsController = controllers.resourceSetups;
+    const resourceSavesController = controllers.resourceSaves;
     const categoriesController = controllers.categories;
     const organizationsController = controllers.organizations;
     const subjectsController = controllers.subjects;
@@ -70,9 +71,7 @@ module.exports = (app) => {
     app.post(['/api/get/categories-by-organization'], joinController.getCategoriesByOrganization);
     app.post(['/api/get/resources-by-category'], resourceSetupsController.fetchResourcesByCategory);
     app.post(['/api/v1/get/fetch-filtered-resources'], joinController.getResourcesByFilters);
-   
-
-
+    app.post(['/api/v1/post/save-as-favorites'], resourceSavesController.saveAsFavorite);
 
 
 

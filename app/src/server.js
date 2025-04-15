@@ -200,6 +200,7 @@ const organizationsJson = readFileSync(path.join(__dirname, '../../', 'public/re
 
 // Utility function to get session data
 const getSessionData = (session) => ({
+    user_id: session?.user?.user_id || '',
     name: session?.user?.name || '',
     email: session?.user?.email || '',
     user_type: session?.user?.user_type || '',
@@ -209,6 +210,7 @@ const getSessionData = (session) => ({
 
 app.get(['/'], (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -218,6 +220,7 @@ app.get(['/'], (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
@@ -256,6 +259,7 @@ app.get(['/library'], (req, res) => {
 
 app.get(['/profile'], (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -265,6 +269,7 @@ app.get(['/profile'], (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
@@ -280,6 +285,7 @@ app.get(['/profile'], (req, res) => {
 
 app.get(['/web-scraping'], (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -289,6 +295,7 @@ app.get(['/web-scraping'], (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
@@ -309,6 +316,7 @@ app.get(['/web-scraping'], (req, res) => {
 
 app.get(['/upload-resources'], (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -318,6 +326,7 @@ app.get(['/upload-resources'], (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
@@ -340,6 +349,7 @@ app.get(['/upload-resources'], (req, res) => {
 
 app.get(['/resources-setup'], (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -349,6 +359,7 @@ app.get(['/resources-setup'], (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
@@ -387,6 +398,7 @@ app.get('/about-us', (req, res) => {
 
 app.get('/registration', (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -396,6 +408,7 @@ app.get('/registration', (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
@@ -412,6 +425,7 @@ app.get('/registration', (req, res) => {
 
 app.get(['/modal'], (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -421,6 +435,7 @@ app.get(['/modal'], (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',
@@ -437,6 +452,7 @@ app.get(['/modal'], (req, res) => {
 
 app.get(['/users'], (req, res) => {
     let sessionData = {
+        user_id: '',
         name: '',
         email: '',
         user_type: '',
@@ -446,6 +462,7 @@ app.get(['/users'], (req, res) => {
 
     if (req.session && req.session.user) {
         sessionData = {
+            user_id: req.session.user.user_id || '',
             name: req.session.user.name || '',
             email: req.session.user.email || '',
             user_type: req.session.user.user_type || '',

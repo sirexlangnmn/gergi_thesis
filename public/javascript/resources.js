@@ -36,14 +36,16 @@ function renderData(data) {
         const bookCard = document.createElement("div");
         bookCard.className = "col-book style-2";
 
+        const checkboxId = `flexCheckDefault${book.resource_id}`;
+
         bookCard.innerHTML = `
             <div class="dz-shop-card style-1">
                 <div class="dz-media">
                     <img src="${imageSrc}" alt="${book.title}">
                 </div>
                 <div class="bookmark-btn style-2">
-                    <input class="form-check-input" type="checkbox" id="flexCheckDefault${index}">
-                    <label class="form-check-label" for="flexCheckDefault${index}">
+                    <input class="form-check-input" type="checkbox" id="${checkboxId}">
+                    <label class="form-check-label" for="${checkboxId}">
                         <i class="flaticon-heart"></i>
                     </label>
                 </div>
@@ -67,6 +69,9 @@ function renderData(data) {
         `;
         index++;
         resourcesContainer.appendChild(bookCard);
+
+        handleSaveAsFavoriteBtn(checkboxId);
+
     });
 }
 
@@ -96,3 +101,6 @@ function getImageSrc(image) {
         return `${filePath}${image}`;  // Return the original image path
     }
 }
+
+
+

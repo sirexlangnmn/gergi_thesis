@@ -107,6 +107,7 @@ exports.login = async (req, res) => {
 
         if (passwordInput === user.password) {
             let sessionUser = {
+                user_id: user.id,
                 name: user.name,
                 email: user.email,
                 user_type: user.user_type,

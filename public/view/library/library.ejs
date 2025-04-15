@@ -402,12 +402,13 @@
 
         <script>
             // const organizationValue = `<%= data.organizationValue %>`;
+            const sessionUserId = `<%= data.user_id %>`;
             const sessionName = `<%= data.name %>`;
             const sessionEmail = `<%= data.email %>`;
             const sessionUserType = `<%= data.user_type %>`;
             const sessionOrganizationId = `<%= data.organization_id %>`;
 
-
+            console.log(`fe sessionUserId ==>> `, sessionUserId);
             // console.log(`fe sessionName ==>> `, sessionName);
             // console.log(`fe sessionEmail ==>> `, sessionEmail);
             // console.log(`fe sessionUserType ==>> `, sessionUserType);
@@ -421,6 +422,8 @@
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-courses.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-categories.js"></script>
         <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-search-by-subjects.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources-save-favorite.js"></script>
+
 
 
         <%- include('../includes/script/script1.ejs') %>
