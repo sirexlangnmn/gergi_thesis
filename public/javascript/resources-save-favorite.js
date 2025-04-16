@@ -12,6 +12,30 @@ function handleSaveAsFavoriteBtn(checkboxId) {
 }
 
 
+// function saveResources(bookId) {
+//     fetch(`${baseUrl}api/v1/post/save-as-favorites`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ bookId, sessionUserId })
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Failed to send bookId');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         alert(`Successfully sent bookId: ${bookId}`);
+//         console.log('Successfully sent bookId:', bookId, data);
+//     })
+//     .catch(error => {
+//         console.error('Error sending bookId:', error);
+//     });
+// }
+
+
 function saveResources(bookId) {
     fetch(`${baseUrl}api/v1/post/save-as-favorites`, {
         method: 'POST',
@@ -27,10 +51,18 @@ function saveResources(bookId) {
         return response.json();
     })
     .then(data => {
-        alert(`Successfully sent bookId: ${bookId}`);
-        console.log('Successfully sent bookId:', bookId, data);
+        if (data.message === 'Resource already saved as favorite') {
+            alert(`Book ID ${bookId} is already saved as favorite.`);
+        } else if (data.message === 'Resource save successful') {
+            alert(`Successfully saved Book ID: ${bookId}`);
+        } else {
+            alert(`Unexpected response: ${data.message}`);
+        }
+
+        console.log('API Response:', data);
     })
     .catch(error => {
         console.error('Error sending bookId:', error);
+        alert('An error occurred while saving the resource.');
     });
 }

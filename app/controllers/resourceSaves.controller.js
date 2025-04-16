@@ -20,6 +20,46 @@ const Sequelize = db.Sequelize;
 
 
 
+// exports.saveAsFavorite = async (req, res) => {
+//     const errors = validationResult(req);
+
+//     try {
+//         if (!errors.isEmpty()) {
+//             return res.status(200).send({
+//                 message: errors.array(),
+//             });
+//         }
+
+//         const { bookId, sessionUserId } = req.body;
+
+//         try {
+//             // Sequelize insert query here
+//             const newSave = await Resource_saves.create({
+//                 resource_id: bookId,
+//                 user_id: sessionUserId,
+//                 createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+//                 updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+//             });
+
+//             if (newSave) {
+//                 return res.status(200).json({ message: 'Resource save successful', resource: newSave });
+//             } else {
+//                 throw new Error('Failed to save resource');
+//             }
+//         } catch (error) {
+//             console.error('Error executing query:', error);
+//             return res.status(500).json({ error: 'Failed to save resource' });
+//         }
+
+//     } catch (error) {
+//         console.error('Error in resourceSave:', error);
+//         return res.status(500).json({ error: 'Internal server error' });
+//     }
+// };
+
+
+
+
 exports.saveAsFavorite = async (req, res) => {
     const errors = validationResult(req);
 
@@ -33,7 +73,17 @@ exports.saveAsFavorite = async (req, res) => {
         const { bookId, sessionUserId } = req.body;
 
         try {
-            // Sequelize insert query here
+            const existingSave = await Resource_saves.findOne({
+                where: {
+                    resource_id: bookId,
+                    user_id: sessionUserId
+                }
+            });
+
+            if (existingSave) {
+                return res.status(200).json({ message: 'Resource already saved as favorite' });
+            }
+
             const newSave = await Resource_saves.create({
                 resource_id: bookId,
                 user_id: sessionUserId,
@@ -46,6 +96,7 @@ exports.saveAsFavorite = async (req, res) => {
             } else {
                 throw new Error('Failed to save resource');
             }
+
         } catch (error) {
             console.error('Error executing query:', error);
             return res.status(500).json({ error: 'Failed to save resource' });
