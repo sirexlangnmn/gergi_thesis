@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // fetchBiblioboardApiData('Business Manager');
+
 });
 
 
@@ -8,11 +8,7 @@ async function fetchBiblioboardApiData(searchKeyword) {
     const url = `https://api.biblioboard.com/search/v2?facet-list=true&limit=20&org-id=1f7368e7-f10b-49a1-8ced-2d9476279974&platform=WEB&offset=0&g=${encoded}`;
     const publicUrl = `https://openresearchlibrary.org/search-results/g%3D${encoded}`;
 
-    // console.log('fetchBiblioboardApiData searchKeyword => ', searchKeyword)
-    // console.log('fetchBiblioboardApiData encoded => ', encoded)
-    // console.log('fetchBiblioboardApiData url => ', url)
-
-    const OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN = '1a94e032-14d4-43de-8a4b-6de0b56d068f';
+    // const OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN = '4b297a7c-c9ac-466d-a7ba-fdd771dcbe90';
 
     try {
         const response = await fetch(url, {
@@ -42,7 +38,7 @@ async function fetchBiblioboardApiData(searchKeyword) {
         }
 
         const data = await response.json();
-        // console.log('fetchBiblioboardApiData data => ', data.media)
+        console.log('april 17 - fetchBiblioboardApiData data => ', data.media)
         generateSearchedData(data.media, publicUrl)
         // return data;
     } catch (error) {
@@ -84,18 +80,13 @@ async function fetchOpenTextBooksApiData(searchKeyword) {
             const bookLinkUrl = new URL(bookLink);
             const path = bookLinkUrl.pathname.substring(1); // Remove leading "/"
 
-            // console.log("fetchOpenTextBooksApiData bookElements: ", bookElements);
-            // console.log("fetchOpenTextBooksApiData bookLinkElement.href: ", bookLinkElement.href);
-            // console.log("fetchOpenTextBooksApiData bookLink: ", bookLink);
-            // console.log("fetchOpenTextBooksApiData path: ", path);
-
             const imageElement = book.closest("div.row").querySelector("a img.cover"); // Find the image relative to the book
             const imageUrl = imageElement ? imageElement.src : null;
 
             books.push({ name: bookTitle, attribution: `https://open.umn.edu/${path}`, thumbnailUrl: imageUrl });
         });
 
-        // console.log("fetchOpenTextBooksApiData books: ", books);
+        console.log("april 17 - fetchOpenTextBooksApiData books: ", books);
         generateSearchedData(books, url)
 
     } catch (error) {
@@ -122,7 +113,7 @@ async function fetchOpenResearchLibraryApiData(searchKeyword) {
 		}
 
 		const data = await response.json();
-		// console.log(`fetchOpenResearchLibraryApiData data.media => `, data.media);
+		console.log(`fetchOpenResearchLibraryApiData data.media => `, data.media);
 	} catch (error) {
 		console.error("Error:", error);
 	}
@@ -146,10 +137,8 @@ async function fetchPdfRoomApiData(searchKeyword) {
 		}
 
 		const htmlText = await response.text();
-        // console.log("htmlText:", htmlText);
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText, "text/html");
-		// console.log(`frontEnd fetchPdfRoomApiData doc => `, doc);
 
         const books = [];
 
@@ -167,54 +156,13 @@ async function fetchPdfRoomApiData(searchKeyword) {
             }
         });
 
-        // console.log(`frontEnd fetchPdfRoomApiData doc => `, books);
+        console.log(`april 17 - fetchPdfRoomApiData doc => `, books);
         generateSearchedData(books, url)
 
 	} catch (error) {
 		console.error("Error:", error);
 	}
 }
-
-
-// function generateSearchedData(books, publicUrl) {
-//     console.log('generateSearchedData books => ', books)
-//     const container = document.getElementById("searchedData");
-//     // container.innerHTML = ""; // Clear previous content
-
-//     books.forEach((book, index) => {
-//         const downloadLink = book.attribution ? book.attribution : publicUrl;
-//         const bookElement = document.createElement("div");
-//         bookElement.className = "col-md-12 col-sm-12";
-//         bookElement.innerHTML = `
-//             <div class="dz-shop-card style-2">
-//                 <div class="dz-media">
-//                     <img src="${book.thumbnailUrl}" alt="${book.name}">
-//                 </div>
-//                 <div class="dz-content">
-//                     <div>
-//                         <li><a href="${downloadLink}" target="_blank" >${downloadLink}</a></li>
-//                     </div>
-//                     <div class="dz-header">
-//                         <div>
-//                             <h4 class="title mb-0"><a href="${downloadLink}" target="_blank" >${book.name}</a></h4>
-//                         </div>
-//                     </div>
-//                     <div class="dz-body">
-//                         <div class="rate" style="justify-content: none">
-//                             <div class="d-flex">
-//                                 <a href="shop-cart.html" class="btn btn-secondary btnhover btnhover2">
-//                                     <i class="flaticon-send m-r10"></i> Save
-//                                 </a>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         `;
-//         container.appendChild(bookElement);
-//     });
-// }
-
 
 
 function generateSearchedData(books, publicUrl) {
@@ -227,7 +175,7 @@ function generateSearchedData(books, publicUrl) {
     });
 }
 
-// Function to create a book element with an attached event listener
+
 function createBookElement(book, index, publicUrl) {
     const downloadLink = book.attribution ? book.attribution : publicUrl;
     const bookElement = document.createElement("div");
@@ -343,9 +291,11 @@ function getInputValue() {
     // console.log("Input Value:", inputValue);
 
 
-
+    // frontend approach
     fetchBiblioboardApiData(inputValue);
     fetchOpenTextBooksApiData(inputValue);
-    // fetchOpenResearchLibraryApiData(inputValue);
     fetchPdfRoomApiData(inputValue);
+
+    // backend approach
+    // fetchOpenResearchLibraryApiData(inputValue);
 }

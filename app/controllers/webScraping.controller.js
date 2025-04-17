@@ -24,6 +24,8 @@ const Resources = db.resources
 const Op = db.Sequelize.Op;
 const Sequelize = db.Sequelize;
 
+const env = process.env;
+
 module.exports = {
 
     openResearchLibrary: async (req, res) => {
@@ -46,7 +48,7 @@ module.exports = {
                     "Sec-Fetch-Site": "cross-site",
                     "Sec-GPC": "1",
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-                    "X-Auth-Token": "47554950-4483-4bca-92ef-a9228a4b5914",
+                    "X-Auth-Token": env.OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN,
                     "X-Biblio-Audience": "library.biblioboard.com",
                     "sec-ch-ua": "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Brave\";v=\"134\"",
                     "sec-ch-ua-mobile": "?0",
@@ -112,6 +114,7 @@ module.exports = {
 
     },
 
+
     saveResources: async (req, res) => {
         try {
             console.log(`saveResources req.body ==> `, req.body)
@@ -155,6 +158,7 @@ module.exports = {
         }
     },
 
+
     // four: async (req, res) => {
     //     try {
     //         // code here
@@ -166,42 +170,7 @@ module.exports = {
 };
 
 
-// function extractImage(resourceName, imageUrl) {
-//     // const imageUrl = "https://imgproxy2.pdfroom.com/eLfQEfHzRpd6f7Ze8eGDabZ5L9bzk0kL1_cDcG95B9M/rs:auto:96:132:0/g:no/elc1bjFhdmwyTnEucG5n.jpg";
-//     const folderPath = path.join(__dirname, '../../', 'public/uploads/gergi/resources_image/');
-
-//     const filePath = path.join(folderPath, resourceName);
-
-//     // Ensure the images folder exists
-//     if (!fs.existsSync(folderPath)) {
-//         fs.mkdirSync(folderPath, { recursive: true });
-//     }
-
-//     // Download and save the image
-//     https.get(imageUrl, (response) => {
-//         if (response.statusCode === 200) {
-//             const fileStream = fs.createWriteStream(filePath);
-//             response.pipe(fileStream);
-//             fileStream.on('finish', () => {
-//                 fileStream.close();
-//                 console.log(`Image downloaded successfully: ${filePath}`);
-//             });
-//         } else {
-//             console.error(`Failed to download image. Status Code: ${response.statusCode}`);
-//         }
-//     }).on('error', (err) => {
-//         console.error('Error downloading image:', err.message);
-//     });
-// }
 
 
 
-// function getFileExtensionFromUrl(url) {
-//     const parts = url.split('.');
-//     return parts.length > 1 ? parts.pop().split(/[\?\#]/)[0] : ''; // Removes query params and fragments
-// }
 
-// function sanitizeFileName(name) {
-//     // return name.replace(/[^a-zA-Z0-9]/g, '-');
-//     return name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-// }

@@ -52,10 +52,10 @@ function renderData(data) {
                 <div class="dz-content">
                     <h5 class="title"><a href="${book.url_link}">${book.title}</a></h5>
                     <ul class="dz-tags">
-                      link
+
                     </ul>
                     <ul class="dz-rating">
-                      ratings
+
                     </ul>
                     <div class="book-footer">
                         <div class="price">

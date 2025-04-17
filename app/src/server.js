@@ -206,6 +206,7 @@ const getSessionData = (session) => ({
     user_type: session?.user?.user_type || '',
     organization_id: session?.user?.organization_id || '',
     image_url: session?.user?.image_url || '',
+    OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN: process.env.OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN,
 });
 
 app.get(['/'], (req, res) => {
