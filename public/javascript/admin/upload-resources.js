@@ -36,12 +36,56 @@ async function uploadFile(file) {
         });
 
         const data = await response.json();
-        displayResult(data);
+        console.log(`uploadFile ==>> `, data)
+        alert(data.message);
+        // displayResult(data);
+        renderUploadedResources(data.values)
     } catch (error) {
         console.error("Error:", error);
     }
 }
 
-function displayResult(data) {
-    document.getElementById("jsonOutput").textContent = JSON.stringify(data, null, 2);
+// function displayResult(data) {
+//     document.getElementById("jsonOutput").textContent = JSON.stringify(data, null, 2);
+// }
+
+
+// function renderUploadedResources(data) {
+//     const books = data.requests;
+//     console.log(`renderUploadedResources books ==>>`, books);
+//     console.log(`renderUploadedResources data ==>>`, data);
+//     const table = getId("uploadedResourcesTable");
+
+//     table.innerHTML = ``;
+
+//     books.forEach(book => {
+//         const row = document.createElement("tr");
+//         row.innerHTML = `
+//             <td>${book.book_title}</td>
+//             <td>${book.download_link}</td>
+//             <td>${book.image_link}</td>
+//         `;
+//         table.appendChild(row);
+//     });
+// }
+
+
+
+function renderUploadedResources(data) {
+    console.log("renderUploadedResources data ==>>", data);
+    const table = document.getElementById("uploadedResourcesTable");
+
+    // Clear the existing table content
+    table.innerHTML = ``;
+
+    // Loop through the array of books
+    data.forEach(book => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${book[1]}</td>
+            <td>${book[2]}</td>
+            <td>${book[3]}</td>
+        `;
+        table.appendChild(row);
+    });
 }

@@ -166,7 +166,8 @@ module.exports = (app) => {
                 console.log('Data inserted successfully:', result.affectedRows);
                 res.json({
                     message: 'Form submitted successfully',
-                    insertedRows: result.affectedRows
+                    insertedRows: result.affectedRows,
+                    values
                 });
             });
 
