@@ -68,7 +68,7 @@ async function loginUser(credentials) {
         alert("Login successful!");
         window.location.href = "/library"; // Redirect after successful login
     } catch (error) {
-        showServerError(error.message);
+        alert("Login failed!");
     }
 }
 

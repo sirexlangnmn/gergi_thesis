@@ -82,7 +82,7 @@ async function registerUser(userData) {
             throw new Error(data.message || "Registration failed");
         }
 
-        alert("Registration successful! Redirecting to login...");
+        alert(`Your registration was successful! We will verify your credentials and email shortly. Redirecting to login...`);
         window.location.href = "/login"; // Redirect after successful registration
     } catch (error) {
         showServerError(error.message);
