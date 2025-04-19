@@ -272,6 +272,20 @@ app.get(['/favorites'], (req, res) => {
 });
 
 
+app.get(['/request'], (req, res) => {
+    const sessionData = getSessionData(req.session);
+
+    // Check if session or organization_id is missing
+    if (!sessionData || !sessionData.organization_id) {
+        return res.redirect('/login'); // or res.render if login is a view
+    }
+
+    res.render(path.join(__dirname, '../../', 'public/view/request/request'), {
+        data: sessionData,
+    });
+});
+
+
 app.get(['/profile'], (req, res) => {
     let sessionData = {
         user_id: '',

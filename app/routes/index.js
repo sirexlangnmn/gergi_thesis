@@ -13,6 +13,7 @@ module.exports = (app) => {
     const resourceSavesController = controllers.resourceSaves;
     const categoriesController = controllers.categories;
     const organizationsController = controllers.organizations;
+    const requestsController = controllers.requests;
     const subjectsController = controllers.subjects;
     const classificationsController = controllers.classifications;
     const courseTitlesController = controllers.courseTitles;
@@ -73,7 +74,7 @@ module.exports = (app) => {
     app.post(['/api/v1/get/fetch-filtered-resources'], joinController.getResourcesByFilters);
     app.post(['/api/v1/post/save-as-favorites'], resourceSavesController.saveAsFavorite);
     app.post(['/api/v1/get/saved-favorite-resources'], joinController.getSavedFavoriteResources);
-
-
+    app.post(['/api/v1/post/request-book'], requestsController.saveRequestBook);
+    app.post(['/api/v1/get/requested-books'], requestsController.getRequestedBooks);
 
 };

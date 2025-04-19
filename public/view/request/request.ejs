@@ -1,0 +1,100 @@
+<%- include('../includes/head/head1.ejs') %>
+    <%- include('../includes/header/header.ejs') %>
+        <div class="page-content bg-grey">
+            <div class="content-inner-1 border-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-2"></div>
+                        <div class="col-xl-8">
+                            <div class="d-flex justify-content-end mb-3">
+                                <button type="button" class="btn btn-primary" class="modalAddRequest" id="modalAddRequest">
+                                    <i class="fas fa-plus me-2"></i> Add
+                                </button>
+                            </div>
+                            <div class="filter-area m-b30">
+                                <div class="grid-area">
+                                    <div class="shop-tab">
+                                        <ul class="nav text-center product-filter justify-content-end" role="tablist">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="category">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-b30">
+                                <div class="row" style="--bs-gutter-x: 9px;">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                            <table class="table check-tbl">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Author</th>
+                                                        <th>ISBN</th>
+                                                        <th>Additional Instructions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="requestTable">
+                                                    <!-- <tr>
+                                                        <td class="product-item-img">Title</td>
+                                                        <td class="product-item-name">Author</td>
+                                                        <td class="product-item-price">ISBN</td>
+                                                        <td class="product-item-quantity">Additional Instructions</td>
+                                                    </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row page mt-0">
+                                    <div class="col-md-6">
+                                        <p class="page-text">Showing 12 from 50 data</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <nav aria-label="Blog Pagination">
+                                        <ul class="pagination style-1 p-t20">
+                                            <li class="page-item"><a class="page-link prev" href="javascript:void(0);">Prev</a></li>
+                                            <li class="page-item"><a class="page-link active" href="javascript:void(0);">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                            <li class="page-item"><a class="page-link next" href="javascript:void(0);">Next</a></li>
+                                        </ul>
+                                    </nav>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-xl-2"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <%- include('request-modal.ejs') %>
+
+
+        </div>
+
+        <script>
+            // const organizationValue = `<%= data.organizationValue %>`;
+            const sessionUserId = `<%= data.user_id %>`;
+            const sessionName = `<%= data.name %>`;
+            const sessionEmail = `<%= data.email %>`;
+            const sessionUserType = `<%= data.user_type %>`;
+            const sessionOrganizationId = `<%= data.organization_id %>`;
+
+            // console.log(`fe sessionUserId ==>> `, sessionUserId);
+            // console.log(`fe sessionName ==>> `, sessionName);
+            // console.log(`fe sessionEmail ==>> `, sessionEmail);
+            // console.log(`fe sessionUserType ==>> `, sessionUserType);
+            // console.log(`fe sessionOrganizationId ==>> `, sessionOrganizationId);
+        </script>
+
+        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/request.js"></script>
+
+
+
+        <%- include('../includes/script/script1.ejs') %>
