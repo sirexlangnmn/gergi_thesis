@@ -77,5 +77,7 @@ module.exports = (app) => {
     app.post(['/api/v1/get/all-saved-favorite-resources'], joinController.getAllSavedFavoriteResources);
     app.post(['/api/v1/post/request-book'], requestsController.saveRequestBook);
     app.post(['/api/v1/get/requested-books'], requestsController.getRequestedBooks);
+    app.post(['/api/v1/get/all-requested-books'], requestsController.getAllRequestedBooks);
+    
 
 };

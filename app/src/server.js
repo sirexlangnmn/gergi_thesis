@@ -272,6 +272,29 @@ app.get(['/favorites'], (req, res) => {
 });
 
 
+// app.get(['/request'], (req, res) => {
+//     const sessionData = getSessionData(req.session);
+
+//     // Check if session or organization_id is missing
+//     if (!sessionData || !sessionData.organization_id) {
+//         return res.redirect('/login'); // or res.render if login is a view
+//     }
+
+//     res.render(path.join(__dirname, '../../', 'public/view/request/request'), {
+//         data: sessionData,
+//     });
+// });
+
+
+// Utility function to determine the view path
+const getRequestPagePath = (userType) => {
+    const views = {
+        1: 'public/view/admin/request/request',
+        2: 'public/view/request/request',
+    };
+    return path.join(__dirname, '../../', views[userType] || 'public/view/login/login');
+};
+
 app.get(['/request'], (req, res) => {
     const sessionData = getSessionData(req.session);
 
@@ -280,9 +303,8 @@ app.get(['/request'], (req, res) => {
         return res.redirect('/login'); // or res.render if login is a view
     }
 
-    res.render(path.join(__dirname, '../../', 'public/view/request/request'), {
-        data: sessionData,
-    });
+    const userType = parseInt(sessionData.user_type);
+    res.render(getRequestPagePath(userType), { data: sessionData });
 });
 
 

@@ -133,3 +133,42 @@ exports.getRequestedBooks = async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+
+
+exports.getAllRequestedBooks = async (req, res) => {
+    const errors = validationResult(req);
+
+    try {
+        if (!errors.isEmpty()) {
+            return res.status(200).send({
+                message: errors.array(),
+            });
+        }
+
+
+        try {
+            const requests = await Requests.findAll({
+                order: [['createdAt', 'DESC']] // <-- Order by latest created
+            });
+
+            if (requests) {
+                return res.status(200).json({
+                    message: 'Get book request successful',
+                    requests
+                });
+            } else {
+                throw new Error('Failed to get book request');
+            }
+
+        } catch (error) {
+            console.error('Error executing query:', error);
+            return res.status(500).json({ error: 'Failed to get book request' });
+        }
+
+    } catch (error) {
+        console.error('Error in getRequestedBooks:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};
