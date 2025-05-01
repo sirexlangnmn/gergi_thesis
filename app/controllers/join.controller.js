@@ -663,7 +663,7 @@ exports.getResourcesByFilters = async (req, res) => {
 
 
 
-exports.getSavedFavoriteResources = async (req, res) => {
+exports.getUserSavedFavoriteResources = async (req, res) => {
     const {
         searchKeyword = "",
         sessionUserId,
@@ -731,6 +731,87 @@ exports.getSavedFavoriteResources = async (req, res) => {
                     message: resources.length > 0
                         ? "Resources saved fetched successfully"
                         : "No resources found for the provided filters",
+                    resources,
+                    total,
+                    currentPage: Number(page),
+                    totalPages: Math.ceil(total / limit)
+                });
+            });
+        });
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+
+
+exports.getAllSavedFavoriteResources = async (req, res) => {
+    const {
+        searchKeyword = "",
+        page = 1,
+        limit = 10
+    } = req.body;
+
+    const offset = (page - 1) * limit;
+    const keyword = `%${searchKeyword}%`;
+
+    let whereConditions = [];
+    let values = [];
+
+    if (searchKeyword) {
+        whereConditions.push("r.title LIKE ?");
+        values.push(keyword);
+    }
+
+    const whereClause = whereConditions.length > 0
+        ? `WHERE ${whereConditions.join(" AND ")}`
+        : "";
+
+    // Main paginated query
+    const searchQuery = `
+        SELECT
+            rs.resource_id,
+            rs.user_id,
+            r.*
+        FROM resource_saves rs
+        INNER JOIN resources r ON rs.resource_id = r.resource_id
+        ${whereClause}
+        ORDER BY rs.createdAt DESC
+        LIMIT ? OFFSET ?
+    `;
+
+    // Count query
+    const countQuery = `
+        SELECT COUNT(*) AS total
+        FROM resource_saves rs
+        INNER JOIN resources r ON rs.resource_id = r.resource_id
+        ${whereClause}
+    `;
+
+    try {
+        const paginatedValues = [...values, Number(limit), Number(offset)];
+
+        // Fetch resources
+        sql.query(searchQuery, paginatedValues, (err, resources) => {
+            if (err) {
+                console.error("Error executing search query:", err);
+                return res.status(500).json({ error: "Database error" });
+            }
+
+            // Fetch total count
+            sql.query(countQuery, values, (countErr, countResult) => {
+                if (countErr) {
+                    console.error("Error executing count query:", countErr);
+                    return res.status(500).json({ error: "Count error" });
+                }
+
+                const total = countResult[0].total;
+
+                res.status(200).json({
+                    message: resources.length > 0
+                        ? "All saved resources fetched successfully"
+                        : "No resources found",
                     resources,
                     total,
                     currentPage: Number(page),

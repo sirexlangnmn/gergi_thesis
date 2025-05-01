@@ -73,7 +73,8 @@ module.exports = (app) => {
     app.post(['/api/get/resources-by-category'], resourceSetupsController.fetchResourcesByCategory);
     app.post(['/api/v1/get/fetch-filtered-resources'], joinController.getResourcesByFilters);
     app.post(['/api/v1/post/save-as-favorites'], resourceSavesController.saveAsFavorite);
-    app.post(['/api/v1/get/saved-favorite-resources'], joinController.getSavedFavoriteResources);
+    app.post(['/api/v1/get/user-saved-favorite-resources'], joinController.getUserSavedFavoriteResources);
+    app.post(['/api/v1/get/all-saved-favorite-resources'], joinController.getAllSavedFavoriteResources);
     app.post(['/api/v1/post/request-book'], requestsController.saveRequestBook);
     app.post(['/api/v1/get/requested-books'], requestsController.getRequestedBooks);
 

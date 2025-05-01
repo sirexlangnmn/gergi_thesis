@@ -1,7 +1,7 @@
 let debounceTimeout;
 let searchedCurrentPage = 1;
 
-fetchFilteredResources(searchedCurrentPage)
+(sessionUserType == 1) ? fetchAdminSavedFavoriteResources(searchedCurrentPage) : fetchUserSavedFavoriteResources(searchedCurrentPage);
 
 const input = getId("searchKeyword");
 
@@ -12,7 +12,7 @@ input.addEventListener("input", function () {
         const keyword = input.value.trim();
         if (keyword) {
             searchedCurrentPage = 1;
-            fetchFilteredResources(searchedCurrentPage);
+            (sessionUserType == 1) ? fetchAdminSavedFavoriteResources(searchedCurrentPage) : fetchUserSavedFavoriteResources(searchedCurrentPage);
         } else {
             getId("searchKeyword").value = "";
         }
@@ -27,7 +27,7 @@ input.addEventListener("keypress", function (e) {
         const keyword = input.value.trim();
         if (keyword) {
             searchedCurrentPage = 1;
-            fetchFilteredResources(searchedCurrentPage)
+            (sessionUserType == 1) ? fetchAdminSavedFavoriteResources(searchedCurrentPage) : fetchUserSavedFavoriteResources(searchedCurrentPage);
         } else {
             getId("searchKeyword").value = "";
         }
@@ -39,13 +39,13 @@ input.addEventListener("keyup", function (e) {
     const keyword = input.value.trim();
     if (!keyword) {
         getId("searchKeyword").value = "";
-        fetchFilteredResources(searchedCurrentPage)
+        (sessionUserType == 1) ? fetchAdminSavedFavoriteResources(searchedCurrentPage) : fetchUserSavedFavoriteResources(searchedCurrentPage);
     }
 });
 
 
 
-async function fetchFilteredResources(page = 1) {
+async function fetchUserSavedFavoriteResources(page = 1) {
     const searchKeyword = getId("searchKeyword").value.trim();
     const limit = 10;
 
@@ -56,10 +56,10 @@ async function fetchFilteredResources(page = 1) {
         limit
     };
 
-    console.log(`fetchFilteredResources filters ==>> `, filters)
+    console.log(`fetchUserSavedFavoriteResources filters ==>> `, filters)
 
     try {
-        const response = await fetch(`${baseUrl}api/v1/get/saved-favorite-resources`, {
+        const response = await fetch(`${baseUrl}api/v1/get/user-saved-favorite-resources`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +70,44 @@ async function fetchFilteredResources(page = 1) {
         if (!response.ok) throw new Error('Failed to fetch resources');
 
         const result = await response.json();
-        console.log('fetchFilteredResources result ==>> ', result);
+        console.log('fetchUserSavedFavoriteResources result ==>> ', result);
+
+        currentPage = page;
+        renderData(result);
+        showingXfromYdata(result);
+
+    } catch (error) {
+        console.error('Error fetching resources:', error);
+    }
+}
+
+
+
+async function fetchAdminSavedFavoriteResources(page = 1) {
+    const searchKeyword = getId("searchKeyword").value.trim();
+    const limit = 10;
+
+    const filters = {
+        searchKeyword,
+        page,
+        limit
+    };
+
+    console.log(`fetchAdminSavedFavoriteResources filters ==>> `, filters)
+
+    try {
+        const response = await fetch(`${baseUrl}api/v1/get/all-saved-favorite-resources`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(filters)
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch resources');
+
+        const result = await response.json();
+        console.log('fetchAdminSavedFavoriteResources result ==>> ', result);
 
         currentPage = page;
         renderData(result);
