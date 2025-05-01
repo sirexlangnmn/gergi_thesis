@@ -579,55 +579,139 @@ exports.getResourcesByFilters = async (req, res) => {
 
 
 
+// exports.getSavedFavoriteResources = async (req, res) => {
+//     const {
+//         searchKeyword,
+//         userId,
+//         page,
+//         limit
+//     } = req.body;
+
+//     const offset = (page - 1) * limit;
+//     const keyword = `%${searchKeyword}%`;
+
+//     let whereConditions = [];
+//     let values = [];
+
+//     // Dynamically build WHERE conditions
+//     if (userId) {
+//         whereConditions.push("rs.user_id = ?");
+//         values.push(userId);
+//     }
+
+//     if (searchKeyword) {
+//         whereConditions.push("r.title LIKE ?");
+//         values.push(keyword);
+//     }
+
+//     const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(" AND ")}` : "";
+
+//     // Main query
+//     const searchQuery = `
+//         SELECT
+//             rs.resource_id,
+//             r.*
+//         FROM resource_saves rs
+//         LEFT JOIN resources r ON rs.resource_id = r.resource_id
+//         ${whereClause}
+//         LIMIT ? OFFSET ?
+//     `;
+
+//     const countQuery = `
+//         SELECT COUNT(*) AS total
+//         FROM resource_saves rs
+//         LEFT JOIN resources r ON rs.resource_id = r.resource_id
+//         ${whereClause}
+//     `;
+
+//     try {
+//         const paginatedValues = [...values, Number(limit), Number(offset)];
+
+//         // Fetch data
+//         sql.query(searchQuery, paginatedValues, (err, resources) => {
+//             if (err) {
+//                 console.error("Error executing search query:", err);
+//                 return res.status(500).json({ error: "Database error" });
+//             }
+
+//             // Fetch total count
+//             sql.query(countQuery, values, (countErr, countResult) => {
+//                 if (countErr) {
+//                     console.error("Error executing count query:", countErr);
+//                     return res.status(500).json({ error: "Count error" });
+//                 }
+
+//                 const total = countResult[0].total;
+
+//                 res.status(200).json({
+//                     message: resources.length > 0
+//                         ? 'Resources saved fetched successfully'
+//                         : 'No resources found for the provided filters',
+//                     resources,
+//                     total,
+//                     currentPage: Number(page),
+//                     totalPages: Math.ceil(total / limit)
+//                 });
+//             });
+//         });
+//     } catch (error) {
+//         console.error("Unexpected error:", error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// };
+
+
+
+
 exports.getSavedFavoriteResources = async (req, res) => {
     const {
-        searchKeyword,
-        userId,
-        page,
-        limit
+        searchKeyword = "",
+        sessionUserId,
+        page = 1,
+        limit = 10
     } = req.body;
+
+    if (!sessionUserId) {
+        return res.status(400).json({ error: "userId is required" });
+    }
 
     const offset = (page - 1) * limit;
     const keyword = `%${searchKeyword}%`;
 
-    let whereConditions = [];
-    let values = [];
-
-    // Dynamically build WHERE conditions
-    if (userId) {
-        whereConditions.push("rs.user_id = ?");
-        values.push(userId);
-    }
+    let whereConditions = ["rs.user_id = ?"];
+    let values = [sessionUserId];
 
     if (searchKeyword) {
         whereConditions.push("r.title LIKE ?");
         values.push(keyword);
     }
 
-    const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(" AND ")}` : "";
+    const whereClause = `WHERE ${whereConditions.join(" AND ")}`;
 
-    // Main query
+    // Main paginated query
     const searchQuery = `
         SELECT
             rs.resource_id,
             r.*
         FROM resource_saves rs
-        LEFT JOIN resources r ON rs.resource_id = r.resource_id
+        INNER JOIN resources r ON rs.resource_id = r.resource_id
         ${whereClause}
+        ORDER BY rs.createdAt DESC
         LIMIT ? OFFSET ?
     `;
 
+    // Total count query
     const countQuery = `
         SELECT COUNT(*) AS total
         FROM resource_saves rs
-        LEFT JOIN resources r ON rs.resource_id = r.resource_id
+        INNER JOIN resources r ON rs.resource_id = r.resource_id
         ${whereClause}
     `;
 
     try {
         const paginatedValues = [...values, Number(limit), Number(offset)];
 
-        // Fetch data
+        // Fetch paginated data
         sql.query(searchQuery, paginatedValues, (err, resources) => {
             if (err) {
                 console.error("Error executing search query:", err);
@@ -645,8 +729,8 @@ exports.getSavedFavoriteResources = async (req, res) => {
 
                 res.status(200).json({
                     message: resources.length > 0
-                        ? 'Resources saved fetched successfully'
-                        : 'No resources found for the provided filters',
+                        ? "Resources saved fetched successfully"
+                        : "No resources found for the provided filters",
                     resources,
                     total,
                     currentPage: Number(page),
