@@ -49,6 +49,30 @@ function clearValidationMessages() {
     document.querySelectorAll(".validation-message").forEach(msg => msg.remove());
 }
 
+// async function loginUser(credentials) {
+//     try {
+//         const response = await fetch(`${baseUrl}api/post/login`, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify(credentials)
+//         });
+
+//         const data = await response.json();
+
+//         if (!response.ok) {
+//             throw new Error(data.message || "Login failed");
+//         }
+
+//         alert("Login successful!");
+//         window.location.href = "/library"; // Redirect after successful login
+//     } catch (error) {
+//         alert("Login failed!");
+//     }
+// }
+
+
 async function loginUser(credentials) {
     try {
         const response = await fetch(`${baseUrl}api/post/login`, {
@@ -65,12 +89,26 @@ async function loginUser(credentials) {
             throw new Error(data.message || "Login failed");
         }
 
-        alert("Login successful!");
-        window.location.href = "/library"; // Redirect after successful login
+        // SweetAlert2 success popup
+        await Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'Welcome back!',
+            timer: 2000,
+            showConfirmButton: false
+        });
+
+        window.location.href = "/library"; // Redirect after popup
     } catch (error) {
-        alert("Login failed!");
+        // SweetAlert2 error popup
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: error.message || 'An error occurred',
+        });
     }
 }
+
 
 function showServerError(message) {
     const errorContainer = document.createElement("div");
