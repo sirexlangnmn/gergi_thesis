@@ -241,25 +241,63 @@ function handleSaveButtonClick(button) {
     }
 }
 
-// Function to send `bookData` via POST request
+// // Function to send `bookData` via POST request
+// function sendBookDataToAPI(bookData) {
+//     fetch("/api/v1/post/web-scraping/save-resources", {  // Replace with your actual API endpoint
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(bookData) // Convert object to JSON format
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log("Response from API:", data);
+//         alert("Book saved successfully!"); // Show success message
+//     })
+//     .catch(error => {
+//         console.error("Error sending data:", error);
+//         alert("Failed to save book.");
+//     });
+// }
+
+
+
+
+
 function sendBookDataToAPI(bookData) {
-    fetch("/api/v1/post/web-scraping/save-resources", {  // Replace with your actual API endpoint
+    fetch("/api/v1/post/web-scraping/save-resources", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(bookData) // Convert object to JSON format
+        body: JSON.stringify(bookData)
     })
     .then(response => response.json())
     .then(data => {
         console.log("Response from API:", data);
-        alert("Book saved successfully!"); // Show success message
+
+        // SweetAlert2 success popup
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Book saved successfully!',
+            timer: 2000,
+            showConfirmButton: false
+        });
     })
     .catch(error => {
         console.error("Error sending data:", error);
-        alert("Failed to save book.");
+
+        // SweetAlert2 error popup
+        Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            text: 'Failed to save book.',
+        });
     });
 }
+
 
 
 

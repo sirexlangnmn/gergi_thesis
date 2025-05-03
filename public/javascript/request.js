@@ -23,6 +23,49 @@ async function handleModalAddRequestClick(event) {
 }
 
 
+// function submitBookRequest() {
+//     const bookTitle = getId("modalBookTitle").value.trim();
+//     const author = getId("modalAuthor").value.trim();
+//     const isbn = getId("modalISBN").value.trim();
+//     const instructions = getId("modalAdditionalInstructions").value.trim();
+
+//     const requestData = {
+//         sessionUserId,
+//         bookTitle,
+//         author,
+//         isbn,
+//         instructions
+//     };
+
+//     fetch(`${baseUrl}api/v1/post/request-book`, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(requestData)
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error("Failed to submit book request");
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         console.log(`submitBookRequest data ==>>`, data);
+//         alert(data.message);
+//         // Optional: Reset the form
+//         document.getElementById("modalRequestBook").reset();
+//         modal.style.display = "none";
+//         prependRequestedBook(data.added);
+//     })
+//     .catch(error => {
+//         console.error("Error submitting book request:", error);
+//         alert("There was an error submitting your request. Please try again.");
+//     });
+// }
+
+
+
 function submitBookRequest() {
     const bookTitle = getId("modalBookTitle").value.trim();
     const author = getId("modalAuthor").value.trim();
@@ -52,17 +95,33 @@ function submitBookRequest() {
     })
     .then(data => {
         console.log(`submitBookRequest data ==>>`, data);
-        alert(data.message);
-        // Optional: Reset the form
+
+        // SweetAlert2 success popup
+        Swal.fire({
+            icon: 'success',
+            title: 'Request Submitted',
+            text: data.message,
+            timer: 2000,
+            showConfirmButton: false
+        });
+
+        // Reset the form and close modal
         document.getElementById("modalRequestBook").reset();
         modal.style.display = "none";
         prependRequestedBook(data.added);
     })
     .catch(error => {
         console.error("Error submitting book request:", error);
-        alert("There was an error submitting your request. Please try again.");
+
+        // SweetAlert2 error popup
+        Swal.fire({
+            icon: 'error',
+            title: 'Submission Failed',
+            text: 'There was an error submitting your request. Please try again.',
+        });
     });
 }
+
 
 
 
