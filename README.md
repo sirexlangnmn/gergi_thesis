@@ -109,8 +109,8 @@ Admin Side:
 | Field             | Details                                                   |
 |------------------|--------------------------------------------------------------|
 | 👤 Name           | **Federex A. Potolin**                                     |
-| 📧 Email          | federex.potolin@example.com *(replace with actual email)* |
-| 📱 Contact Number | 0926-733-2616 *(optional to include)*                      |
+| 📧 Email          | potolin.federex@gmail.com |
+| 📱 Contact Number | 09267332616                 |
 | 🎓 Program        | Master of Information and Communication Studies           |
 | 🏫 Institution    | University of the Philippines – Open University            |
 
