@@ -111,7 +111,7 @@ Admin Side:
 | 👤 Name           | **Federex A. Potolin**                                     |
 | 📧 Email          | potolin.federex@gmail.com |
 | 📱 Contact Number | 09267332616                 |
-| 🎓 Program        | Master of Information and Communication Studies           |
+| 🎓 Program        | Master of Information Systems (MIS)           |
 | 🏫 Institution    | University of the Philippines – Open University            |
 
 
