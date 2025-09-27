@@ -55,15 +55,15 @@ app.use(
     cors({
         origin: [
             'http://localhost:3000',
-            'https://www.gergi.ph',
-            'https://gergi.ph'
+            'https://www.gergi.app',
+            'https://gergi.app'
         ],
     }),
 );
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://www.gergi.ph');
-    res.setHeader('Access-Control-Allow-Origin', 'https://gergi.ph');
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.gergi.app');
+    res.setHeader('Access-Control-Allow-Origin', 'https://gergi.app');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);

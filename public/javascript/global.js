@@ -7,7 +7,7 @@ if (location_hostname === 'localhost') {
     host = 'http://' + location_hostname + ':' + 3000;
 }
 
-if (location.hostname === 'gergi.ph' || location.hostname.endsWith('.gergi.ph')) {
+if (location.hostname === 'www.gergi.app' || location.hostname === 'gergi.app' || location.hostname.endsWith('.gergi.app')) {
     host = 'https://' + location_hostname;
 }
 
