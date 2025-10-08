@@ -43,7 +43,7 @@
         // const organizationValue = `<%= data.organizationValue %>`;
         const organization_id = `<%= data.organization_id %>`;
     </script>
-    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/slugilize.js"></script>
-    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/departments.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/slugilize.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/departments.js"></script>
 
 <%- include('../includes/script/script.ejs') %>

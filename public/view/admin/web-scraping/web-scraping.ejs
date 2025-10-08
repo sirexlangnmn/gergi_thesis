@@ -151,6 +151,6 @@
         <script>
             const OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN = `<%= data.OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN %>`;
         </script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/admin-navigation.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/web-scraping.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/admin-navigation.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/web-scraping.js"></script>
     <%- include('../../includes/script/script.ejs') %>

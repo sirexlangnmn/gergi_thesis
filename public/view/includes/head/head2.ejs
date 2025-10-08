@@ -21,11 +21,11 @@
 
 
     <script>
-        const baseUrl = '<%= process.env.GERGI_HOSTNAME %>';
+        const baseUrl = '<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>';
     </script>
 
     <!-- FAVICONS ICON -->
-    <link rel="icon" type="image/x-icon" href="<%= process.env.GERGI_HOSTNAME %>assets/images/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/favicon.png" />
 
     <!-- PAGE TITLE HERE -->
     <title>gergi</title>
@@ -35,9 +35,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- STYLESHEETS -->
-	<link rel="stylesheet" type="text/css" href="<%= process.env.GERGI_HOSTNAME %>assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="<%= process.env.GERGI_HOSTNAME %>assets/icons/fontawesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="<%= process.env.GERGI_HOSTNAME %>assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
 
 
     <!-- GOOGLE FONTS-->
@@ -45,5 +45,5 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/global.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/global.js"></script>
 </head>

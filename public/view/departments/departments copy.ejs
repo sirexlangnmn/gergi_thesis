@@ -42,9 +42,9 @@
     <script>
         const organizationValue = `<%= data.organizationValue %>`;
     </script>
-    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/slugilize.js"></script>
-    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/convertToTitleCase.js"></script>
-    <script src="<%= process.env.GERGI_HOSTNAME %>references/departments.js"></script>
-    <script src="<%= process.env.GERGI_HOSTNAME %>javascript/departments.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/slugilize.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/convertToTitleCase.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>references/departments.js"></script>
+    <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/departments.js"></script>
 
 <%- include('../includes/script/script.ejs') %>

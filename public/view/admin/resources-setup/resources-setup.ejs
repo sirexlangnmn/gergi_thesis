@@ -226,15 +226,15 @@
             <button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
         </div>
 
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/admin-navigation.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-organizations.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-departments.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-courses.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-categories.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-subjects.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-breadcrumbs1.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup-search.js"></script>
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/admin/resources-setup.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/admin-navigation.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup-organizations.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup-departments.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup-courses.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup-categories.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup-subjects.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup-breadcrumbs1.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup-search.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/admin/resources-setup.js"></script>
         
 
     <%- include('../../includes/script/script.ejs') %>

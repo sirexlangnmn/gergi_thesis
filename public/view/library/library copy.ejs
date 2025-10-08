@@ -756,7 +756,7 @@
                                 <!-- <div class="col-book style-2">
                                     <div class="dz-shop-card style-1">
                                         <div class="dz-media">
-                                            <img src="<%= process.env.GERGI_HOSTNAME %>assets/images/books/grid/book14.jpg"
+                                            <img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/books/grid/book14.jpg"
                                                 alt="book">
                                         </div>
                                         <div class="bookmark-btn style-2">
@@ -824,11 +824,11 @@
                     <!--Client Swiper -->
                     <div class="swiper client-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME %>assets/images/client/client1.svg" alt="client"></div>
-                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME %>assets/images/client/client2.svg" alt="client"></div>
-                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME %>assets/images/client/client3.svg" alt="client"></div>
-                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME %>assets/images/client/client4.svg" alt="client"></div>
-                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME %>assets/images/client/client5.svg" alt="client"></div>
+                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/client/client1.svg" alt="client"></div>
+                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/client/client2.svg" alt="client"></div>
+                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/client/client3.svg" alt="client"></div>
+                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/client/client4.svg" alt="client"></div>
+                            <div class="swiper-slide"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/client/client5.svg" alt="client"></div>
                         </div>
                     </div>
                 </div>
@@ -890,7 +890,7 @@
 
             <!-- Newsletter -->
             <section class="py-5 newsletter-wrapper"
-                style="background-image: url('<%= process.env.GERGI_HOSTNAME %>assets/images/background/bg1.jpg'); background-size: cover;">
+                style="background-image: url('<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>assets/images/background/bg1.jpg'); background-size: cover;">
                 <div class="container">
                     <div class="subscride-inner">
                         <div
@@ -930,5 +930,5 @@
         </div>
 
 
-        <script src="<%= process.env.GERGI_HOSTNAME %>javascript/resources.js"></script>
+        <script src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>javascript/resources.js"></script>
         <%- include('../includes/script/script1.ejs') %>

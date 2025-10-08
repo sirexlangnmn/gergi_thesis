@@ -11,7 +11,7 @@
         <div class="container clearfix">
             <!-- Website Logo -->
             <div class="logo-header logo-dark">
-                <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
+                <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
             </div>
 
             <!-- EXTRA NAV -->
@@ -117,7 +117,7 @@
             <div class="container clearfix">
                 <!-- Website Logo -->
                 <div class="logo-header logo-dark">
-                    <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
+                    <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt="logo"></a>
                 </div>
 
                 <!-- Nav Toggle Button -->
@@ -139,7 +139,7 @@
                 <!-- Main Nav -->
                 <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
                     <div class="logo-header logo-dark">
-                        <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt=""></a>
+                        <a href="/login"><img src="<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>uploads/gergi/logo/Global-E-library-logo-orange-black.png" alt=""></a>
                     </div>
                     <form class="search-input">
                         <div class="input-group">
@@ -335,7 +335,7 @@
             getId('headerCurrentEmail1').innerHTML = sessionEmailHeader;
             getId('headerCurrentName2').innerHTML = sessionNameHeader;
             getId('headerCurrentEmail2').innerHTML = sessionEmailHeader;
-            getId("headerCurrentImage1").src = `<%= process.env.GERGI_HOSTNAME %>uploads/gergi/client-logo/${sessionimageUrldHeader}`;
+            getId("headerCurrentImage1").src = `<%= process.env.GERGI_HOSTNAME || process.env.GERGI_WWW_HOSTNAME %>uploads/gergi/client-logo/${sessionimageUrldHeader}`;
 
             headerButtonLogin.classList.add('hidden')
             headerCurrentUser1.classList.remove('hidden')
