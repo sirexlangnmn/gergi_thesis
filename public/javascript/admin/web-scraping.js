@@ -8,7 +8,7 @@ async function fetchBiblioboardApiData(searchKeyword) {
     const url = `https://api.biblioboard.com/search/v2?facet-list=true&limit=20&org-id=1f7368e7-f10b-49a1-8ced-2d9476279974&platform=WEB&offset=0&g=${encoded}`;
     const publicUrl = `https://openresearchlibrary.org/search-results/g%3D${encoded}`;
 
-    // const OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN = '4b297a7c-c9ac-466d-a7ba-fdd771dcbe90';
+    const OPENRESEARCHLIBRARY_ORG_X_AUTH_TOKEN = 'fba8cf8d-c7be-47a2-8b13-b0b89fb63578';
 
     try {
         const response = await fetch(url, {
