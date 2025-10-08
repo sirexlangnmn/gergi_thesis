@@ -46,77 +46,29 @@ const compression = require('compression');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const helmet = require('helmet');
 // const cookieSession = require('cookie-session');
 const multer = require('multer');
 const path = require('path');
 const app = express();
 
-// ✅ Allowed origins (your frontends)
-const allowedOrigins = ['http://localhost:3000', 'https://www.gergi.app', 'https://gergi.app'];
-
-// ✅ CORS setup
 app.use(
     cors({
-        origin: function (origin, callback) {
-            // Allow requests with no origin (like Postman or mobile apps)
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.includes(origin)) {
-                return callback(null, true);
-            } else {
-                return callback(new Error('Not allowed by CORS'));
-            }
-        },
-        credentials: true,
-        methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
-        allowedHeaders: ['X-Requested-With', 'Content-Type', 'Authorization'],
+        origin: [
+            'http://localhost:3000',
+            'https://www.gergi.app',
+            'https://gergi.app'
+        ],
     }),
 );
 
-// ✅ Standard security headers using Helmet
-app.use(
-    helmet({
-        contentSecurityPolicy: false, // Disable CSP for now (can configure later)
-        crossOriginEmbedderPolicy: false, // Avoid breaking external embeds
-    }),
-);
-
-// ✅ Additional manual security headers
 app.use((req, res, next) => {
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN'); // Prevent clickjacking
-    res.setHeader('X-Content-Type-Options', 'nosniff'); // Prevent MIME sniffing
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin'); // Limit referrer info
-    res.setHeader('Permissions-Policy', 'geolocation=(), camera=(), microphone=()'); // Disable unwanted browser APIs
-
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.gergi.app');
+    res.setHeader('Access-Control-Allow-Origin', 'https://gergi.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-
-// ✅ Cache control: disable caching for dynamic content
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, private, max-age=0');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    next();
-});
-
-// app.use(
-//     cors({
-//         origin: [
-//             'http://localhost:3000',
-//             'https://www.gergi.app',
-//             'https://gergi.app'
-//         ],
-//     }),
-// );
-
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', 'https://www.gergi.app');
-//     res.setHeader('Access-Control-Allow-Origin', 'https://gergi.app');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-//     next();
-// });
 
 //app.use(cors()); // Enable All CORS Requests for all origins
 
@@ -142,22 +94,22 @@ app.use(
     }),
 );
 
-// app.use(function (req, res, next) {
-//     const corsWhitelist = [
-//         'http://localhost:3000',
-//     ];
+app.use(function (req, res, next) {
+    const corsWhitelist = [
+        'http://localhost:3000',
+    ];
 
-//     if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
-//         res.header('Access-Control-Allow-Origin', req.headers.origin);
-//         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     }
+    if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    }
 
-//     res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 
-//     res.setHeader('X-Frame-Options', 'sameorigin');
+    res.setHeader('X-Frame-Options', 'sameorigin');
 
-//     next();
-// });
+    next();
+});
 
 const isHttps = false; // must be the same to client.js isHttps
 const port = process.env.PORT; // must be the same to client.js signalingServerPort
@@ -234,14 +186,17 @@ db.sequelize
         console.log('Failed to sync db: ' + err.message);
     });
 
+
 // =====================================
 // db sequelize sync process [end]
 //======================================
+
 
 // to read my references json file
 const { readFileSync, writeFile } = require('fs');
 const classificationsJson = readFileSync(path.join(__dirname, '../../', 'public/references/classifications.json'));
 const organizationsJson = readFileSync(path.join(__dirname, '../../', 'public/references/organizations.json'));
+
 
 // Utility function to get session data
 const getSessionData = (session) => ({
@@ -280,6 +235,7 @@ app.get(['/'], (req, res) => {
     });
 });
 
+
 // Utility function to determine the view path
 const getViewPath = (userType) => {
     const views = {
@@ -301,6 +257,7 @@ app.get(['/library'], (req, res) => {
     res.render(getViewPath(userType), { data: sessionData });
 });
 
+
 app.get(['/favorites'], (req, res) => {
     const sessionData = getSessionData(req.session);
 
@@ -314,6 +271,7 @@ app.get(['/favorites'], (req, res) => {
     });
 });
 
+
 // app.get(['/request'], (req, res) => {
 //     const sessionData = getSessionData(req.session);
 
@@ -326,6 +284,7 @@ app.get(['/favorites'], (req, res) => {
 //         data: sessionData,
 //     });
 // });
+
 
 // Utility function to determine the view path
 const getRequestPagePath = (userType) => {
@@ -347,6 +306,7 @@ app.get(['/request'], (req, res) => {
     const userType = parseInt(sessionData.user_type);
     res.render(getRequestPagePath(userType), { data: sessionData });
 });
+
 
 app.get(['/profile'], (req, res) => {
     let sessionData = {
@@ -436,6 +396,8 @@ app.get(['/upload-resources'], (req, res) => {
     });
 });
 
+
+
 app.get(['/resources-setup'], (req, res) => {
     let sessionData = {
         user_id: '',
@@ -468,12 +430,22 @@ app.get(['/resources-setup'], (req, res) => {
 });
 
 app.get('/contact-us', (req, res) => {
-    res.render(path.join(__dirname, '../../', 'public/view/contact_us/contact_us'), {});
+    res.render(path.join(__dirname, '../../', 'public/view/contact_us/contact_us'), {
+
+    });
 });
 
 app.get('/about-us', (req, res) => {
-    res.render(path.join(__dirname, '../../', 'public/view/about_us/about_us'), {});
+    res.render(path.join(__dirname, '../../', 'public/view/about_us/about_us'), {
+
+    });
 });
+
+
+
+
+
+
 
 app.get('/registration', (req, res) => {
     let sessionData = {
@@ -501,6 +473,7 @@ app.get('/registration', (req, res) => {
     });
 });
 
+
 app.get(['/modal'], (req, res) => {
     let sessionData = {
         user_id: '',
@@ -526,6 +499,7 @@ app.get(['/modal'], (req, res) => {
         data: sessionData,
     });
 });
+
 
 app.get(['/users'], (req, res) => {
     let sessionData = {
@@ -558,6 +532,7 @@ app.get(['/users'], (req, res) => {
     });
 });
 
+
 app.get('/login', (req, res) => {
     // let sessionData = {
     //     name: '',
@@ -577,6 +552,7 @@ app.get('/login', (req, res) => {
     //     };
     // }
 
+
     const sessionData = getSessionData(req.session);
     if (sessionData.organization_id !== '') {
         return res.redirect('/');
@@ -586,6 +562,7 @@ app.get('/login', (req, res) => {
         data: sessionData,
     });
 });
+
 
 // app.get('/library', (req, res) => {
 //     let sessionData = {
@@ -617,7 +594,9 @@ app.get('/login', (req, res) => {
 //     }
 // });
 
+
 app.get('/courses/:departmentValue', (req, res) => {
+
     const departmentValue = req.params.departmentValue;
 
     if (departmentValue) {
@@ -633,7 +612,9 @@ app.get('/courses/:departmentValue', (req, res) => {
     }
 });
 
+
 app.get('/resources/:courseValue', (req, res) => {
+
     const courseValue = req.params.courseValue;
 
     if (courseValue) {
@@ -645,6 +626,7 @@ app.get('/resources/:courseValue', (req, res) => {
             courseValue: courseValue,
         };
 
+
         res.render(path.join(__dirname, '../../', 'public/view/resources/resources'), {
             data: sessionData,
         });
@@ -652,6 +634,8 @@ app.get('/resources/:courseValue', (req, res) => {
         res.render(path.join(__dirname, '../../', 'public/view/login/login'));
     }
 });
+
+
 
 app.get('/logout', function (req, res, next) {
     // remove the req.user property and clear the login session
@@ -671,6 +655,8 @@ app.post('/session-checker/:random', function (req, res, next) {
 
     res.send(req.session);
 });
+
+
 
 server.listen(port, null, () => {
     log.debug(
