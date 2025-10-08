@@ -99,26 +99,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use(
-//     cors({
-//         origin: [
-//             'http://localhost:3000',
-//             'https://www.gergi.app',
-//             'https://gergi.app'
-//         ],
-//     }),
-// );
 
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', 'https://www.gergi.app');
-//     res.setHeader('Access-Control-Allow-Origin', 'https://gergi.app');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-//     next();
-// });
-
-//app.use(cors()); // Enable All CORS Requests for all origins
 
 app.use(compression()); // Compress all HTTP responses using GZip
 
@@ -142,22 +123,7 @@ app.use(
     }),
 );
 
-// app.use(function (req, res, next) {
-//     const corsWhitelist = [
-//         'http://localhost:3000',
-//     ];
 
-//     if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
-//         res.header('Access-Control-Allow-Origin', req.headers.origin);
-//         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     }
-
-//     res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-
-//     res.setHeader('X-Frame-Options', 'sameorigin');
-
-//     next();
-// });
 
 const isHttps = false; // must be the same to client.js isHttps
 const port = process.env.PORT; // must be the same to client.js signalingServerPort
